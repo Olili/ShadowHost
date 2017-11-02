@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Fourre tout peut être amélioré.
+
 public class DebugPanel : MonoBehaviour {
 
     PlayerBrain playerBrain;
+    [Range(0, 1)]  public float timeScale = 1;
+
 	void Start () {
         playerBrain = FindObjectOfType<PlayerBrain>();
 
@@ -35,9 +39,14 @@ public class DebugPanel : MonoBehaviour {
             }
         }
     }
+    void UpdateFrameRate()
+    {
+        if (Time.timeScale != timeScale)
+            Time.timeScale = timeScale;
+    }
 	// Update is called once per frame
 	void Update () {
         Possession();
-
+        UpdateFrameRate();
     }
 }
