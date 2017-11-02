@@ -37,7 +37,8 @@ public class Steering : MonoBehaviour {
             // On vire la composante y
             Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             // On ajoute l'acceleration
-            velocity += (steering  * puppet.stats.Get(Stats.StatType.maxAcceleration));
+            //velocity += (steering  * puppet.stats.Get(Stats.StatType.maxAcceleration));
+            velocity += (steering * 50 * Time.fixedDeltaTime * puppet.stats.Get(Stats.StatType.maxAcceleration));
             // On clamp à maxSpeed
             velocity = Vector3.ClampMagnitude(velocity, puppet.stats.Get(Stats.StatType.move_speed));
             // On recupère la composante y de base
