@@ -6,14 +6,22 @@ public class Steering : MonoBehaviour {
 
     static readonly float slowingRadius = 2;
 
+            // component
     protected Rigidbody rb;
+    private Puppet puppet;
+
+        // data
     [HideInInspector] public Vector3 OnPlanNormal;
     protected Vector3 steering;
-    private Puppet puppet;
     Vector3 computedVelocity;
-
     float separationRayFactor = 1f; // 
 
+        // updateFrequencie
+    bool updateNeighbours = true;
+    Collider[] closeNeighbours;
+    Collider[] farawayNeighbours;
+    float timer = 0;
+    float delay = 0.1f;
 
     #region getterSetters
     public Vector3 GetSteering
@@ -29,7 +37,9 @@ public class Steering : MonoBehaviour {
         steering = Vector3.zero;
         puppet = GetComponent<Puppet>();
         rb = GetComponent<Rigidbody>();
-
+    }
+    public void Start()
+    {
 #if UNITY_EDITOR
         giz.separateSphereLenght = puppet.Extents.magnitude * separationRayFactor;
 #endif
@@ -45,9 +55,7 @@ public class Steering : MonoBehaviour {
         {
             if (steering == Vector3.zero)
             {
-#if UNITY_EDITOR
-                giz.steeringForce = steering;
-#endif
+                EndFrameReset();
                 return Vector3.zero;
             }
 
@@ -65,15 +73,23 @@ public class Steering : MonoBehaviour {
             // On recupère la composante y de base
             computedVelocity = new Vector3(velocity.x, ySave + velocity.y, velocity.z);
 
-#if UNITY_EDITOR
-            giz.steeringForce = steering;
-#endif
-            steering = Vector3.zero;
-            //Debug.Log("CVel :" + computedVelocity);
+            EndFrameReset();
             return computedVelocity;
         }
     }
-
+    void EndFrameReset()
+    {
+#if UNITY_EDITOR
+        giz.steeringForce = steering;
+#endif
+        steering = Vector3.zero;
+        timer += Time.fixedDeltaTime;
+        if (timer > delay)
+        {
+            updateNeighbours = true;
+            timer = 0;
+        }
+    }
 
 
     public void FixedUpdate()
@@ -128,9 +144,19 @@ public class Steering : MonoBehaviour {
 
     }
     float wanderAngle = 0;
-
-
-
+    /*
+         Je choisis une direction random. 
+         Je cree un cercle ayant pour centre la direction actuelle.
+         et un rayon arbitraire. 
+         Je choisis un point aléatoire dans ce cercle. 
+         Je décide de seek vers cette direction. 
+         Ou
+         Je choisis une direction random. 
+         Je cree un cercle ayant pour centre la direction actuelle.
+         et un rayon arbitraire. 
+         Je choisis un point aléatoire dans ce cercle. 
+         Ma direction actuelle devient cette direction. 
+     */
     public void Wander(float factor = 1)
     {
         float wanderT = 30;
@@ -142,20 +168,6 @@ public class Steering : MonoBehaviour {
         Vector3 circleOffset = new Vector3(Mathf.Cos(wanderAngle * Mathf.Deg2Rad), 0, Mathf.Sin(wanderAngle * Mathf.Deg2Rad)) * circleRadius;
         Vector3 target = circleCenter + circleOffset;
         Seek(target, factor);
-        /*
-            Je choisis une direction random. 
-            Je cree un cercle ayant pour centre la direction actuelle.
-            et un rayon arbitraire. 
-            Je choisis un point aléatoire dans ce cercle. 
-            Je décide de seek vers cette direction. 
-            Ou
-            Je choisis une direction random. 
-            Je cree un cercle ayant pour centre la direction actuelle.
-            et un rayon arbitraire. 
-            Je choisis un point aléatoire dans ce cercle. 
-            Ma direction actuelle devient cette direction. 
-        */
-
     }
     #endregion
     #region Advanced Steering Movement 
@@ -163,12 +175,10 @@ public class Steering : MonoBehaviour {
     // de plus ici on push dans une sphere autour de nous.  Mais ce qui compte c'est surtout d'éviter de vers quoi on avance.
     public void Separation(float factor = 1)
     {
-
-        int separationMask = LayerMask.GetMask(new string[] { "Puppet" });
         Collider[] puppetsCollided;
         Vector3 separationForce = Vector3.zero;
         float sphereCheckRadius = puppet.Extents.magnitude * separationRayFactor;
-        puppetsCollided = Physics.OverlapSphere(transform.position, sphereCheckRadius, separationMask);
+        puppetsCollided = GetNeighbouringPuppet();
         if (puppetsCollided != null)
         {
             int i;
@@ -186,7 +196,6 @@ public class Steering : MonoBehaviour {
                     }
                 }
             }
-
             separationForce = Vector3.ClampMagnitude(separationForce, puppet.stats.Get(Stats.StatType.move_speed));
 #if UNITY_EDITOR
             giz.separateForce = separationForce;
@@ -194,29 +203,62 @@ public class Steering : MonoBehaviour {
             steering += separationForce* factor;
         }
     }
+    public void Alignement(float factor = 1)
+    {
+        Vector3 averageDirection = Vector3.zero;
+        closeNeighbours = GetNeighbouringPuppet();
+        for (int i = 0; i < closeNeighbours.Length; i++)
+        {
+            if (closeNeighbours[i].transform!= transform)
+                averageDirection += closeNeighbours[i].attachedRigidbody.velocity;
+        }
+        steering += (averageDirection.normalized) * puppet.stats.Get(Stats.StatType.move_speed) * factor;
+    }
+    public void Alignement(Vector3 leaderVel,float factor = 1)
+    {
+        Vector3 averageDirection = leaderVel;
+        steering += (averageDirection.normalized) * puppet.stats.Get(Stats.StatType.move_speed) * factor;
+    }
+    public void Cohesion(float factor = 1)
+    {
+        Vector3 averagePosition = Vector3.zero;
+        closeNeighbours = GetNeighbouringPuppet();
+        for (int i = 0; i < closeNeighbours.Length; i++)
+        {
+            averagePosition += closeNeighbours[i].transform.position;
+        }
+        Seek(averagePosition / closeNeighbours.Length);
+    }
     public void LeaderFollowing(Vector3 target, Vector3 targetVelocity, Vector3 targetDirection)
     {
-        Vector3 behind;
-        float followingDistance = 1f;
-        if (targetVelocity.magnitude > followingDistance)
-        {
-            behind = target + (targetVelocity.normalized * -followingDistance);
-        }
-        else
-            behind = target + (targetDirection.normalized * -followingDistance);
-
-        Evade(target, targetVelocity);
-        Arrival(behind);
-
+        Alignement(targetVelocity,0.7f);
+        //if (targetVelocity!=Vector3.zero)
+        //    Evade(target, targetVelocity);
+        //Seek(target,0.7f);
     }
+
     #endregion
 
+
+    public Collider[] GetNeighbouringPuppet()
+    {
+
+        if (updateNeighbours)
+        {
+            int separationMask = LayerMask.GetMask(new string[] { "Puppet" });
+            Vector3 separationForce = Vector3.zero;
+            float sphereCheckRadius = puppet.Extents.magnitude * separationRayFactor;
+            closeNeighbours = Physics.OverlapSphere(transform.position, sphereCheckRadius, separationMask);
+
+            updateNeighbours = false;
+        }
+        return closeNeighbours;
+    }
     protected virtual void GroundGravityCheck()
     {
         // peut être optimi en changeant layer + pas à chaques frames.
         RaycastHit hit;
         Vector3 center = transform.position + Vector3.up * puppet.Extents.y;
-        Debug.DrawLine(center, center + -2 * Vector3.up,Color.blue);
         if (Physics.Raycast(center, -2 * Vector3.up, out hit))
         {
             OnPlanNormal = hit.normal;
@@ -224,11 +266,6 @@ public class Steering : MonoBehaviour {
     }
     public virtual Vector3 GetDvOnPlan(Vector3 target, Vector3 planNormal)
     {
-        //Vector3 dV = (target - transform.position);
-        //dV = Vector3.ClampMagnitude(dV, puppet.stats.Get(Stats.StatType.move_speed));
-        //return dV;
-
-        //// pour le moment pas besoin de marcher sur des trucs en pente : 
         Vector3 dV = (target - transform.position);
         float distance = dV.magnitude;
         dV.Normalize();
@@ -258,11 +295,4 @@ public class Steering : MonoBehaviour {
     }
     public GizmosForSteering giz;
 #endif
-
-    /*  
-     De quoi j'ai besoin ? 
-     --> 
-     
-     */
-
 }

@@ -63,5 +63,8 @@ public class Puppet : MonoBehaviour {
     {
 
     }
+    public void GetFrontPuppets()
+    {
 
+    }
 }
