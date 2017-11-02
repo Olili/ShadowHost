@@ -34,8 +34,11 @@ public class Steering : MonoBehaviour {
         giz.separateSphereLenght = puppet.Extents.magnitude * separationRayFactor;
 #endif
     }
-
-    // Attention Cette fonction ne doit être appellée qu'une fois par fixedUpdate.
+    /// <summary>
+    /// Renvoi la velocité finale calculée par le steering 
+    /// /!\ Ne dois pas être appellé + d'une fois par fixedUpdate
+    /// /!\ Renvois 0 si aucune force de steering
+    /// </summary>
     public Vector3 ComputedVelocity
     {
         get
@@ -50,18 +53,17 @@ public class Steering : MonoBehaviour {
 
             float ySave = 0; // save y, pour ne pas écraser le fait que l'on tombe
             ySave = rb.velocity.y;
-            //On clamp pour que max == acceleration
+                //On clamp pour que max == acceleration
             steering = Vector3.ClampMagnitude(steering, puppet.stats.Get(Stats.StatType.move_speed));
-            // On vire la composante y
+                // On vire la composante y
             Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            // On ajoute l'acceleration
-            //velocity += (steering  * puppet.stats.Get(Stats.StatType.maxAcceleration));
+                // On ajoute l'acceleration
+                //velocity += (steering  * puppet.stats.Get(Stats.StatType.maxAcceleration));
             velocity += (steering * 50 * Time.fixedDeltaTime * puppet.stats.Get(Stats.StatType.maxAcceleration));
             // On clamp à maxSpeed
             velocity = Vector3.ClampMagnitude(velocity, puppet.stats.Get(Stats.StatType.move_speed));
             // On recupère la composante y de base
             computedVelocity = new Vector3(velocity.x, ySave + velocity.y, velocity.z);
-            //Debug.Log("ComputedVelocity :" + computedVelocity);
 
 #if UNITY_EDITOR
             giz.steeringForce = steering;
@@ -80,24 +82,24 @@ public class Steering : MonoBehaviour {
     }
 
     #region Basic steering Movement
-    public void Seek(Vector3 target)
+    public void Seek(Vector3 target, float factor = 1)
     {
         Vector3 desiredVelocityPlan = GetDvOnPlan(target, OnPlanNormal);
         Vector3 force = desiredVelocityPlan - rb.velocity;
 
         force = Vector3.ClampMagnitude(force, puppet.stats.Get(Stats.StatType.move_speed));
-        steering += force;
+        steering += force * factor;
     }
-    public void Flee(Vector3 target)
+    public void Flee(Vector3 target, float factor = 1)
     {
         Vector3 desiredVelocityPlan = -GetDvOnPlan(target, OnPlanNormal);
         Vector3 force = desiredVelocityPlan - rb.velocity;
 
         force = Vector3.ClampMagnitude(force, puppet.stats.Get(Stats.StatType.move_speed));
-        steering += force;
+        steering += force * factor;
 
     }
-    public void Arrival(Vector3 target)
+    public void Arrival(Vector3 target,float factor = 1)
     {
         Vector3 desiredVelocityPlan = GetDvOnPlan(target, OnPlanNormal);
         float distance = desiredVelocityPlan.magnitude;
@@ -108,28 +110,28 @@ public class Steering : MonoBehaviour {
         }
         Vector3 force = desiredVelocityPlan - rb.velocity;
         force = Vector3.ClampMagnitude(force, puppet.stats.Get(Stats.StatType.move_speed));
-        steering += force;
+        steering += force * factor;
     }
-    public void Pursuit(Vector3 target, Vector3 targetVelocity)
+    public void Pursuit(Vector3 target, Vector3 targetVelocity,float factor = 1)
     {
         float T = 0.5f;
         Vector3 futurePosition = target + targetVelocity * T;
-        Seek(futurePosition);
+        Seek(futurePosition,factor);
 
     }
 
-    public void Evade(Vector3 target, Vector3 targetVelocity)
+    public void Evade(Vector3 target, Vector3 targetVelocity, float factor = 1)
     {
         float T = 0.5f;
         Vector3 futurePosition = target + targetVelocity * T;
-        Flee(futurePosition);
+        Flee(futurePosition, factor);
 
     }
     float wanderAngle = 0;
 
 
 
-    public void Wander()
+    public void Wander(float factor = 1)
     {
         float wanderT = 30;
         float circleRadius = 1;
@@ -139,7 +141,7 @@ public class Steering : MonoBehaviour {
         wanderAngle += Random.Range(-wanderT, wanderT);
         Vector3 circleOffset = new Vector3(Mathf.Cos(wanderAngle * Mathf.Deg2Rad), 0, Mathf.Sin(wanderAngle * Mathf.Deg2Rad)) * circleRadius;
         Vector3 target = circleCenter + circleOffset;
-        Seek(target);
+        Seek(target, factor);
         /*
             Je choisis une direction random. 
             Je cree un cercle ayant pour centre la direction actuelle.
@@ -159,7 +161,7 @@ public class Steering : MonoBehaviour {
     #region Advanced Steering Movement 
     // Peut être améliorer : Lorsqu'une unité est un milieu d'un gros groupe elle est coincée et vibre.
     // de plus ici on push dans une sphere autour de nous.  Mais ce qui compte c'est surtout d'éviter de vers quoi on avance.
-    public void Separation()
+    public void Separation(float factor = 1)
     {
 
         int separationMask = LayerMask.GetMask(new string[] { "Puppet" });
@@ -189,7 +191,7 @@ public class Steering : MonoBehaviour {
 #if UNITY_EDITOR
             giz.separateForce = separationForce;
 #endif
-            steering += separationForce;
+            steering += separationForce* factor;
         }
     }
     public void LeaderFollowing(Vector3 target, Vector3 targetVelocity, Vector3 targetDirection)
@@ -213,7 +215,9 @@ public class Steering : MonoBehaviour {
     {
         // peut être optimi en changeant layer + pas à chaques frames.
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, -2 * Vector3.up, out hit))
+        Vector3 center = transform.position + Vector3.up * puppet.Extents.y;
+        Debug.DrawLine(center, center + -2 * Vector3.up,Color.blue);
+        if (Physics.Raycast(center, -2 * Vector3.up, out hit))
         {
             OnPlanNormal = hit.normal;
         }
