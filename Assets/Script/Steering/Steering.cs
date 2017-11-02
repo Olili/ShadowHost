@@ -9,12 +9,20 @@ public class Steering : MonoBehaviour {
     protected Rigidbody rb;
     [HideInInspector] public Vector3 OnPlanNormal;
     protected Vector3 steering;
-    Puppet puppet;
+    private Puppet puppet;
     Vector3 computedVelocity;
-    //// better for OnDrawGizmos : 
-    //protected Vector3 steeringGizmo;
-    //Ray avoidRayDebug;
 
+
+
+    #region getterSetters
+    public Vector3 GetSteering
+    {
+        get
+        {
+            return steering;
+        }
+    }
+#endregion
     public void Awake()
     {
         steering = Vector3.zero;
@@ -49,6 +57,9 @@ public class Steering : MonoBehaviour {
             return computedVelocity;
         }
     }
+
+  
+
     public void FixedUpdate()
     {
         GroundGravityCheck();
@@ -191,20 +202,27 @@ public class Steering : MonoBehaviour {
     }
     public virtual Vector3 GetDvOnPlan(Vector3 target, Vector3 planNormal)
     {
+        //Vector3 dV = (target - transform.position);
+        //dV = Vector3.ClampMagnitude(dV, puppet.stats.Get(Stats.StatType.move_speed));
+        //return dV;
+
+        //// pour le moment pas besoin de marcher sur des trucs en pente : 
         Vector3 dV = (target - transform.position);
-        dV = Vector3.ClampMagnitude(dV, puppet.stats.Get(Stats.StatType.move_speed));
-        return dV;
+        float distance = dV.magnitude;
+        dV.Normalize();
+        Vector3 right = Vector3.Cross(dV, planNormal);
+        Vector3 planDv = Vector3.Cross(planNormal, right);
 
-            //// pour le moment pas besoin de marcher sur des trucs en pente : 
-        //float distance = dV.magnitude;
-        //dV.Normalize();
-        //Vector3 right = Vector3.Cross(dV, planNormal);
-        //Vector3 planDv = Vector3.Cross(planNormal, right);
-
-        //if (distance > puppet.stats.Get(Stats.StatType.move_speed))
-        //    return planDv.normalized * puppet.stats.Get(Stats.StatType.move_speed); 
-        //else
-        //    return planDv.normalized * distance;
+        if (distance > puppet.stats.Get(Stats.StatType.move_speed))
+            return planDv.normalized * puppet.stats.Get(Stats.StatType.move_speed);
+        else
+            return planDv.normalized * distance;
 
     }
+
+
+//#if UNITY_EDITOR
+//    protected Vector3 steeringGizmo;
+//    Ray avoidRayDebug;
+//#endif
 }
