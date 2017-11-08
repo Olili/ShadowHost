@@ -13,10 +13,12 @@ public class Puppet : MonoBehaviour {
     Vector3 extents;
     public Puppet leader;
 
+#region GetterSetters
     public Vector3 Extents
     {
         get{return extents;}
     }
+#endregion
 
     private void Awake()
     {
@@ -25,12 +27,18 @@ public class Puppet : MonoBehaviour {
         stats.Init();
         extents = GetComponent<Collider>().bounds.extents;
     }
-
-    public virtual void Move(Vector3 direction, float factor)
+    public void Init(Vector3 position,Puppet _leader, Transform parent)
     {
-        Vector3 translation = direction * 1 * stats.Get(Stats.StatType.move_speed) * Time.fixedDeltaTime;
-        rb.MovePosition(rb.transform.position + translation);
+        gameObject.SetActive(true);
+        transform.position = position;
+        transform.parent = parent;
+        leader = _leader;
     }
+    //public virtual void Move(Vector3 direction, float factor)
+    //{
+    //    Vector3 translation = direction * 1 * stats.Get(Stats.StatType.move_speed) * Time.fixedDeltaTime;
+    //    rb.MovePosition(rb.transform.position + translation);
+    //}
     public virtual void SetVelocity(Vector3 velocity)
     {
         Vector3 rbVelocity = rb.velocity;
@@ -59,11 +67,9 @@ public class Puppet : MonoBehaviour {
     {
         return rb.velocity;
     }
-    public virtual void OnTakeDamage()
-    {
 
-    }
-    public void GetFrontPuppets()
+
+    public virtual void OnTakeDamage()
     {
 
     }
