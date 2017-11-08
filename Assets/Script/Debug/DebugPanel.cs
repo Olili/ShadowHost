@@ -13,6 +13,8 @@ public class DebugPanel : MonoBehaviour {
         playerBrain = FindObjectOfType<PlayerBrain>();
 
     }
+
+    // ne marche plus. temporaire.
     void Possession()
     {
         RaycastHit hit;
@@ -31,10 +33,10 @@ public class DebugPanel : MonoBehaviour {
                     {
                         lastPuppet = playerBrain.gameObject;
                         Destroy(playerBrain);
-                        lastPuppet.AddComponent<MouseBrain>();
+                        lastPuppet.AddComponent<FollowBrain>();
                     }
                     playerBrain = puppet.gameObject.AddComponent<PlayerBrain>();
-                    Destroy(puppet.GetComponent<MouseBrain>());
+                    Destroy(puppet.GetComponent<FollowBrain>());
                 }
             }
         }

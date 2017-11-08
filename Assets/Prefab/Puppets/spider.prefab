@@ -818,8 +818,7 @@ GameObject:
   - component: {fileID: 95661263599991158}
   - component: {fileID: 54247970972838818}
   - component: {fileID: 65357378599301620}
-  - component: {fileID: 114942537618614244}
-  - component: {fileID: 114939063886410894}
+  - component: {fileID: 114276344232229142}
   - component: {fileID: 114815797527445370}
   m_Layer: 8
   m_Name: spider
@@ -1712,7 +1711,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &65357378599301620
 BoxCollider:
@@ -1743,6 +1742,32 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114276344232229142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957509282031604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5265cbb5b120ee04d8c3772b4b29af18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    statTab:
+    - name: move_speed
+      baseStat: 4
+      currentStat: 1
+    - name: maxAcceleration
+      baseStat: 0.2
+      currentStat: 1
+    - name: maxTurnSpeed
+      baseStat: 300
+      currentStat: 1
+    - name: strengh
+      baseStat: 1
+      currentStat: 1
+  leader: {fileID: 0}
 --- !u!114 &114815797527445370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1763,43 +1788,6 @@ MonoBehaviour:
     steeringForce: {x: 0, y: 0, z: 0}
     separateForce: {x: 0, y: 0, z: 0}
     separateSphereLenght: 0
---- !u!114 &114939063886410894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957509282031604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 494b5ab74aa91df4eba23ed1ffc60212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats:
-    statTab:
-    - name: move_speed
-      baseStat: 4
-      currentStat: 1
-    - name: maxAcceleration
-      baseStat: 0.2
-      currentStat: 1
-    - name: maxTurnSpeed
-      baseStat: 300
-      currentStat: 1
-    - name: strengh
-      baseStat: 1
-      currentStat: 1
-  leader: {fileID: 0}
---- !u!114 &114942537618614244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957509282031604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29f5ca007a64e9944a806782c8f426fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!137 &137424584509370760
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

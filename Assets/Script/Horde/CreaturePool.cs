@@ -12,7 +12,7 @@ Il faut gérer plusieurs creatures différentes.
 public class CreaturePool : MonoBehaviour
 {
     List<GameObject>[] poolTab; // contient un tableau de pool de creatures
-    int poolSize;
+    int poolSize = 25;
     [SerializeField] GameObject[] prefabModel;
 
     private void Awake()
@@ -26,12 +26,16 @@ public class CreaturePool : MonoBehaviour
         for (int i = 0; i < (int)CreatureType.Max_Creatures; i++)
         {
             poolTab[i] = new List<GameObject>();
-            // remplir les pool de creatures au debut du jeux
+            for (int j = 0; j < poolSize; j++)
+            {
+                AddCreatureToPool(CreatureType.Spider);
+            }
         }
     }
     Puppet AddCreatureToPool(CreatureType type)
     {
         GameObject poolObject = Instantiate<GameObject>(prefabModel[(int)type]);
+        poolObject.SetActive(false);
         poolTab[(int)type].Add(poolObject);
         Puppet puppet = poolObject.GetComponent<Puppet>();
         return puppet;
@@ -48,7 +52,8 @@ public class CreaturePool : MonoBehaviour
             {
                 if (!puppet.gameObject.activeInHierarchy)
                 {
-                    return puppet;
+                    returnedPuppet = puppet;
+                    break;
                 }
             }
         }
@@ -56,6 +61,7 @@ public class CreaturePool : MonoBehaviour
         {
             returnedPuppet = AddCreatureToPool(type);
         }
+        returnedPuppet.gameObject.SetActive(true);
         return returnedPuppet;
     }
 }

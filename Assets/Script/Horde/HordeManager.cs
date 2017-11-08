@@ -13,6 +13,7 @@ public enum CreatureType
 public class HordeManager : MonoBehaviour {
 
     CreaturePool creaturePool;
+    public int nbCreaturePop = 10;
 
     void Start () {
         creaturePool = GetComponent<CreaturePool>();
@@ -25,16 +26,22 @@ public class HordeManager : MonoBehaviour {
 
         Puppet alpha = creaturePool.GetCreature(type);
         alpha.Init(position, null, hordeContainer.transform);
+        alpha.gameObject.AddComponent<Alpha>();
         alpha.gameObject.AddComponent<PlayerBrain>();
+        alpha.ChangeColorDebug();
             // faire une carré de pop d'unités
         float margin = 1.3f;
-        int rowZ = Mathf.FloorToInt(nbCreatures / 2);
-        int rowX = Mathf.CeilToInt(nbCreatures / 2);
+        //int rowZ = Mathf.FloorToInt(nbCreatures / 2);
+        //int rowX = Mathf.CeilToInt(nbCreatures / 2);
+        int rowZ = Mathf.CeilToInt(Mathf.Sqrt(nbCreatures));
+        int rowX = Mathf.CeilToInt(Mathf.Sqrt(nbCreatures));
+
 
         Vector3 offset = position;
         offset.x -= ((rowX - 1) * margin / 2.0f);
         offset.z -= (margin);
 
+        int nbUnit = 0;
         for (int z = 0; z < rowZ;z++)
         {
             for (int x = 0; x < rowX; x++)
@@ -47,6 +54,9 @@ public class HordeManager : MonoBehaviour {
 
                 follower.Init(creaturePosition,alpha, hordeContainer.transform);
                 follower.gameObject.AddComponent<FollowBrain>();
+                alpha.GetComponent<Alpha>().AddHordePuppet(follower);
+                if (++nbUnit >=nbCreatures)
+                    return;
             }
         }
     }
@@ -54,8 +64,7 @@ public class HordeManager : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Salut");
-            CreateHorde(Vector3.zero, CreatureType.Spider, 5);
+            CreateHorde(Vector3.zero, CreatureType.Spider, nbCreaturePop);
         }
     }
 }

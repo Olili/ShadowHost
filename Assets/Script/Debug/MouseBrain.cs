@@ -30,15 +30,12 @@ public class MouseBrain : Brain {
                 }
             }
         }
-        //else
-        //{
-        //    steering.LeaderFollowing(puppet.leader.transform.position,puppet.leader.GetVelocity(), puppet.leader.transform.forward);
-        //}
 
         steering.Separation();
         velocity = steering.ComputedVelocity;
 
         puppet.SetVelocity(velocity);
+        velocity.y = 0;
         puppet.Rotate(velocity);
     }
       

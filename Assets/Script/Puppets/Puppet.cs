@@ -9,9 +9,11 @@ public class Puppet : MonoBehaviour {
 
     public Stats stats = new Stats();
     PhysicMaterial physicMaterial;
-    private Rigidbody rb;
-    Vector3 extents;
+    protected Rigidbody rb;
+    protected Vector3 extents;
     public Puppet leader;
+    protected Animator animator;
+    protected Material material;
 
 #region GetterSetters
     public Vector3 Extents
@@ -23,6 +25,7 @@ public class Puppet : MonoBehaviour {
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         physicMaterial = GetComponent<Collider>().material;
         stats.Init();
         extents = GetComponent<Collider>().bounds.extents;
@@ -45,7 +48,7 @@ public class Puppet : MonoBehaviour {
         if (velocity != Vector3.zero)
         {
             physicMaterial.dynamicFriction = 0;
-            rb.velocity = velocity ;
+            rb.velocity = velocity;
         }
         else
         {
@@ -72,5 +75,9 @@ public class Puppet : MonoBehaviour {
     public virtual void OnTakeDamage()
     {
 
+    }
+    public void ChangeColorDebug()
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.red;
     }
 }

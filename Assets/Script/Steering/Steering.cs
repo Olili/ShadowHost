@@ -191,7 +191,7 @@ public class Steering : MonoBehaviour {
                     vecFromOther.Normalize();
                     if (distance != 0)
                     {
-                        vecFromOther = vecFromOther * sphereCheckRadius / distance;
+                        vecFromOther = vecFromOther * sphereCheckRadius / distance * puppet.stats.Get(Stats.StatType.move_speed);
                         separationForce += vecFromOther;
                     }
                 }
@@ -229,14 +229,6 @@ public class Steering : MonoBehaviour {
         }
         Seek(averagePosition / closeNeighbours.Length);
     }
-    public void LeaderFollowing(Vector3 target, Vector3 targetVelocity, Vector3 targetDirection)
-    {
-        Alignement(targetVelocity,0.7f);
-        //if (targetVelocity!=Vector3.zero)
-        //    Evade(target, targetVelocity);
-        //Seek(target,0.7f);
-    }
-
     #endregion
 
 
