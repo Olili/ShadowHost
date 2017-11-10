@@ -18,7 +18,7 @@ public class MouseBrain : Brain {
     public override void FixedUpdate()
     {
         Vector3 velocity = Vector3.zero;
-        if (puppet.leader == null)
+        if (puppet.Leader == null)
         {
             if (Input.GetMouseButton(0))
             {
@@ -34,9 +34,9 @@ public class MouseBrain : Brain {
         steering.Separation();
         velocity = steering.ComputedVelocity;
 
-        puppet.SetVelocity(velocity);
+        puppet.PuppetAction.SetVelocity(velocity);
         velocity.y = 0;
-        puppet.Rotate(velocity);
+        puppet.PuppetAction.SetRotation(velocity);
     }
       
 }

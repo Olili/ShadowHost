@@ -12,7 +12,7 @@ public class Stats
         maxAcceleration, // spécifique au steering ~= vitesse pour changer de direction.
         maxTurnSpeed, // il sera peut être interessant de la changer pour le joueur.
         strengh, // non implémenté
-
+        maxLife,
         max_stats
     }
 

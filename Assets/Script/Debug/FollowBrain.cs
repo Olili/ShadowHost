@@ -16,9 +16,9 @@ public class FollowBrain : Brain
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        Vector3 leaderPos = puppet.leader.transform.position;
-        Vector3 leaderVel = puppet.leader.GetVelocity();
-        Vector3 leaderDir = puppet.leader.transform.forward;
+        Vector3 leaderPos = puppet.Leader.transform.position;
+        Vector3 leaderVel = puppet.Leader.GetVelocity();
+        Vector3 leaderDir = puppet.Leader.transform.forward;
      
         Vector3 velocity = Vector3.zero;
 
@@ -27,7 +27,7 @@ public class FollowBrain : Brain
 
         // On peut s'aligner dans la direction du joueur pour simplifier les déplacements.
         // On doit éviter le joueur s'il avance.
-        if (puppet.leader.GetVelocity().magnitude < 0.2f)
+        if (puppet.Leader.GetVelocity().magnitude < 0.2f)
         {
             FollowImmobilePlayer(leaderPos, leaderVel, leaderDir);
 
@@ -41,16 +41,16 @@ public class FollowBrain : Brain
         steering.Separation(0.7f);
 
         velocity = steering.ComputedVelocity;
-        puppet.SetVelocity(velocity);
         velocity.y = 0;
         if (velocity.magnitude > 0.3f)
         {
-            puppet.Rotate(velocity.normalized);
+            puppet.PuppetAction.SetVelocity(velocity);
+            puppet.PuppetAction.SetRotation(velocity.normalized);
         }
         else
         {
-            puppet.SetVelocity(Vector3.zero);
-            puppet.Rotate(Vector3.zero);
+            puppet.PuppetAction.SetVelocity(Vector3.zero);
+            puppet.PuppetAction.SetRotation(Vector3.zero);
         }
     }
     void FollowMovingPlayer(Vector3 leaderPos,Vector3 leaderVel,Vector3 leaderDir)
@@ -60,7 +60,8 @@ public class FollowBrain : Brain
        
         if (vecFromLeader.magnitude < 2 )
         {
-            steering.Evade(leaderPos, leaderVel,2);
+            //steering.Evade(leaderPos, leaderVel,2);
+            steering.Flee(leaderPos,2);
         }
         else
         {

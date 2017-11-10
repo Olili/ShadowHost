@@ -820,6 +820,7 @@ GameObject:
   - component: {fileID: 65357378599301620}
   - component: {fileID: 114276344232229142}
   - component: {fileID: 114815797527445370}
+  - component: {fileID: 114343782723695608}
   m_Layer: 8
   m_Name: spider
   m_TagString: Untagged
@@ -1753,6 +1754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5265cbb5b120ee04d8c3772b4b29af18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   stats:
     statTab:
     - name: move_speed
@@ -1767,7 +1769,17 @@ MonoBehaviour:
     - name: strengh
       baseStat: 1
       currentStat: 1
-  leader: {fileID: 0}
+--- !u!114 &114343782723695608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957509282031604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4160a3d971cee034aa63e0938e8e5f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114815797527445370
 MonoBehaviour:
   m_ObjectHideFlags: 1

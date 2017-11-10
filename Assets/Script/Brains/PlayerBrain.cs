@@ -22,18 +22,25 @@ public class PlayerBrain : Brain {
     {
         base.Update();
     }
-    public override void FixedUpdate () {
 
-        base.FixedUpdate();
-        Vector3 direction= Vector3.zero;
+    public virtual void Move()
+    {
+        Vector3 direction = Vector3.zero;
         direction.x = Input.GetAxis("Horizontal");
         direction.z = Input.GetAxis("Vertical");
         direction.Normalize();
-        direction = direction* puppet.stats.Get(Stats.StatType.move_speed);
-        direction.y = rb.velocity.y;
+        direction = direction * puppet.stats.Get(Stats.StatType.move_speed);
+        if (direction!=Vector3.zero)
+            direction.y = 0;
 
-        puppet.SetVelocity(direction);
-        puppet.Rotate(direction.normalized);
+        puppet.PuppetAction.SetVelocity(direction);
+        puppet.PuppetAction.SetRotation(direction.normalized);
+    }
+
+    public override void FixedUpdate () {
+
+        base.FixedUpdate();
+        Move();
     }
     public override void OnDestroy()
     {
