@@ -323,10 +323,10 @@ GameObject:
   - component: {fileID: 95429393589902252}
   - component: {fileID: 65800669821649180}
   - component: {fileID: 54998044097022762}
-  - component: {fileID: 114185623679733422}
   - component: {fileID: 114068643768898110}
   - component: {fileID: 114123310254145474}
-  m_Layer: 0
+  - component: {fileID: 114243058646587382}
+  m_Layer: 8
   m_Name: GruntPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062f9298551667d40b357e30e56c1af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114185623679733422
+--- !u!114 &114243058646587382
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -863,7 +863,7 @@ MonoBehaviour:
   stats:
     statTab:
     - name: move_speed
-      baseStat: 3
+      baseStat: 3.5
       currentStat: 1
     - name: maxAcceleration
       baseStat: 0.3
@@ -872,9 +872,11 @@ MonoBehaviour:
       baseStat: 300
       currentStat: 1
     - name: strengh
-      baseStat: 1
+      baseStat: 3
       currentStat: 1
-  leader: {fileID: 0}
+    - name: maxLife
+      baseStat: 10
+      currentStat: 1
 --- !u!137 &137617255255689134
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -40,7 +40,8 @@ public class Puppet : MonoBehaviour {
             if (puppetAction != null)
                 puppetAction.OnEnd();
             puppetAction = value;
-            puppetAction.OnBegin();
+            if (puppetAction!=null)
+                puppetAction.OnBegin();
         }
     }
 
@@ -175,11 +176,13 @@ public class Puppet : MonoBehaviour {
     }
     public void Update()
     {
-        puppetAction.OnUpdate();
+        if (puppetAction != null)
+            puppetAction.OnUpdate();
     }
     public void FixedUpdate()
     {
-        puppetAction.OnFixedUpdate();
+        if (puppetAction != null)
+            puppetAction.OnFixedUpdate();
     }
     public void OnDrawGizmos()
     {

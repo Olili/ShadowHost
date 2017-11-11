@@ -818,9 +818,8 @@ GameObject:
   - component: {fileID: 95661263599991158}
   - component: {fileID: 54247970972838818}
   - component: {fileID: 65357378599301620}
-  - component: {fileID: 114276344232229142}
   - component: {fileID: 114815797527445370}
-  - component: {fileID: 114343782723695608}
+  - component: {fileID: 114020214126802962}
   m_Layer: 8
   m_Name: spider
   m_TagString: Untagged
@@ -1743,7 +1742,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114276344232229142
+--- !u!114 &114020214126802962
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1751,7 +1750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1957509282031604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5265cbb5b120ee04d8c3772b4b29af18, type: 3}
+  m_Script: {fileID: 11500000, guid: 494b5ab74aa91df4eba23ed1ffc60212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
@@ -1761,7 +1760,7 @@ MonoBehaviour:
       baseStat: 4
       currentStat: 1
     - name: maxAcceleration
-      baseStat: 0.2
+      baseStat: 0.3
       currentStat: 1
     - name: maxTurnSpeed
       baseStat: 300
@@ -1769,17 +1768,9 @@ MonoBehaviour:
     - name: strengh
       baseStat: 1
       currentStat: 1
---- !u!114 &114343782723695608
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1957509282031604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4160a3d971cee034aa63e0938e8e5f95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+    - name: maxLife
+      baseStat: 6
+      currentStat: 1
 --- !u!114 &114815797527445370
 MonoBehaviour:
   m_ObjectHideFlags: 1
