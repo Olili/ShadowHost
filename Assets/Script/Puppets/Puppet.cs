@@ -189,4 +189,9 @@ public class Puppet : MonoBehaviour {
         if (puppetAction!=null)
             puppetAction.DrawGizmo();
     }
+
+    public void OnAnimationEvent()
+    {
+        puppetAction.OnAnimationEvent();
+    }
 }

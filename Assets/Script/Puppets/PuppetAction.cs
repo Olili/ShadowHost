@@ -111,4 +111,8 @@ public class PuppetAction  {
     {
 
     }
+    public virtual void OnAnimationEvent()
+    {
+
+    }
 }

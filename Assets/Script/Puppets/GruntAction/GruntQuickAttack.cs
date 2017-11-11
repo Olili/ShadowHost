@@ -7,16 +7,20 @@ public class GruntQuickAttack : GruntAction
     float timer = 0;
     float chargeTime = 0;
     Vector3 attackExtents;
+    bool attackStarted = false;
 
 
     public GruntQuickAttack(Puppet _puppet) : base(_puppet)
     {
-        attackExtents = new Vector3(1, 0.5f, 4);
+        attackExtents = new Vector3(1, 0.5f, 3);
     }
             // La state machine de QuickAttack   :
     public override void OnBegin()
     {
         base.OnBegin();
+        timer = 0;
+        chargeTime = 0;
+        attackStarted = false;
         CurActionFct = Charge;
     }
     public override void OnEnd()
@@ -33,28 +37,33 @@ public class GruntQuickAttack : GruntAction
             timer = 0;
             CurActionFct = DuringAttack;
             puppet.Animator.SetTrigger("StartAttack");
-            puppet.GetComponentInChildren<ParticleSystem>().Play();
-            AttackCollision();
+       
         }
     }
     public void DuringAttack()
     {
 
-        puppet.Rb.velocity = puppet.stats.Get(Stats.StatType.move_speed)* puppet.transform.forward*2;
+        puppet.Rb.velocity = puppet.stats.Get(Stats.StatType.move_speed)* puppet.transform.forward*1.5f;
         timer += Time.deltaTime;
-        if (timer > 0.5f)
+
+        
+        if (puppet.Animator.GetCurrentAnimatorStateInfo(0).IsName("Attack01"))
+        {
+            attackStarted = true;
+        }
+        if (attackStarted && puppet.Animator.IsInTransition(0))
         {
             timer = 0;
+            attackStarted = false;
             CurActionFct = AttackEnd;
-
-         
+            puppet.Animator.SetFloat("Velocity", 0);
         }
     }
     public void AttackEnd()
     {
         puppet.Rb.velocity = Vector3.zero;
         timer += Time.deltaTime;
-        if (timer > 0.1f)
+        if (timer > 0.2f)
         {
             CurActionFct = null;
             puppet.PuppetAction = new GruntAction(puppet); // On laisse la main
@@ -77,6 +86,11 @@ public class GruntQuickAttack : GruntAction
                 targetPuppet.PuppetAction.OnHit(puppet.stats.Get(Stats.StatType.strengh), forceApply.normalized * 5);
             }
         }
+    }
+    public override void OnAnimationEvent()
+    {
+        puppet.GetComponentInChildren<ParticleSystem>().Play();
+        AttackCollision();
     }
 
         // Les ordres/transition des brain   :
