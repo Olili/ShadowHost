@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GruntQuickAttack : GruntAction
 {
-    float timer = 0;
-    float chargeTime = 0;
+    float timer;
+    float chargeTime ;
     Vector3 attackExtents;
     bool attackStarted = false;
 
@@ -19,9 +19,10 @@ public class GruntQuickAttack : GruntAction
     {
         base.OnBegin();
         timer = 0;
-        chargeTime = 0;
+        chargeTime = 0.1f;
         attackStarted = false;
         CurActionFct = Charge;
+        puppet.Animator.SetTrigger("StartAttack");
     }
     public override void OnEnd()
     {
@@ -32,12 +33,12 @@ public class GruntQuickAttack : GruntAction
     {
         puppet.Rb.velocity = Vector3.zero;
         timer += Time.deltaTime;
+      
+
         if (timer> chargeTime)
         {
             timer = 0;
             CurActionFct = DuringAttack;
-            puppet.Animator.SetTrigger("StartAttack");
-       
         }
     }
     public void DuringAttack()

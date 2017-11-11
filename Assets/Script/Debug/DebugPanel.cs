@@ -28,15 +28,8 @@ public class DebugPanel : MonoBehaviour {
                 Puppet puppet = hit.transform.GetComponent<Puppet>();
                 if (puppet != null)
                 {
-                    Debug.Log("Possesion !!!");
-                    if (playerBrain != null)
-                    {
-                        lastPuppet = playerBrain.gameObject;
-                        Destroy(playerBrain);
-                        lastPuppet.AddComponent<FollowBrain>();
-                    }
-                    playerBrain = puppet.gameObject.AddComponent<PlayerBrain>();
-                    Destroy(puppet.GetComponent<FollowBrain>());
+                    GameManager.Instance.Possession(puppet);
+                    //Debug.Log("Possesion !!!");
                 }
             }
         }

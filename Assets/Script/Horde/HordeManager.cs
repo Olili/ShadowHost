@@ -27,12 +27,9 @@ public class HordeManager : MonoBehaviour {
         Puppet alpha = creaturePool.GetCreature(type);
         alpha.Init(position, null, hordeContainer.transform);
         alpha.gameObject.AddComponent<Alpha>();
-        alpha.gameObject.AddComponent<PlayerBrain>();
         alpha.ChangeColorDebug();
             // faire une carré de pop d'unités
         float margin = 1.3f;
-        //int rowZ = Mathf.FloorToInt(nbCreatures / 2);
-        //int rowX = Mathf.CeilToInt(nbCreatures / 2);
         int rowZ = Mathf.CeilToInt(Mathf.Sqrt(nbCreatures));
         int rowX = Mathf.CeilToInt(Mathf.Sqrt(nbCreatures));
 
@@ -62,9 +59,13 @@ public class HordeManager : MonoBehaviour {
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {
             CreateHorde(Vector3.zero, CreatureType.Spider, nbCreaturePop);
+        }
+        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            CreateHorde(Vector3.zero, CreatureType.Grunt, 4);
         }
     }
 }

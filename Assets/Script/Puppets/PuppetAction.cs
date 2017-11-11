@@ -104,6 +104,11 @@ public class PuppetAction  {
         puppet.Rb.AddForce(force, ForceMode.Impulse);
         if (puppet.Life <= 0)
         {
+            if (puppet.Leader !=null)
+            {
+                puppet.Leader.GetComponent<Alpha>().RemoveHordePuppet(puppet);
+            }
+
             GameObject.Destroy(puppet.gameObject);
         }
     }
