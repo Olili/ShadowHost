@@ -16,6 +16,8 @@ public class FollowBrain : Brain
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        if (puppet.Leader == null)
+            return;
         Vector3 leaderPos = puppet.Leader.transform.position;
         Vector3 leaderVel = puppet.Leader.GetVelocity();
         Vector3 leaderDir = puppet.Leader.transform.forward;

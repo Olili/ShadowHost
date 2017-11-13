@@ -108,8 +108,11 @@ public class PuppetAction  {
             {
                 puppet.Leader.GetComponent<Alpha>().RemoveHordePuppet(puppet);
             }
-
-            GameObject.Destroy(puppet.gameObject);
+            if (puppet.gameObject.GetComponent<Brain>()!=null)
+            {
+                GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
+            }
+            puppet.gameObject.SetActive(false);
         }
     }
     public virtual void DrawGizmo()

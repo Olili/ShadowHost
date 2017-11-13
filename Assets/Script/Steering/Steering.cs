@@ -184,7 +184,7 @@ public class Steering : MonoBehaviour {
             int i;
             for (i = 0; i < puppetsCollided.Length; i++)
             {
-                if (puppetsCollided[i].transform != this.transform)
+                if (puppetsCollided[i] !=null&& puppetsCollided[i].transform != this.transform)
                 {
                     Vector3 vecFromOther = puppet.transform.position - puppetsCollided[i].transform.position;
                     float distance = vecFromOther.magnitude;
