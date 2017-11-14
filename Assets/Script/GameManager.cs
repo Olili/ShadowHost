@@ -6,6 +6,27 @@ public class GameManager : MonoBehaviour {
 
     private PlayerBrain playerBrain;
     private static GameManager instance = null;
+
+#region getterSetters
+    public PlayerBrain PlayerBrain
+    {
+        get
+        {
+            return playerBrain;
+        }
+        set
+        {
+            playerBrain = value;
+            if (playerBrain!= null)
+            {
+                CameraController cameraController = Camera.main.GetComponent<CameraController>();
+                if (cameraController!=null)
+                    cameraController.SetTarget(playerBrain.transform);
+            }
+        }
+    }
+#endregion
+
     public static GameManager Instance
     {
         get
@@ -17,31 +38,30 @@ public class GameManager : MonoBehaviour {
             }
             return instance;
         }
-
         private set { }
     }
+   
+
     public void Possession(Puppet puppet)
     {
         Brain brain = puppet.GetComponent<Brain>();
 
-
-        if (brain == playerBrain && playerBrain != null)
+        if (brain == PlayerBrain && PlayerBrain != null)
         {
             Debug.Log("Unit déjà possedee");
             return;
         }
-
-        if (playerBrain != null)
+        if (PlayerBrain != null)
         {
-            Destroy(playerBrain);
+            Destroy(PlayerBrain);
         }
         switch (puppet.Type)
         {
             case CreatureType.Spider:
-                playerBrain = puppet.gameObject.AddComponent<PlayerBrain>();
+                puppet.gameObject.AddComponent<PlayerBrain>();
                 break;
             case CreatureType.Grunt:
-                playerBrain = puppet.gameObject.AddComponent<PlayerGruntBrain>();
+                puppet.gameObject.AddComponent<PlayerGruntBrain>();
                 break;
             case CreatureType.Max_Creatures:
                 Debug.Log("What it is ?");
@@ -49,6 +69,5 @@ public class GameManager : MonoBehaviour {
             default:
                 break;
         }
-
     }
 }
