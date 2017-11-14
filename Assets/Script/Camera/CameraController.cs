@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour {
 
     public void Awake()
     {
-        cineVC = GetComponent<CinemachineVirtualCamera>();
+        cineVC = GetComponentInChildren<CinemachineVirtualCamera>();
     }
 
     public void SetTarget(Transform transform)

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
             playerBrain = value;
             if (playerBrain!= null)
             {
-                CameraController cameraController = Camera.main.GetComponent<CameraController>();
+                CameraController cameraController = Camera.main.GetComponentInParent<CameraController>();
                 if (cameraController!=null)
                     cameraController.SetTarget(playerBrain.transform);
             }
