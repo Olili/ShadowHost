@@ -37,6 +37,9 @@ public class PlayerBrain : Brain {
         direction.y = puppet.Rb.velocity.y;
 
         puppet.PuppetAction.SetVelocity(direction);
+
+
+        direction = GetComponent<Steering>().GetDvOnPlan(transform.position + direction);
         puppet.PuppetAction.SetRotation(direction.normalized);
     }
 

@@ -24,7 +24,7 @@ public class Steering : MonoBehaviour {
     float delay = 0.1f;
 
     // info : 
-    bool isOnGround = false;
+    public bool isOnGround = false;
 
     #region getterSetters
     public Vector3 GetSteering
@@ -104,7 +104,7 @@ public class Steering : MonoBehaviour {
     #region Basic steering Movement
     public void Seek(Vector3 target, float factor = 1)
     {
-        Vector3 desiredVelocityPlan = GetDvOnPlan(target, OnPlanNormal);
+        Vector3 desiredVelocityPlan = GetDvOnPlan(target);
         Vector3 force = desiredVelocityPlan - rb.velocity;
 
         force = Vector3.ClampMagnitude(force, puppet.stats.Get(Stats.StatType.move_speed));
@@ -112,7 +112,7 @@ public class Steering : MonoBehaviour {
     }
     public void Flee(Vector3 target, float factor = 1)
     {
-        Vector3 desiredVelocityPlan = -GetDvOnPlan(target, OnPlanNormal);
+        Vector3 desiredVelocityPlan = -GetDvOnPlan(target);
         Vector3 force = desiredVelocityPlan - rb.velocity;
 
         force = Vector3.ClampMagnitude(force, puppet.stats.Get(Stats.StatType.move_speed));
@@ -121,7 +121,7 @@ public class Steering : MonoBehaviour {
     }
     public void Arrival(Vector3 target,float factor = 1)
     {
-        Vector3 desiredVelocityPlan = GetDvOnPlan(target, OnPlanNormal);
+        Vector3 desiredVelocityPlan = GetDvOnPlan(target);
         float distance = desiredVelocityPlan.magnitude;
 
         if (desiredVelocityPlan.magnitude < slowingRadius)
@@ -253,9 +253,10 @@ public class Steering : MonoBehaviour {
     protected virtual void GroundGravityCheck()
     {
         // peut être optimi en changeant layer + pas à chaques frames.
+        int mask = LayerMask.GetMask(new string[] { "Default" });
         RaycastHit hit;
         Vector3 center = transform.position + Vector3.up * puppet.Extents.y;
-        if (Physics.Raycast(center, -puppet.Extents.y * Vector3.up, out hit))
+        if (Physics.Raycast(center, -puppet.Extents.y * Vector3.up, out hit, mask))
         {
             OnPlanNormal = hit.normal;
             isOnGround = true;
@@ -265,13 +266,13 @@ public class Steering : MonoBehaviour {
             isOnGround = false;
         }
     }
-    public virtual Vector3 GetDvOnPlan(Vector3 target, Vector3 planNormal)
+    public virtual Vector3 GetDvOnPlan(Vector3 target)
     {
         Vector3 dV = (target - transform.position);
         float distance = dV.magnitude;
         dV.Normalize();
-        Vector3 right = Vector3.Cross(dV, planNormal);
-        Vector3 planDv = Vector3.Cross(planNormal, right);
+        Vector3 right = Vector3.Cross(dV, OnPlanNormal);
+        Vector3 planDv = Vector3.Cross(OnPlanNormal, right);
 
         if (distance > puppet.stats.Get(Stats.StatType.move_speed))
             return planDv.normalized * puppet.stats.Get(Stats.StatType.move_speed);
