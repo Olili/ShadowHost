@@ -7,13 +7,20 @@ using UnityEngine;
 [RequireComponent(typeof(Steering))]
 public class Puppet : MonoBehaviour {
 
+    static readonly float maxSlope = 45;
+
     [SerializeField]private CreatureType type;
     public Stats stats = new Stats();
-    private Puppet leader;
+    [SerializeField]private Puppet leader;
     private Vector3 extents;
     private float life;
+    public string debugAction;
+    [SerializeField] private bool isOnGround;
+    [HideInInspector] public Vector3 OnPlanNormal;
+    public bool slidingDebug = false;
+    Transform centerDown;
 
-        // State machine : 
+    // State machine : 
     private PuppetAction puppetAction;
 
         // unityStuff
@@ -41,7 +48,25 @@ public class Puppet : MonoBehaviour {
                 puppetAction.OnEnd();
             puppetAction = value;
             if (puppetAction!=null)
+            {
                 puppetAction.OnBegin();
+                debugAction = puppetAction.ToString();
+            }
+        }
+    }
+    public bool IsOnGround
+    {
+        get
+        {
+            return isOnGround;
+        }
+        set
+        {
+            if (value == true)
+                Rb.useGravity = false;
+            else
+                Rb.useGravity = true;
+            isOnGround = value;
         }
     }
 
@@ -122,6 +147,8 @@ public class Puppet : MonoBehaviour {
             life = value;
         }
     }
+
+   
     #endregion
 
     private void Awake()
@@ -132,6 +159,10 @@ public class Puppet : MonoBehaviour {
         stats.Init();
         extents = GetComponent<Collider>().bounds.extents;
         Life = stats.Get(Stats.StatType.maxLife);
+        OnPlanNormal = Vector3.up;
+        PhysicMaterial.dynamicFriction = 0;
+        centerDown = transform.Find("CenterDown");
+
         switch (Type)
         {
             case CreatureType.Spider:
@@ -154,11 +185,45 @@ public class Puppet : MonoBehaviour {
         transform.parent = parent;
         Leader = _leader;
     }
-    //public virtual void Move(Vector3 direction, float factor)
-    //{
-    //    Vector3 translation = direction * 1 * stats.Get(Stats.StatType.move_speed) * Time.fixedDeltaTime;
-    //    rb.MovePosition(rb.transform.position + translation);
-    //}
+    protected virtual void GroundGravityCheck()
+    {
+        int mask = LayerMask.GetMask(new string[] { "Default"});
+        RaycastHit hit;
+        Vector3 center = transform.position + Vector3.up * Extents.y;
+        if (Physics.Raycast(center, -OnPlanNormal, out hit, (Extents.y +0.5f), mask))
+        {
+            slidingDebug = false;
+                // On est dans une pente il faut tomber
+            if (Vector3.Angle(Vector3.up, hit.normal) > maxSlope)
+            {
+                Slide();
+                slidingDebug = true;
+                IsOnGround = false;
+            }
+                // On est proche du sol mais pas assez
+            else if (Vector3.Distance(hit.point, centerDown.position) > 0.2f)
+            {
+                rb.AddForce(Physics.gravity*10, ForceMode.Acceleration);
+                IsOnGround = true;
+            }
+            else
+            {
+                IsOnGround = true;
+            }
+            OnPlanNormal = hit.normal;
+        }
+        else // Raycast failure : on est loin du sol
+        {
+            IsOnGround = false;
+        }
+    }
+    private void Slide()
+    {
+        Vector3 right = Vector3.Cross(OnPlanNormal, Vector3.up);
+        //Vector3 downSlide = Vector3.Cross(right, OnPlanNormal);
+        Vector3 downSlide = Vector3.Cross(OnPlanNormal, right);
+        Rb.AddForce(downSlide.normalized * 10, ForceMode.Acceleration);
+    }
    
     public Vector3 GetVelocity()
     {
@@ -166,10 +231,6 @@ public class Puppet : MonoBehaviour {
     }
 
 
-    public virtual void OnTakeDamage()
-    {
-
-    }
     public void ChangeColorDebug()
     {
         GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.red;
@@ -181,8 +242,16 @@ public class Puppet : MonoBehaviour {
     }
     public void FixedUpdate()
     {
+        GroundGravityCheck();
+        if (!IsOnGround)
+            puppetAction.RotateTowardGround();
         if (puppetAction != null)
             puppetAction.OnFixedUpdate();
+        if (transform.position.y < -1000)
+        {
+            Debug.Log("Out of map " + gameObject.name);
+            puppetAction.OnDeath();
+        }
     }
     public void OnDrawGizmos()
     {

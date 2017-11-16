@@ -11,7 +11,6 @@ public class Steering : MonoBehaviour {
     private Puppet puppet;
 
         // data
-    [HideInInspector] public Vector3 OnPlanNormal;
     protected Vector3 steering;
     Vector3 computedVelocity;
     float separationRayFactor = 1f; // 
@@ -24,9 +23,11 @@ public class Steering : MonoBehaviour {
     float delay = 0.1f;
 
     // info : 
-    public bool isOnGround = false;
+    private bool isOnGround = false;
+    public bool isSliding;
 
     #region getterSetters
+    
     public Vector3 GetSteering
     {
         get
@@ -50,37 +51,50 @@ public class Steering : MonoBehaviour {
     /// <summary>
     /// Renvoi la velocité finale calculée par le steering 
     /// /!\ Ne dois pas être appellé + d'une fois par fixedUpdate
-    /// /!\ Renvois 0 si aucune force de steering
+    /// /!\ Renvois 0 si aucune force de steering n'a été appliquée cette frame
+    /// /!\ Renvois la velocité inchangée
     /// </summary>
     public Vector3 ComputedVelocity
     {
         get
         {
-            if (steering == Vector3.zero || !isOnGround)
+            if (!puppet.IsOnGround)
             {
                 EndFrameReset();
-                //return Vector3.zero;
                 return rb.velocity;
             }
-
-            float ySave = 0; // save y, pour ne pas écraser le fait que l'on tombe
-            ySave = rb.velocity.y;
-                //On clamp pour que max == acceleration
+            else if (steering == Vector3.zero)
+            {
+                EndFrameReset();
+                return Vector3.zero;
+            }
             steering = Vector3.ClampMagnitude(steering, puppet.stats.Get(Stats.StatType.move_speed));
-                // On vire la composante y
-            Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                // On ajoute l'acceleration
-                //velocity += (steering  * puppet.stats.Get(Stats.StatType.maxAcceleration));
+            Vector3 velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
             velocity += (steering * 50 * Time.fixedDeltaTime * puppet.stats.Get(Stats.StatType.maxAcceleration));
-            // On clamp à maxSpeed
             velocity = Vector3.ClampMagnitude(velocity, puppet.stats.Get(Stats.StatType.move_speed));
-            // On recupère la composante y de base
-            computedVelocity = new Vector3(velocity.x, ySave + velocity.y, velocity.z);
+            computedVelocity = new Vector3(velocity.x, velocity.y, velocity.z);
+
+                //// code pour se déplacer meme si on tombe. 
+            //float ySave = 0; // save y, pour ne pas écraser le fait que l'on tombe
+            //ySave = rb.velocity.y;
+            //    //On clamp pour que max == acceleration
+            //steering = Vector3.ClampMagnitude(steering, puppet.stats.Get(Stats.StatType.move_speed));
+            //    // On vire la composante y
+            //Vector3 velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            //    // On ajoute l'acceleration
+            //velocity += (steering * 50 * Time.fixedDeltaTime * puppet.stats.Get(Stats.StatType.maxAcceleration));
+            //// On clamp à maxSpeed
+            //velocity = Vector3.ClampMagnitude(velocity, puppet.stats.Get(Stats.StatType.move_speed));
+            //// On recupère la composante y de base
+            //computedVelocity = new Vector3(velocity.x, ySave + velocity.y, velocity.z);
 
             EndFrameReset();
             return computedVelocity;
         }
     }
+
+   
+
     void EndFrameReset()
     {
 #if UNITY_EDITOR
@@ -98,7 +112,6 @@ public class Steering : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        GroundGravityCheck();
     }
 
     #region Basic steering Movement
@@ -250,29 +263,14 @@ public class Steering : MonoBehaviour {
         }
         return closeNeighbours;
     }
-    protected virtual void GroundGravityCheck()
-    {
-        // peut être optimi en changeant layer + pas à chaques frames.
-        int mask = LayerMask.GetMask(new string[] { "Default" });
-        RaycastHit hit;
-        Vector3 center = transform.position + Vector3.up * puppet.Extents.y;
-        if (Physics.Raycast(center, -puppet.Extents.y * Vector3.up, out hit, mask))
-        {
-            OnPlanNormal = hit.normal;
-            isOnGround = true;
-        }
-        else
-        {
-            isOnGround = false;
-        }
-    }
+    
     public virtual Vector3 GetDvOnPlan(Vector3 target)
     {
         Vector3 dV = (target - transform.position);
         float distance = dV.magnitude;
         dV.Normalize();
-        Vector3 right = Vector3.Cross(dV, OnPlanNormal);
-        Vector3 planDv = Vector3.Cross(OnPlanNormal, right);
+        Vector3 right = Vector3.Cross(dV, puppet.OnPlanNormal);
+        Vector3 planDv = Vector3.Cross(puppet.OnPlanNormal, right);
 
         if (distance > puppet.stats.Get(Stats.StatType.move_speed))
             return planDv.normalized * puppet.stats.Get(Stats.StatType.move_speed);
@@ -280,7 +278,7 @@ public class Steering : MonoBehaviour {
             return planDv.normalized * distance;
 
     }
-
+   
 
 #if UNITY_EDITOR
     [System.Serializable]

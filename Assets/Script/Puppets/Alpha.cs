@@ -58,7 +58,7 @@ public class Alpha : MonoBehaviour
     {
         for (int i = 0; i < hordePuppets.Count;i++)
         {
-            if (!puppetNearby.Contains(hordePuppets[i]))
+            if (!puppetNearby.Contains(hordePuppets[i]) && hordePuppets[i]!=null )
             {
                 float distance = Vector3.Distance(transform.position, hordePuppets[i].transform.position);
                 if (distance <= maxDistance)

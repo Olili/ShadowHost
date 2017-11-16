@@ -64,29 +64,55 @@ public class PuppetAction  {
     {
 
     }
+    /// <summary>
+    /// Permet de set la velocity du puppet
+    /// Ne marche pas si puppet n'est pas sur le sol
+    /// Si on veut être sur le controller la velocité passer
+    /// par le RB direction.
+    /// </summary>
+    /// <param name="velocity"></param>
     public virtual void SetVelocity(Vector3 velocity)
     {
-        Vector3 rbVelocity = puppet.Rb.velocity;
         if (velocity != Vector3.zero)
         {
-            puppet.PhysicMaterial.dynamicFriction = 0;
             puppet.Rb.velocity = velocity;
         }
         else
         {
-            puppet.PhysicMaterial.dynamicFriction = 0.5f;
+            if (puppet.IsOnGround)
+                puppet.Rb.velocity = Vector3.zero; // peut être smooth mais en attendant c'est bim!
         }
     }
+   
     public virtual void SetRotation(Vector3 direction)
     {
-        Vector3 groundDirection = new Vector3(direction.x, 0, direction.z);
+        if ((!puppet.IsOnGround))
+            return;
+
+        Vector3 right;
+        if (direction.magnitude > 0.1f)
+            right = Vector3.Cross(direction, puppet.OnPlanNormal);
+        else  // si la vitesse de rotation est trop faible on garde son orientation.
+            right = Vector3.Cross(puppet.transform.forward, puppet.OnPlanNormal);
+        //  On oriente le puppet en fonction de la direction donnée et de l'orientation sur le plan
+        Vector3 OnPlanDirection = Vector3.Cross(puppet.OnPlanNormal, right);
+            // On tourne au fil du temps
         float speed = puppet.stats.Get(Stats.StatType.maxTurnSpeed) * Time.fixedDeltaTime;
-        if (groundDirection.magnitude > 0.1f)
+        if (OnPlanDirection != Vector3.zero) 
         {
-            Quaternion targetNormaRotation = Quaternion.LookRotation(direction, Vector3.up);
+            Quaternion targetNormaRotation = Quaternion.LookRotation(OnPlanDirection, Vector3.up);
             Quaternion finalRotation = Quaternion.RotateTowards(puppet.transform.rotation, targetNormaRotation, speed);
             puppet.Rb.MoveRotation(finalRotation);
         }
+    }
+    public void RotateTowardGround()
+    {
+        float speed = puppet.stats.Get(Stats.StatType.maxTurnSpeed) * Time.fixedDeltaTime;
+        Vector3 right = Vector3.Cross(puppet.transform.forward, Vector3.up);
+        Vector3 planDirection = Vector3.Cross(Vector3.up, right);
+        Quaternion targetNormaRotation = Quaternion.LookRotation(planDirection, Vector3.up);
+        Quaternion finalRotation = Quaternion.RotateTowards(puppet.transform.rotation, targetNormaRotation, speed);
+        puppet.Rb.MoveRotation(finalRotation);
     }
     public virtual void OnUpdate()
     {
@@ -104,16 +130,20 @@ public class PuppetAction  {
         puppet.Rb.AddForce(force, ForceMode.Impulse);
         if (puppet.Life <= 0)
         {
-            if (puppet.Leader !=null)
-            {
-                puppet.Leader.GetComponent<Alpha>().RemoveHordePuppet(puppet);
-            }
-            if (puppet.gameObject.GetComponent<Brain>()!=null)
-            {
-                GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
-            }
-            puppet.gameObject.SetActive(false);
+            OnDeath();
         }
+    }
+    public virtual void OnDeath()
+    {
+        if (puppet.Leader != null)
+        {
+            puppet.Leader.GetComponent<Alpha>().RemoveHordePuppet(puppet);
+        }
+        if (puppet.gameObject.GetComponent<Brain>() != null)
+        {
+            GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
+        }
+        puppet.gameObject.SetActive(false);
     }
     public virtual void DrawGizmo()
     {

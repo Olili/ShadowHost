@@ -60,6 +60,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1059411505430382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4613334896358626}
+  m_Layer: 8
+  m_Name: CenterDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1088296150111778
 GameObject:
   m_ObjectHideFlags: 1
@@ -638,6 +653,7 @@ Transform:
   - {fileID: 4418686484014890}
   - {fileID: 4535928720435250}
   - {fileID: 4658043688479096}
+  - {fileID: 4613334896358626}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -728,6 +744,19 @@ Transform:
   m_Father: {fileID: 4335571557063122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0.8597596, z: 0}
+--- !u!4 &4613334896358626
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1059411505430382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4516047436289152}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4616824349374506
 Transform:
   m_ObjectHideFlags: 1
@@ -951,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e86d74b861288144be68eb8475b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPlanNormal: {x: 0, y: 0, z: 0}
+  isSliding: 0
   giz:
     Velocity: 0
     Steering: 0
@@ -989,6 +1018,10 @@ MonoBehaviour:
     - name: maxLife
       baseStat: 10
       currentStat: 1
+  leader: {fileID: 0}
+  debugAction: 
+  OnPlanNormal: {x: 0, y: 0, z: 0}
+  slidingDebug: 0
 --- !u!137 &137617255255689134
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
