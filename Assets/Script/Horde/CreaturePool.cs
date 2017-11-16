@@ -35,6 +35,7 @@ public class CreaturePool : MonoBehaviour
     Puppet AddCreatureToPool(CreatureType type)
     {
         GameObject poolObject = Instantiate<GameObject>(prefabModel[(int)type]);
+        poolObject.transform.parent = transform;
         poolObject.SetActive(false);
         poolTab[(int)type].Add(poolObject);
         Puppet puppet = poolObject.GetComponent<Puppet>();
