@@ -34,6 +34,8 @@ public class PlayerBrain : Brain {
         if (direction!=Vector3.zero)
             direction.y = 0;
 
+        direction.y = puppet.Rb.velocity.y;
+
         puppet.PuppetAction.SetVelocity(direction);
         puppet.PuppetAction.SetRotation(direction.normalized);
     }
