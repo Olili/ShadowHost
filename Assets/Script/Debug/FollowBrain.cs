@@ -43,10 +43,11 @@ public class FollowBrain : Brain
         steering.Separation(0.7f);
 
         velocity = steering.ComputedVelocity;
-        velocity.y = 0;
+        
         if (velocity.magnitude > 0.3f)
         {
             puppet.PuppetAction.SetVelocity(velocity);
+            velocity.y = 0;
             puppet.PuppetAction.SetRotation(velocity.normalized);
         }
         else
