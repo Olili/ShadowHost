@@ -23,6 +23,9 @@ public class Steering : MonoBehaviour {
     float timer = 0;
     float delay = 0.1f;
 
+    // info : 
+    bool isOnGround = false;
+
     #region getterSetters
     public Vector3 GetSteering
     {
@@ -53,10 +56,11 @@ public class Steering : MonoBehaviour {
     {
         get
         {
-            if (steering == Vector3.zero)
+            if (steering == Vector3.zero || !isOnGround)
             {
                 EndFrameReset();
-                return Vector3.zero;
+                //return Vector3.zero;
+                return rb.velocity;
             }
 
             float ySave = 0; // save y, pour ne pas écraser le fait que l'on tombe
@@ -251,9 +255,14 @@ public class Steering : MonoBehaviour {
         // peut être optimi en changeant layer + pas à chaques frames.
         RaycastHit hit;
         Vector3 center = transform.position + Vector3.up * puppet.Extents.y;
-        if (Physics.Raycast(center, -2 * Vector3.up, out hit))
+        if (Physics.Raycast(center, -puppet.Extents.y * Vector3.up, out hit))
         {
             OnPlanNormal = hit.normal;
+            isOnGround = true;
+        }
+        else
+        {
+            isOnGround = false;
         }
     }
     public virtual Vector3 GetDvOnPlan(Vector3 target, Vector3 planNormal)
