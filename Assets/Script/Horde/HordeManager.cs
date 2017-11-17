@@ -50,9 +50,9 @@ public class HordeManager : MonoBehaviour {
                 creaturePosition.z -= z * margin;
 
                 follower.Init(creaturePosition,alpha, hordeContainer.transform);
-                follower.gameObject.AddComponent<FollowBrain>();
+                follower.gameObject.AddComponent<IA_Brain>();
                 alpha.GetComponent<Alpha>().AddHordePuppet(follower);
-                if (++nbUnit >=nbCreatures)
+                if (++nbUnit >= nbCreatures)
                     return;
             }
         }

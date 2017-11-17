@@ -58,7 +58,7 @@ public class Alpha : MonoBehaviour
     {
         for (int i = 0; i < hordePuppets.Count;i++)
         {
-            if (!puppetNearby.Contains(hordePuppets[i]) && hordePuppets[i]!=null )
+            if (!puppetNearby.Contains(hordePuppets[i]) && hordePuppets[i]!=null  && hordePuppets[i] !=this)
             {
                 float distance = Vector3.Distance(transform.position, hordePuppets[i].transform.position);
                 if (distance <= maxDistance)
@@ -72,8 +72,12 @@ public class Alpha : MonoBehaviour
         {
             for (int i = 0; i < puppetNearby.Count;i++)
             {
-                FollowBrain followBrain = puppetNearby[i].GetComponent<FollowBrain>();
-                followBrain.chillTest = true;
+                IA_Brain iaBrain = GetComponent<IA_Brain>();
+                if (iaBrain != null && iaBrain.MyIAState is Follow_State)
+                {
+                    (iaBrain.MyIAState as Follow_State).chillTest = true;
+                }
+               
             }
             //Debug.Log("Chill circle  " + maxDistance);
         }

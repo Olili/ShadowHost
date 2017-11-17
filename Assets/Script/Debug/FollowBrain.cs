@@ -41,7 +41,6 @@ public class FollowBrain : Brain
         }
 
         steering.Separation(0.7f);
-
         velocity = steering.ComputedVelocity;
         
         if (velocity.magnitude > 0.3f)
