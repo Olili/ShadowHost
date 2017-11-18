@@ -75,7 +75,6 @@ public class HordeCreator : MonoBehaviour {
         puppet.gameObject.SetActive(false);
         puppet.transform.parent = transform;
     }
-<<<<<<< Updated upstream
     public void CreateDeadPuppet(CreatureType type, Vector3? position = null)
     {
         Puppet puppet = creaturePool.GetCreature(type);
@@ -84,12 +83,6 @@ public class HordeCreator : MonoBehaviour {
         {
             puppet.transform.position = position.Value;
         }
-=======
-    public void CreateDeadPuppet(CreatureType type)
-    {
-        Puppet puppet = creaturePool.GetCreature(type);
-        puppet.PuppetAction = new DeathAction(puppet);
->>>>>>> Stashed changes
     }
     public void AddDeadPuppet(Puppet puppet)
     {
