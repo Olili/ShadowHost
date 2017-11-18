@@ -18,15 +18,26 @@ public class DeathAction : PuppetAction
         {
             animator.SetTrigger("Death");
         }
-
         // Creation / activation trigger stuff.
-
     }
     public void OnDeadBody()
     {
         puppet.Rb.velocity = Vector3.zero;
+        Host host = GameManager.Instance.PlayerBrain.GetComponent<Host>();
+        if (host!=null)
+        {
+            float distance = Vector3.Distance(host.transform.position , puppet.transform.position);
+            if (distance < 3)
+            {
+                host.AddBody(puppet);
+            }
+            else
+            {
+                host.RemoveBody(puppet);
+            }
+        }
     }
-
+    
     public override void OnEnd()
     {
         base.OnEnd();
@@ -42,5 +53,4 @@ public class DeathAction : PuppetAction
     {
         base.SetVelocity(velocity);
     }
-
 }

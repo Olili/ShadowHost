@@ -24,7 +24,7 @@ public class PuppetAction  {
 
 #region getterSetters
 
-    public ptrStateFct CurActionFct
+    public ptrStateFct CurUpdateFct
     {
         get
         {

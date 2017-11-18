@@ -21,7 +21,7 @@ public class GruntQuickAttack : GruntAction
         timer = 0;
         chargeTime = 0.1f;
         attackStarted = false;
-        CurActionFct = Charge;
+        CurUpdateFct = Charge;
         puppet.Animator.SetTrigger("StartAttack");
     }
     public override void OnEnd()
@@ -38,7 +38,7 @@ public class GruntQuickAttack : GruntAction
         if (timer> chargeTime)
         {
             timer = 0;
-            CurActionFct = DuringAttack;
+            CurUpdateFct = DuringAttack;
         }
     }
     public void DuringAttack()
@@ -56,7 +56,7 @@ public class GruntQuickAttack : GruntAction
         {
             timer = 0;
             attackStarted = false;
-            CurActionFct = AttackEnd;
+            CurUpdateFct = AttackEnd;
             puppet.Animator.SetFloat("Velocity", 0);
         }
     }
@@ -66,7 +66,7 @@ public class GruntQuickAttack : GruntAction
         timer += Time.deltaTime;
         if (timer > 0.2f)
         {
-            CurActionFct = null;
+            CurUpdateFct = null;
             puppet.PuppetAction = new GruntAction(puppet); // On laisse la main
         }
     }
