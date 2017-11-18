@@ -27,7 +27,7 @@ public class Chase_State : IA_State
         if (myTarget == null && !FindTheNearestFoe())
         {
             Debug.Log("Pas d'ennemie trouvé => change State to follow");
-            if (puppet.GetComponent<Alpha>() != null)
+            if (puppet.GetComponent<Alpha>() == null)
             {
                 puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type);
             }
