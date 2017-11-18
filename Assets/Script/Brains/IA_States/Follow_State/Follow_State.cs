@@ -99,7 +99,7 @@ public class Follow_State : IA_State {
     public virtual void OneOfMyPuppetFindFoes(Puppet _foePuppet)
     {
         puppet.HordeManager.FoeLeaderPuppet = _foePuppet;
-        foreach (Puppet myFollowers in puppet.GetComponent<Alpha>().HordePuppets)
+        foreach (Puppet myFollowers in puppet.transform.parent.GetComponent<HordeManager>().HordePuppets)
         {
             myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(myFollowers, Brain.E_State.chase, myFollowers.Type);
         }

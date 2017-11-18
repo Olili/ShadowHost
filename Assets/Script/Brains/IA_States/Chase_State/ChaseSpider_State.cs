@@ -79,7 +79,7 @@ public class ChaseSpider_State : Chase_State
         {
             if (foeLeaderPuppet.GetComponent<Alpha>() != null)
             {
-                foreach (Puppet pup in foeLeaderPuppet.GetComponent<Alpha>().HordePuppets)
+                foreach (Puppet pup in foeLeaderPuppet.transform.parent.GetComponent<HordeManager>().HordePuppets)
                 {
                     float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
                     if (tempDist < nearestDistance)

@@ -27,17 +27,21 @@ public class DeathAction : PuppetAction
     public void OnDeadBody()
     {
         puppet.Rb.velocity = Vector3.zero;
-        Host host = GameManager.Instance.PlayerBrain.GetComponent<Host>();
-        if (host!=null)
+        Host host;
+        if (GameManager.Instance.PlayerBrain != null)
         {
-            float distance = Vector3.Distance(host.transform.position , puppet.transform.position);
-            if (distance < 3)
+            host = GameManager.Instance.PlayerBrain.GetComponent<Host>();
+            if (host != null)
             {
-                host.AddBody(puppet);
-            }
-            else
-            {
-                host.RemoveBody(puppet);
+                float distance = Vector3.Distance(host.transform.position, puppet.transform.position);
+                if (distance < 3)
+                {
+                    host.AddBody(puppet);
+                }
+                else
+                {
+                    host.RemoveBody(puppet);
+                }
             }
         }
         if (secondLife == true)

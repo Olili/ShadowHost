@@ -137,7 +137,7 @@ public class PuppetAction  {
     {
         if (puppet.Leader != null)
         {
-            puppet.Leader.GetComponent<Alpha>().RemoveHordePuppet(puppet);
+            puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
         }
         if (puppet.gameObject.GetComponent<Brain>() != null)
         {

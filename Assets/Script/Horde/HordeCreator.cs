@@ -36,6 +36,7 @@ public class HordeCreator : MonoBehaviour {
 
         Puppet alpha = creaturePool.GetCreature(type);
         alpha.name = "AlphaSpider";
+        hordeContainer.GetComponent<HordeManager>().InitAlpha(alpha);
         alpha.Init(position, alpha, hordeContainer.transform);
         alpha.gameObject.AddComponent<Alpha>();
         alpha.gameObject.AddComponent<IA_Brain>();
@@ -63,7 +64,7 @@ public class HordeCreator : MonoBehaviour {
 
                 follower.Init(creaturePosition,alpha, hordeContainer.transform);
                 follower.gameObject.AddComponent<IA_Brain>();
-                alpha.GetComponent<Alpha>().AddHordePuppet(follower);
+                alpha.transform.parent.GetComponent<HordeManager>().AddHordePuppet(follower);
                 if (++nbUnit >= nbCreatures)
                     return;
             }
@@ -74,6 +75,7 @@ public class HordeCreator : MonoBehaviour {
         puppet.gameObject.SetActive(false);
         puppet.transform.parent = transform;
     }
+<<<<<<< Updated upstream
     public void CreateDeadPuppet(CreatureType type, Vector3? position = null)
     {
         Puppet puppet = creaturePool.GetCreature(type);
@@ -82,6 +84,12 @@ public class HordeCreator : MonoBehaviour {
         {
             puppet.transform.position = position.Value;
         }
+=======
+    public void CreateDeadPuppet(CreatureType type)
+    {
+        Puppet puppet = creaturePool.GetCreature(type);
+        puppet.PuppetAction = new DeathAction(puppet);
+>>>>>>> Stashed changes
     }
     public void AddDeadPuppet(Puppet puppet)
     {

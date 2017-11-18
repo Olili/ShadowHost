@@ -5,38 +5,20 @@ using UnityEngine;
 
 public class Alpha : MonoBehaviour
 {
-    List<Puppet> hordePuppets = new List<Puppet>();
     Puppet alphaPuppet;
     float timer = 0;
-
-#region GetSet
-    public List<Puppet> HordePuppets
-    {
-        get
-        {
-            return hordePuppets;
-        }
-
-        set
-        {
-            hordePuppets = value;
-        }
-    }
-#endregion
+    HordeManager refToHordeManager;
 
     private void Awake()
     {
+        Init();
+    }
+    public void Init()
+    {
         alphaPuppet = GetComponent<Puppet>();
+        refToHordeManager = transform.parent.GetComponent<HordeManager>();
     }
-    public void AddHordePuppet(Puppet puppet)
-    {
-        HordePuppets.Add(puppet);
-    }
-    public void RemoveHordePuppet(Puppet puppet)
-    {
-        HordePuppets.Remove(puppet);
-    }
-   
+
     public void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
@@ -55,7 +37,7 @@ public class Alpha : MonoBehaviour
     {
         float creatureRay = alphaPuppet.Extents.magnitude * 1.2f;
         float unitArea = (Mathf.PI * creatureRay * creatureRay);
-        float totalHordeArea = unitArea * HordePuppets.Count;
+        float totalHordeArea = unitArea * refToHordeManager.HordePuppets.Count;
         float HordeMaxRay = Mathf.Sqrt(totalHordeArea / Mathf.PI);
 
         //Debug.Log("HordeMaxRay :" + HordeMaxRay);
@@ -72,13 +54,14 @@ public class Alpha : MonoBehaviour
     }
     void CircleCheck(float maxDistance, List<Puppet> puppetNearby, float unitVolume)
     {
-        for (int i = 0; i < HordePuppets.Count;i++)
+        
+        for (int i = 0; i < refToHordeManager.HordePuppets.Count;i++)
         {
-            if (!puppetNearby.Contains(HordePuppets[i]) && HordePuppets[i]!=null  && HordePuppets[i] !=this)
+            if (!puppetNearby.Contains(refToHordeManager.HordePuppets[i]) && refToHordeManager.HordePuppets[i]!=null  && refToHordeManager.HordePuppets[i] !=this)
             {
-                float distance = Vector3.Distance(transform.position, HordePuppets[i].transform.position);
+                float distance = Vector3.Distance(transform.position, refToHordeManager.HordePuppets[i].transform.position);
                 if (distance <= maxDistance)
-                    puppetNearby.Add(HordePuppets[i]);
+                    puppetNearby.Add(refToHordeManager.HordePuppets[i]);
             }
         }
         float circleVolume = Mathf.PI * maxDistance * maxDistance;
