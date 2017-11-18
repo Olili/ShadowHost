@@ -22,11 +22,13 @@ public class HordeCreator : MonoBehaviour {
     void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
         GameObject hordeContainer = new GameObject("horde");
+        hordeContainer.AddComponent<HordeManager>();
         hordeContainer.transform.position = position;
 
         Puppet alpha = creaturePool.GetCreature(type);
         alpha.Init(position, null, hordeContainer.transform);
         alpha.gameObject.AddComponent<Alpha>();
+        alpha.gameObject.AddComponent<IA_Brain>();
         alpha.ChangeColorDebug();
             // faire une carré de pop d'unités
         float margin = 1.3f;
