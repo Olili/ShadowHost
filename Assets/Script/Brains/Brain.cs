@@ -32,6 +32,7 @@ public class Brain : MonoBehaviour {
     #region IA_STATE_Getter
     public enum E_State
     {
+        free,
         follow,
         chase
     }
@@ -39,6 +40,19 @@ public class Brain : MonoBehaviour {
     {
         if (!iAmAnAplha)
         {
+            if (_state == E_State.follow)
+            {
+                switch (_type)
+                {
+                    case CreatureType.Spider:
+                        return new SpiderFollow_State(_myPuppet);
+
+                    case CreatureType.Grunt:
+                        return new GruntFollow_State(_myPuppet);
+                    default:
+                        return new Follow_State(_myPuppet);
+                }
+            }
             if (_state == E_State.follow)
             {
                 switch (_type)

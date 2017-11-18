@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeathAction : PuppetAction
 {
     Animator animator;
-    public bool secondLife;
     public DeathAction(Puppet _puppet) : base(_puppet)
     {
         animator = _puppet.Animator;
@@ -17,7 +16,6 @@ public class DeathAction : PuppetAction
     {
         base.OnBegin();
         // lancement animation mort. 
-        secondLife = false;
         if (animator!=null)
         {
             animator.SetTrigger("Death");
@@ -44,10 +42,7 @@ public class DeathAction : PuppetAction
                 }
             }
         }
-        if (secondLife == true)
-        {
-
-        }
+  
     }
     
     public override void OnEnd()

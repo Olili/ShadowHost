@@ -176,11 +176,14 @@ public class Puppet : MonoBehaviour {
         OnPlanNormal = Vector3.up;
         PhysicMaterial.dynamicFriction = 0;
         centerDown = transform.Find("CenterDown");
-
+        InitAction();
+    }
+    public void InitAction()
+    {
         switch (Type)
         {
             case CreatureType.Spider:
-                PuppetAction = new SpiderAction(this);  
+                PuppetAction = new SpiderAction(this);
                 break;
             case CreatureType.Grunt:
                 PuppetAction = new GruntAction(this);

@@ -8,7 +8,8 @@ public class Host : MonoBehaviour
     delegate void SimpleDelegate(Puppet dead);    SimpleDelegate OnDeadBodyClose;    Puppet closestDeadPuppet;    List<Puppet> deadBodyList;    Puppet puppet;
     public void Start()    {        puppet = GetComponent<Puppet>();        deadBodyList = new List<Puppet>();
     }    public void GoInBody(Puppet body)    {
-        transform.parent = body.transform;        gameObject.SetActive(false);        GameManager.Instance.Possession(body);        (body.PuppetAction as DeathAction).secondLife = true;    }    public void GoOutBody(Puppet body)    {        transform.parent = null;        gameObject.SetActive(true);        body.PuppetAction = new DeathAction(body);
+        transform.parent = body.transform;        gameObject.SetActive(false);        GameManager.Instance.Possession(body);        body.InitAction();        if (body.Animator != null)
+            body.Animator.SetTrigger("Revive");    }    public void GoOutBody(Puppet body)    {        transform.parent = null;        gameObject.SetActive(true);        body.PuppetAction = new DeathAction(body);
     }
     public void AddBody(Puppet deadPuppet)    {        if ((!deadBodyList.Contains(deadPuppet)))        {            deadBodyList.Add(deadPuppet);        }
     }    public void RemoveBody(Puppet deadPuppet)    {
