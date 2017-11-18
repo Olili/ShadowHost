@@ -77,10 +77,10 @@ public class GameManager : MonoBehaviour {
         switch (puppet.Type)
         {
             case CreatureType.Spider:
-                puppet.gameObject.AddComponent<PlayerBrain>();
+                PlayerBrain = puppet.gameObject.AddComponent<PlayerBrain>();
                 break;
             case CreatureType.Grunt:
-                puppet.gameObject.AddComponent<PlayerGruntBrain>();
+                PlayerBrain = puppet.gameObject.AddComponent<PlayerGruntBrain>();
                 break;
             case CreatureType.Max_Creatures:
                 Debug.Log("What it is ?");

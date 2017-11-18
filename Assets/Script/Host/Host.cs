@@ -37,14 +37,16 @@ public class Host : MonoBehaviour
         body.InitAction();
         if (body.Animator != null)
             body.Animator.SetTrigger("Revive");
+        GameManager.Instance.PlayerBrain.host = this;
 
         GameManager.Instance.FeedbackManager.PossessBody(body);
     }
     public void GoOutBody(Puppet body)
     {
-        transform.parent = null;
+        transform.SetParent(null);// = null;
         gameObject.SetActive(true);
         body.PuppetAction = new DeathAction(body);
+        GameManager.Instance.Possession(puppet);
 
         GameManager.Instance.FeedbackManager.UnPossessBody(body);
     }
@@ -63,7 +65,7 @@ public class Host : MonoBehaviour
         if ((deadBodyList.Contains(deadPuppet)))
         {
             deadBodyList.Remove(deadPuppet);
-            if (deadBodyList.Count == 0)
+            if (deadBodyList.Count == 0 && OnDeadBodyClose!=null)
                 OnDeadBodyClose(null);
         }
     }

@@ -6,6 +6,7 @@ public class PlayerBrain : Brain {
 
     Rigidbody rb;
     StatBuff turnSpeedBuff;
+    public Host host;
     // Use this for initialization
     public override void Awake()
     {
@@ -22,6 +23,11 @@ public class PlayerBrain : Brain {
     public override void Update()
     {
         base.Update();
+
+        if (Input.GetKeyDown(KeyCode.P) && GetComponent<Host>() == false)
+        {
+            host.GoOutBody(puppet);
+        }
     }
 
     public virtual void Move()
