@@ -50,7 +50,7 @@ public class AlphaGuide_State : Follow_State
     {
         Vector3 velocity = Vector3.zero;
         Vector3 newPoint = puppet.transform.position + (vectDirection * 3.0f) + (Vector3.Cross(vectDirection, Vector3.up) * Random.Range(-maxAngleRandomToAppy, maxAngleRandomToAppy));
-        steering.Seek(newPoint, 0.8f);
+        steering.Seek(newPoint, 1.0f);
 
         velocity = steering.ComputedVelocity;
 

@@ -85,7 +85,7 @@ public class Follow_State : IA_State {
                     {
                         if (tempLeaderState is Follow_State)
                         {
-                            (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                            (tempLeaderState as Follow_State).AlphaFight(allPossibleTarget[i].GetComponent<Puppet>().Leader);
                         }
                     }
                 }
@@ -108,5 +108,15 @@ public class Follow_State : IA_State {
         }
         puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.chase, puppet.Type, true);
     }
+    public virtual void AlphaFight(Puppet _foePuppet)
+    {
+        puppet.HordeManager.FoeLeaderPuppet = _foePuppet;
+        foreach (Puppet myFollowers in puppet.transform.parent.GetComponent<HordeManager>().HordePuppets)
+        {
+            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(myFollowers, Brain.E_State.alphaFight, myFollowers.Type);
+        }
+        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.alphaFight, puppet.Type, true);
+    }
+
 }
 

@@ -67,4 +67,19 @@ public class HordeManager : MonoBehaviour
         }
         
     }
+    public void TransmitHorde()
+    {
+        foreach (Puppet pup in HordePuppets)
+        {
+            if (pup != currentAlpha && !(pup.PuppetAction is DeathAction))
+            {
+                pup.Leader = foeLeaderPuppet;
+                foeLeaderPuppet.HordeManager.AddHordePuppet(pup);
+                pup.transform.parent = foeLeaderPuppet.HordeManager.transform;
+            }
+        }
+        HordePuppets.Clear();
+
+        //Destroy(this.gameObject);
+    }
 }

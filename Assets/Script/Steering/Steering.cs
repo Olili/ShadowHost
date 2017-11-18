@@ -121,6 +121,7 @@ public class Steering : MonoBehaviour {
         Vector3 force = desiredVelocityPlan - rb.velocity;
 
         force = Vector3.ClampMagnitude(force, puppet.stats.Get(Stats.StatType.move_speed));
+        //force = Vector3.ClampMagnitude(force, puppet.stats.Get()); Stats.StatType.move_speed
         steering += force * factor;
     }
     public void Flee(Vector3 target, float factor = 1)
@@ -272,10 +273,10 @@ public class Steering : MonoBehaviour {
         Vector3 right = Vector3.Cross(dV, puppet.OnPlanNormal);
         Vector3 planDv = Vector3.Cross(puppet.OnPlanNormal, right);
 
-        if (distance > puppet.stats.Get(Stats.StatType.move_speed))
+        //if (distance > puppet.stats.Get(Stats.StatType.move_speed))
             return planDv.normalized * puppet.stats.Get(Stats.StatType.move_speed);
-        else
-            return planDv.normalized * distance;
+        //else
+        //    return planDv.normalized * distance;
 
     }
    

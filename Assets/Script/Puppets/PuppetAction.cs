@@ -137,16 +137,24 @@ public class PuppetAction  {
     {
         puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
 
+        //puppet.gameObject.SetActive(false);
+        if (puppet.GetComponent<Alpha>() != null)
+        {
+            if (puppet.GetComponent<IA_Brain>().MyIAState is Chase_State)
+            {
+                puppet.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
+                GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+            }
+            else if(puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && puppet.HordeManager.FoeLeaderPuppet.GetComponent<Alpha>() != null)
+            {
+                puppet.transform.parent.GetComponent<HordeManager>().TransmitHorde();
+                GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+            }
+        }   
         if (puppet.gameObject.GetComponent<Brain>() != null)
         {
             GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
         }
-        //puppet.gameObject.SetActive(false);
-        if (puppet.GetComponent<Alpha>() != null)
-        {
-            puppet.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
-            GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
-        }   
         puppet.PuppetAction = new DeathAction(puppet);
     }
     public virtual void BasicAttack()
