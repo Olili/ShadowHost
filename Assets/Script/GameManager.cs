@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour {
 
     private PlayerBrain playerBrain;
     public  HordeCreator hordeCreator;
-    public InterfaceManager interfaceManager;
+
+    private InterfaceManager interfaceManager;
     private static GameManager instance = null;
 
 #region getterSetters
@@ -25,6 +26,23 @@ public class GameManager : MonoBehaviour {
                 if (cameraController!=null)
                     cameraController.SetTarget(playerBrain.transform);
             }
+        }
+    }
+
+
+    public InterfaceManager InterfaceManager
+    {
+        get
+        {
+            if(interfaceManager == null)
+            {
+                interfaceManager = new GameObject("InterfaceManager").AddComponent<InterfaceManager>();
+            }
+            return interfaceManager;
+        }
+        set
+        {
+            interfaceManager = value;
         }
     }
 #endregion

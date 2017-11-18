@@ -8,7 +8,7 @@ public class InterfaceManager : MonoBehaviour {
 
     private void Awake()
     {
-        GameManager.Instance.interfaceManager = this;
+        GameManager.Instance.InterfaceManager = this;
     }
 	void Start () 
 	{
@@ -21,9 +21,11 @@ public class InterfaceManager : MonoBehaviour {
 		
 	}
 
-	
+
+
+
 	public void HighlightDeadPuppet(Puppet p)
 	{
-
+		
 	}
 }

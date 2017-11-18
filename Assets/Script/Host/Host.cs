@@ -13,12 +13,12 @@ public class Host : MonoBehaviour
     {
         puppet = GetComponent<Puppet>();
         deadBodyList = new List<Puppet>();
-        OnDeadBodyClose += GameManager.Instance.interfaceManager.HighlightDeadPuppet;
+        OnDeadBodyClose += GameManager.Instance.InterfaceManager.HighlightDeadPuppet;
     }
 
     public void OnDestroy()
     {
-        OnDeadBodyClose -= GameManager.Instance.interfaceManager.HighlightDeadPuppet;
+        OnDeadBodyClose -= GameManager.Instance.InterfaceManager.HighlightDeadPuppet;
     }
 
     public void AddBody(Puppet deadPuppet)
