@@ -27,11 +27,12 @@ public class Host : MonoBehaviour
             deadBodyList.Clear();
             OnDeadBodyClose(null);
         }
-        OnDeadBodyClose -= GameManager.Instance.FeedbackManager.HighlightDeadPuppet;
+        // OnDeadBodyClose -= GameManager.Instance.FeedbackManager.HighlightDeadPuppet;
     }
     public void GoInBody(Puppet body)
     {
         transform.parent = body.transform;
+        transform.position = body.transform.position;
         gameObject.SetActive(false);
         GameManager.Instance.Possession(body);
         body.InitAction();
@@ -44,6 +45,7 @@ public class Host : MonoBehaviour
     public void GoOutBody(Puppet body)
     {
         transform.SetParent(null);// = null;
+        transform.position = body.transform.position;
         gameObject.SetActive(true);
         body.PuppetAction = new DeathAction(body);
         GameManager.Instance.Possession(puppet);
@@ -67,10 +69,12 @@ public class Host : MonoBehaviour
             deadBodyList.Remove(deadPuppet);
             if (deadBodyList.Count == 0 && OnDeadBodyClose!=null)
                 OnDeadBodyClose(null);
+                
+            if(deadPuppet == closestDeadPuppet)
+                closestDeadPuppet = null;
         }
     }
     public void Update()
-
     {
         if (deadBodyList.Count != 0)
         {
