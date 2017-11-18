@@ -172,10 +172,15 @@ public class Puppet : MonoBehaviour {
         PhysicMaterial = GetComponent<Collider>().material;
         stats.Init();
         extents = GetComponent<Collider>().bounds.extents;
-        Life = stats.Get(Stats.StatType.maxLife);
+       
         OnPlanNormal = Vector3.up;
         PhysicMaterial.dynamicFriction = 0;
         centerDown = transform.Find("CenterDown");
+        Init();
+    }
+    public void Init()
+    {
+        Life = stats.Get(Stats.StatType.maxLife);
         InitAction();
     }
     public void InitAction()

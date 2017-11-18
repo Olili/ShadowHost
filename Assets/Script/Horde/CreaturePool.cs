@@ -54,6 +54,7 @@ public class CreaturePool : MonoBehaviour
                 if (!puppet.gameObject.activeInHierarchy)
                 {
                     returnedPuppet = puppet;
+                    returnedPuppet.Init();
                     break;
                 }
             }
