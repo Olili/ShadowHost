@@ -5,16 +5,19 @@ using UnityEngine;
 public class DeathAction : PuppetAction
 {
     Animator animator;
+    public bool secondLife;
     public DeathAction(Puppet _puppet) : base(_puppet)
     {
         animator = _puppet.Animator;
         CurFixedUpdateFct = OnDeadBody;
+        puppet.GetComponent<Collider>().enabled = false;
         GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
     }
     public override void OnBegin()
     {
         base.OnBegin();
         // lancement animation mort. 
+        secondLife = false;
         if (animator!=null)
         {
             animator.SetTrigger("Death");
@@ -37,11 +40,16 @@ public class DeathAction : PuppetAction
                 host.RemoveBody(puppet);
             }
         }
+        if (secondLife == true)
+        {
+
+        }
     }
     
     public override void OnEnd()
     {
         base.OnEnd();
+        puppet.GetComponent<Collider>().enabled = true;
     }
     public override void OnHit(float damage, Vector3 force)
     {

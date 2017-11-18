@@ -89,5 +89,6 @@ public class GameManager : MonoBehaviour {
             default:
                 break;
         }
+        puppet.Life = puppet.stats.Get(Stats.StatType.maxLife);
     }
 }

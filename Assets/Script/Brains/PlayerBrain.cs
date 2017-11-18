@@ -16,6 +16,7 @@ public class PlayerBrain : Brain {
         base.Start();
         turnSpeedBuff = new StatBuff(Stats.StatType.maxTurnSpeed, 500, -1);
         puppet.stats.AddBuff(turnSpeedBuff);
+        puppet.Leader = puppet;
         GameManager.Instance.PlayerBrain = this;
     }
     public override void Update()
