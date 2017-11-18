@@ -12,6 +12,7 @@ public class Puppet : MonoBehaviour {
     [SerializeField]private CreatureType type;
     public Stats stats = new Stats();
     [SerializeField]private Puppet leader;
+    [SerializeField] private HordeManager hordeManager;
     private Vector3 extents;
     private float life;
     public string debugAction;
@@ -148,7 +149,20 @@ public class Puppet : MonoBehaviour {
         }
     }
 
-   
+    public HordeManager HordeManager
+    {
+        get
+        {
+            return hordeManager;
+        }
+
+        set
+        {
+            hordeManager = value;
+        }
+    }
+
+
     #endregion
 
     private void Awake()
@@ -184,6 +198,7 @@ public class Puppet : MonoBehaviour {
         transform.position = position;
         transform.parent = parent;
         Leader = _leader;
+        HordeManager = parent.GetComponent<HordeManager>();
     }
     protected virtual void GroundGravityCheck()
     {

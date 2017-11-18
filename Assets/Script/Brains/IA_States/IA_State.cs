@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IA_State  {
 
+
     public ptrStateFct UpdateFct;
     public ptrStateFct FixedUpdateFct;
     protected Puppet puppet;

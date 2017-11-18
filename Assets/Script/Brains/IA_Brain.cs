@@ -31,7 +31,14 @@ public class IA_Brain : Brain {
     public override void Awake()
     {
         base.Awake();
-        MyIAState = new Follow_State(puppet);
+        if(puppet.GetComponent<Alpha>() == null)
+        {
+            MyIAState = new Follow_State(puppet);
+        }
+        else
+        {
+
+        }
     }
     // Use this for initialization
     public override void Start () {

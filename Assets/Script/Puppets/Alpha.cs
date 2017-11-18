@@ -8,17 +8,33 @@ public class Alpha : MonoBehaviour
     List<Puppet> hordePuppets = new List<Puppet>();
     Puppet alphaPuppet;
     float timer = 0;
+
+#region GetSet
+    public List<Puppet> HordePuppets
+    {
+        get
+        {
+            return hordePuppets;
+        }
+
+        set
+        {
+            hordePuppets = value;
+        }
+    }
+#endregion
+
     private void Awake()
     {
         alphaPuppet = GetComponent<Puppet>();
     }
     public void AddHordePuppet(Puppet puppet)
     {
-        hordePuppets.Add(puppet);
+        HordePuppets.Add(puppet);
     }
     public void RemoveHordePuppet(Puppet puppet)
     {
-        hordePuppets.Remove(puppet);
+        HordePuppets.Remove(puppet);
     }
    
     public void FixedUpdate()
@@ -39,7 +55,7 @@ public class Alpha : MonoBehaviour
     {
         float creatureRay = alphaPuppet.Extents.magnitude * 1.2f;
         float unitArea = (Mathf.PI * creatureRay * creatureRay);
-        float totalHordeArea = unitArea * hordePuppets.Count;
+        float totalHordeArea = unitArea * HordePuppets.Count;
         float HordeMaxRay = Mathf.Sqrt(totalHordeArea / Mathf.PI);
 
         //Debug.Log("HordeMaxRay :" + HordeMaxRay);
@@ -56,13 +72,13 @@ public class Alpha : MonoBehaviour
     }
     void CircleCheck(float maxDistance, List<Puppet> puppetNearby, float unitVolume)
     {
-        for (int i = 0; i < hordePuppets.Count;i++)
+        for (int i = 0; i < HordePuppets.Count;i++)
         {
-            if (!puppetNearby.Contains(hordePuppets[i]) && hordePuppets[i]!=null  && hordePuppets[i] !=this)
+            if (!puppetNearby.Contains(HordePuppets[i]) && HordePuppets[i]!=null  && HordePuppets[i] !=this)
             {
-                float distance = Vector3.Distance(transform.position, hordePuppets[i].transform.position);
+                float distance = Vector3.Distance(transform.position, HordePuppets[i].transform.position);
                 if (distance <= maxDistance)
-                    puppetNearby.Add(hordePuppets[i]);
+                    puppetNearby.Add(HordePuppets[i]);
             }
         }
         float circleVolume = Mathf.PI * maxDistance * maxDistance;
@@ -83,9 +99,11 @@ public class Alpha : MonoBehaviour
         }
     }
     float maxStuffSize = 0;
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         Gizmos.DrawSphere(transform.position, maxStuffSize);
     }
+
 }
