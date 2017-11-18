@@ -72,7 +72,7 @@ public class Alpha : MonoBehaviour
         {
             for (int i = 0; i < puppetNearby.Count;i++)
             {
-                IA_Brain iaBrain = GetComponent<IA_Brain>();
+                IA_Brain iaBrain = puppetNearby[i].GetComponent<IA_Brain>();
                 if (iaBrain != null && iaBrain.MyIAState is Follow_State)
                 {
                     (iaBrain.MyIAState as Follow_State).chillTest = true;

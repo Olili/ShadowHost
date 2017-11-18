@@ -20,12 +20,11 @@ public class Follow_State : IA_State {
         base.OnEnd();
     }
 
-    void FollowMovingPlayer()
+    void FollowMovingPlayer() // fct state
     {
         Vector3 leaderPos = puppet.Leader.transform.position;
         Vector3 leaderVel = puppet.Leader.Rb.velocity;
         Vector3 leaderDir = puppet.Leader.transform.forward;
-
 
         Vector3 vecFromLeader = puppet.transform.position - leaderPos;
 
@@ -40,13 +39,13 @@ public class Follow_State : IA_State {
             steering.Seek(leaderPos, 0.7f);
         }
 
-        if (puppet.Leader.GetVelocity().magnitude < 0.2f)
+        if (puppet.Leader.GetVelocity().magnitude < 0.2f) // transition
         {
             FixedUpdateFct = FollowImmobilePlayer;
         }
         Move();
     }
-    void FollowImmobilePlayer()
+    void FollowImmobilePlayer() // fct state
     {
         Vector3 leaderPos = puppet.Leader.transform.position;
         Vector3 leaderVel = puppet.Leader.Rb.velocity;
@@ -58,9 +57,15 @@ public class Follow_State : IA_State {
             if (!chillTest)
                 steering.Arrival(leaderPos);
         }
+        if (puppet.Leader.GetVelocity().magnitude > 0.2f) // transition
+        {
+            FixedUpdateFct = FollowMovingPlayer;
+            chillTest = false;
+
+        }
         Move();
     }
-    void Move()
+    void Move() // fct util pour toute state
     {
         Vector3 velocity = Vector3.zero;
         steering.Separation(0.7f);
