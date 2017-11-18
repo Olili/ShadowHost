@@ -74,12 +74,12 @@ public class Brain : MonoBehaviour {
                 switch (_state)
                 {
                     case E_State.follow:
-                        return new Follow_State(_myPuppet);
+                        return new AlphaGuide_State(_myPuppet);
 
                     case E_State.chase:
                         return new ChaseSpider_State(_myPuppet);
                     default:
-                        return new Follow_State(_myPuppet);
+                        return new AlphaGuide_State(_myPuppet);
                 }
             }
             else if (_type == CreatureType.Grunt)
