@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour {
     {
         isLauched = true;
     }
-    public void OnTriggerEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
 
     }
