@@ -33,11 +33,11 @@ public class IA_Brain : Brain {
         base.Awake();
         if(puppet.GetComponent<Alpha>() == null)
         {
-            MyIAState = new SpiderFollow_State(puppet);
+            MyIAState = this.GetTypeState(puppet, E_State.follow, puppet.Type);
         }
         else
         {
-            MyIAState = new AlphaGuide_State(puppet);
+            MyIAState = this.GetTypeState(puppet, E_State.follow, puppet.Type, true);
         }
     }
     // Use this for initialization
