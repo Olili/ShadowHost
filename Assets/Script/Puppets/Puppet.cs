@@ -263,4 +263,19 @@ public class Puppet : MonoBehaviour {
     {
         puppetAction.OnAnimationEvent();
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (puppetAction != null)
+            puppetAction.TriggerEnter(other);
+    }
+    public  void OnTriggerStay(Collider other)
+    {
+        if (puppetAction != null)
+            puppetAction.TriggerStay(other);
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (puppetAction != null)
+            puppetAction.TriggerExit(other);
+    }
 }

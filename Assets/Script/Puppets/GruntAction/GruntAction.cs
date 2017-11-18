@@ -9,6 +9,10 @@ public class GruntAction : PuppetAction
     {
 
     }
+    public override void BasicAttack()
+    {
+        OnSimpleAttack();
+    }
 
     public virtual void OnSimpleAttack()
     {

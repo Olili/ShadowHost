@@ -143,7 +143,12 @@ public class PuppetAction  {
         {
             GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
         }
-        puppet.gameObject.SetActive(false);
+        //puppet.gameObject.SetActive(false);
+        puppet.PuppetAction = new DeathAction(puppet);
+    }
+    public virtual void BasicAttack()
+    {
+
     }
     public virtual void DrawGizmo()
     {
@@ -153,4 +158,10 @@ public class PuppetAction  {
     {
 
     }
+    public virtual void TriggerEnter(Collider other)
+    {}
+    public virtual void TriggerStay(Collider other)
+    {}
+    public virtual void TriggerExit(Collider other)
+    {}
 }
