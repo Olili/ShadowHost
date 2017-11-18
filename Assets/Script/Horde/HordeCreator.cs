@@ -14,8 +14,7 @@ public class HordeCreator : MonoBehaviour {
 
     CreaturePool creaturePool;
     List<Puppet> deadList;
-    static readonly float maxDead = 20;
-
+    static readonly float maxDead = 1;
 
     public int nbCreaturePop = 10;
 
@@ -86,11 +85,20 @@ public class HordeCreator : MonoBehaviour {
     }
     public void AddDeadPuppet(Puppet puppet)
     {
+        if (deadList.Contains(puppet))
+            return;
         deadList.Add(puppet);
         if (deadList.Count > maxDead)
         {
             SendtoPool(deadList[0]);
             deadList.Remove(deadList[0]);
+        }
+    }
+    public void RemoveDeadPuppet(Puppet puppet)
+    {
+        if (deadList.Contains(puppet))
+        {
+            deadList.Remove(puppet);
         }
     }
     void Update()

@@ -5,12 +5,14 @@ using UnityEngine;
 public class DeathAction : PuppetAction
 {
     Animator animator;
+    float timer;
     public DeathAction(Puppet _puppet) : base(_puppet)
     {
         animator = _puppet.Animator;
         CurFixedUpdateFct = OnDeadBody;
         puppet.GetComponent<Collider>().enabled = false;
         GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
+        timer = 0;
     }
     public override void OnBegin()
     {
@@ -24,7 +26,9 @@ public class DeathAction : PuppetAction
     }
     public void OnDeadBody()
     {
+        timer += Time.deltaTime;
         puppet.Rb.velocity = Vector3.zero;
+        puppet.Rb.angularVelocity = Vector3.zero;
         Host host;
         if (GameManager.Instance.PlayerBrain != null)
         {
@@ -34,7 +38,8 @@ public class DeathAction : PuppetAction
                 float distance = Vector3.Distance(host.transform.position, puppet.transform.position);
                 if (distance < 3)
                 {
-                    host.AddBody(puppet);
+                    if (timer>1)
+                        host.AddBody(puppet);
                 }
                 else
                 {
@@ -42,7 +47,6 @@ public class DeathAction : PuppetAction
                 }
             }
         }
-  
     }
     
     public override void OnEnd()

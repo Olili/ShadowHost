@@ -31,6 +31,7 @@ public class Host : MonoBehaviour
     }
     public void GoInBody(Puppet body)
     {
+        //if (body.PuppetAction is Dea)
         transform.parent = body.transform;
         transform.position = body.transform.position;
         gameObject.SetActive(false);
