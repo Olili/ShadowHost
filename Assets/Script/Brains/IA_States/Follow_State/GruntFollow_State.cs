@@ -46,10 +46,21 @@ public class GruntFollow_State : Follow_State
             FixedUpdateFct = FollowImmobilePlayer;
         }
         Move();
+
+        if (puppet.GetComponent<Alpha>() != null)
+        {
+            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type, true);
+        }
+
     }
     protected override void FollowImmobilePlayer()
     {
         base.FollowImmobilePlayer();
+        if (puppet.GetComponent<Alpha>() != null)
+        {
+            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type, true);
+        }
+
 
     }
     protected override void Move()

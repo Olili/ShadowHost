@@ -25,24 +25,28 @@ public class ChaseSpider_State : Chase_State
     {
         base.FixedUpdate_ChaseFoe();
 
-        if (myTarget != null)
+        if (myTarget != null && !(myTarget.PuppetAction is DeathAction))
         {
             myVel = puppet.Rb.velocity;
 
             Vector3 vecFromFoe = puppet.transform.position - myTarget.transform.position;
 
-            if (vecFromFoe.magnitude < 2)
+            if (vecFromFoe.magnitude < 2.0f)
             {
-                //puppet.PuppetAction
+                puppet.transform.LookAt(new Vector3(myTarget.transform.position.x, puppet.transform.position.y, myTarget.transform.position.z));
+                (puppet.PuppetAction as SpiderAction).BasicAttack();
             }
             else
             {
                 steering.Seek(myTarget.transform.position, 0.7f);
+                Move();
             }
-            Move();
 
         }
-
+        else
+        {
+            FindTheNearestFoe();
+        }
     }
     public override void Update_ChaseFoe()
     {
@@ -100,7 +104,7 @@ public class ChaseSpider_State : Chase_State
             myTarget = myPossibleTarget;
             return true;
         }
-
+        myTarget = null;
         return false;
     }
 

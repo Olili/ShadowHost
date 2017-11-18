@@ -26,10 +26,12 @@ public class Follow_State : IA_State {
 
     protected virtual void FollowMovingPlayer()
     {
+
         CheckForFoes();
     }
     protected virtual void FollowImmobilePlayer()
     {
+
         Vector3 leaderPos = puppet.Leader.transform.position;
         Vector3 leaderVel = puppet.Leader.Rb.velocity;
         Vector3 leaderDir = puppet.Leader.transform.forward;
@@ -47,6 +49,7 @@ public class Follow_State : IA_State {
 
         }
         Move();
+
         CheckForFoes();
 
     }
