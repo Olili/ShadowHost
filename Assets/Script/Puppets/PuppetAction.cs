@@ -135,15 +135,18 @@ public class PuppetAction  {
     }
     public virtual void OnDeath()
     {
-        if (puppet.Leader != null)
-        {
-            puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
-        }
+        puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
+
         if (puppet.gameObject.GetComponent<Brain>() != null)
         {
             GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
         }
         //puppet.gameObject.SetActive(false);
+        if (puppet.GetComponent<Alpha>() != null)
+        {
+            puppet.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
+            GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+        }   
         puppet.PuppetAction = new DeathAction(puppet);
     }
     public virtual void BasicAttack()

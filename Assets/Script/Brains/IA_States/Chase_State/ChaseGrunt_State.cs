@@ -25,7 +25,7 @@ public class ChaseGrunt_State : Chase_State
     {
         base.FixedUpdate_ChaseFoe();
 
-        if (myTarget != null)
+        if (myTarget != null &&  !(myTarget.PuppetAction is DeathAction))
         {
             myVel = puppet.Rb.velocity;
 
@@ -33,6 +33,7 @@ public class ChaseGrunt_State : Chase_State
 
             if (vecFromFoe.magnitude < 2.0f)
             {
+                puppet.transform.LookAt(new Vector3(myTarget.transform.position.x, puppet.transform.position.y, myTarget.transform.position.z));
                 (puppet.PuppetAction as GruntAction).BasicAttack();
             }
             else
@@ -41,6 +42,10 @@ public class ChaseGrunt_State : Chase_State
             }
             Move();
 
+        }
+        else
+        {
+            FindTheNearestFoe();
         }
 
     }
@@ -100,7 +105,7 @@ public class ChaseGrunt_State : Chase_State
             myTarget = myPossibleTarget;
             return true;
         }
-
+        myTarget = null;
         return false;
     }
 
