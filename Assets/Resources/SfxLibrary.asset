@@ -14,5 +14,7 @@ MonoBehaviour:
   FX_Host: {fileID: 1853338042999136, guid: e6d1cff70ff5abe4f931fb9d1292c2f3, type: 2}
   FX_OnDeadSelectable: {fileID: 1928149307647950, guid: 1ea89cd3ba3a3ea41a9be4bee112667d,
     type: 2}
+  FX_OneShotPossession: {fileID: 1771114496686106, guid: f6262e37013d0844f8cf3a7f0cf4d4a6,
+    type: 2}
   MAT_OnDeadSelectable: {fileID: 2100000, guid: 2797de2576674fb43b573c342614b9fd,
     type: 2}

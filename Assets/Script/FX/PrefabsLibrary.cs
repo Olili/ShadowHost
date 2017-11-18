@@ -8,5 +8,7 @@ public class PrefabsLibrary : ScriptableObject
 {
 	public GameObject FX_Host;
 	public GameObject FX_OnDeadSelectable;
+
+	public GameObject FX_OneShotPossession;
 	public Material MAT_OnDeadSelectable;
 }

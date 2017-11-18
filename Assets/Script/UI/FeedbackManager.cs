@@ -72,6 +72,7 @@ public class FeedbackManager : MonoBehaviour {
     public void PossessBody(Transform target)
     {
         possessionFX.transform.SetParent(target, false);
+		Instantiate(pl.FX_OneShotPossession, target.position, Quaternion.identity, null);
     }
 
     public void UnPossessBody(Transform target)
