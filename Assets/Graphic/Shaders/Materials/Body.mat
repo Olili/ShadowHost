@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: defaultMat
-  m_Shader: {fileID: 4800000, guid: 257e7db74b6e34643a5d78391e72f99f, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Name: Body
+  m_Shader: {fileID: 4800000, guid: 0e7fb6b1095797e4cbf825a17ab5e8f6, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -46,6 +46,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 411106953ec5cf74ea3093fa9671c858, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -54,18 +58,17 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Ramp:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - PixelSnap: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Edges: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Level: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -76,5 +79,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.11548144, g: 0.19117647, b: 0.105428204, a: 1}
+    - _Color: {r: 0, g: 0.12583387, b: 0.237, a: 1}
+    - _EdgeColour1: {r: 1, g: 0, b: 0.8068962, a: 1}
+    - _EdgeColour2: {r: 0, g: 0.25517225, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainColor: {r: 0.10683392, g: 0.14293638, b: 0.38235295, a: 1}
