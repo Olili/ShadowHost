@@ -10,7 +10,7 @@ public enum CreatureType
     Spider,Grunt, Max_Creatures
 }
 
-public class HordeManager : MonoBehaviour {
+public class HordeCreator : MonoBehaviour {
 
     CreaturePool creaturePool;
     public int nbCreaturePop = 10;
