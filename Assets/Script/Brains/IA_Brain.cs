@@ -33,11 +33,11 @@ public class IA_Brain : Brain {
         base.Awake();
         if(puppet.GetComponent<Alpha>() == null)
         {
-            MyIAState = new Follow_State(puppet);
+            MyIAState = new SpiderFollow_State(puppet);
         }
         else
         {
-
+            MyIAState = new AlphaGuide_State(puppet);
         }
     }
     // Use this for initialization
@@ -54,5 +54,9 @@ public class IA_Brain : Brain {
     {
         if (MyIAState != null && MyIAState.FixedUpdateFct != null) 
             MyIAState.FixedUpdateFct();
+    }
+    public override IA_State GetTypeState(Puppet _myPuppet, E_State _state, CreatureType _type, bool iAmAnAplha = false)
+    {
+        return base.GetTypeState(_myPuppet, _state, _type, iAmAnAplha);
     }
 }

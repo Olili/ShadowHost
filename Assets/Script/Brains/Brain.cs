@@ -35,7 +35,7 @@ public class Brain : MonoBehaviour {
         follow,
         chase
     }
-    public virtual IA_State GetTypeState(Puppet _myPuppet, E_State _state, CreatureType _type, bool iAmAnAplha = false, Puppet _myFoePuppet = null)
+    public virtual IA_State GetTypeState(Puppet _myPuppet, E_State _state, CreatureType _type, bool iAmAnAplha = false)
     {
         if (!iAmAnAplha)
         {
@@ -56,9 +56,9 @@ public class Brain : MonoBehaviour {
             {
                 switch (_type)
                 {
-                    //case CreatureType.Spider:
-                    //    return new ChaseSpider_State()
-                    //    break;
+                    case CreatureType.Spider:
+                        return new ChaseSpider_State(_myPuppet);
+                        break;
 
                     case CreatureType.Grunt:
                         break;
@@ -74,10 +74,10 @@ public class Brain : MonoBehaviour {
                 switch (_state)
                 {
                     case E_State.follow:
-
+                        return new Follow_State(_myPuppet);
 
                     case E_State.chase:
-
+                        return new ChaseSpider_State(_myPuppet);
                     default:
                         return new Follow_State(_myPuppet);
                 }

@@ -75,15 +75,18 @@ public class ChaseSpider_State : Chase_State
         float nearestDistance = float.MaxValue;
         Puppet myPossibleTarget = null;
 
-        if (foeLeaderPuppet != null && foeLeaderPuppet.GetComponent<Alpha>() != null)
+        if (foeLeaderPuppet != null)
         {
-            foreach (Puppet pup in foeLeaderPuppet.GetComponent<Alpha>().HordePuppets)
+            if (foeLeaderPuppet.GetComponent<Alpha>() != null)
             {
-                float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
-                if (tempDist < nearestDistance)
+                foreach (Puppet pup in foeLeaderPuppet.GetComponent<Alpha>().HordePuppets)
                 {
-                    nearestDistance = tempDist;
-                    myPossibleTarget = pup;
+                    float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
+                    if (tempDist < nearestDistance)
+                    {
+                        nearestDistance = tempDist;
+                        myPossibleTarget = pup;
+                    }
                 }
             }
         }

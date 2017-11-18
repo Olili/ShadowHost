@@ -22,11 +22,12 @@ public class HordeCreator : MonoBehaviour {
     public void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
         GameObject hordeContainer = new GameObject("horde");
-        hordeContainer.AddComponent<HordeCreator>();
+        hordeContainer.AddComponent<HordeManager>();
         hordeContainer.transform.position = position;
 
         Puppet alpha = creaturePool.GetCreature(type);
-        alpha.Init(position, null, hordeContainer.transform);
+        alpha.name = "AlphaSpider";
+        alpha.Init(position, alpha, hordeContainer.transform);
         alpha.gameObject.AddComponent<Alpha>();
         alpha.gameObject.AddComponent<IA_Brain>();
         alpha.ChangeColorDebug();
