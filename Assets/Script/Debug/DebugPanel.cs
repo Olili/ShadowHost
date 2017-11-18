@@ -7,11 +7,12 @@ using UnityEngine;
 public class DebugPanel : MonoBehaviour {
 
     PlayerBrain playerBrain;
+    HordeCreator hordeCreator;
     [Range(0, 1)]  public float timeScale = 1;
 
 	void Start () {
         playerBrain = FindObjectOfType<PlayerBrain>();
-
+        hordeCreator = FindObjectOfType<HordeCreator>();
     }
 
     // ne marche plus. temporaire.
@@ -34,6 +35,27 @@ public class DebugPanel : MonoBehaviour {
             }
         }
     }
+    void PopHordDebug()
+    {
+      
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            hordeCreator.CreateDeadPuppet(CreatureType.Spider);
+        }
+        else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            hordeCreator.CreateHorde(Vector3.zero, CreatureType.Spider, 10);
+        }
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            hordeCreator.CreateDeadPuppet(CreatureType.Grunt);
+        }
+        else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            hordeCreator.CreateHorde(Vector3.zero, CreatureType.Grunt, 4);
+        }
+     
+    }
     void UpdateFrameRate()
     {
         if (Time.timeScale != timeScale)
@@ -43,5 +65,6 @@ public class DebugPanel : MonoBehaviour {
 	void Update () {
         Possession();
         UpdateFrameRate();
+        PopHordDebug();
     }
 }

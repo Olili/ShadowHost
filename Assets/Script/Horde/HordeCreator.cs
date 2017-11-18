@@ -19,7 +19,7 @@ public class HordeCreator : MonoBehaviour {
         creaturePool = GetComponent<CreaturePool>();
 	}
 	
-    void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
+    public void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
         GameObject hordeContainer = new GameObject("horde");
         hordeContainer.AddComponent<HordeCreator>();
@@ -59,15 +59,14 @@ public class HordeCreator : MonoBehaviour {
             }
         }
     }
+    public void CreateDeadPuppet(CreatureType type)
+    {
+        Puppet puppet = creaturePool.GetCreature(type);
+        puppet.PuppetAction = new DeathAction(puppet);
+    }
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CreateHorde(Vector3.zero, CreatureType.Spider, nbCreaturePop);
-        }
-        if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            CreateHorde(Vector3.zero, CreatureType.Grunt, 4);
-        }
+      
     }
 }
