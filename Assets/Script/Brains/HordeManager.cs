@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HordeManager : MonoBehaviour
 {
+
     private Puppet foeLeaderPuppet;
     private List<Puppet> hordePuppets = new List<Puppet>();
     private Puppet currentAlpha;
@@ -38,6 +39,7 @@ public class HordeManager : MonoBehaviour
     public void InitAlpha(Puppet _firstAlpha)
     {
         currentAlpha = _firstAlpha;
+        AddHordePuppet(currentAlpha);
     }
     public void AddHordePuppet(Puppet puppet)
     {
@@ -81,5 +83,23 @@ public class HordeManager : MonoBehaviour
         HordePuppets.Clear();
 
         //Destroy(this.gameObject);
+    }
+
+
+    private float timerBeforeDestroy = 0.0f;
+    public void FixedUpdate()
+    {
+        if (hordePuppets.Count == 0)
+        {
+            timerBeforeDestroy += Time.deltaTime;
+            if (timerBeforeDestroy > 1.5f)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else
+        {
+            timerBeforeDestroy = 0.0f;
+        }
     }
 }

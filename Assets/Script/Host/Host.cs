@@ -32,6 +32,15 @@ public class Host : MonoBehaviour
     public void GoInBody(Puppet body)
     {
         //if (body.PuppetAction is Dea)
+        if (body.transform.parent != null && body.transform.parent.GetComponent<HordeManager>() != null)
+        {
+            body.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(body);
+        }
+        body.gameObject.AddComponent<Alpha>();
+        GameObject myNewHorde = new GameObject("PlayerHordeManager");
+        myNewHorde.AddComponent<HordeManager>();
+        myNewHorde.GetComponent<HordeManager>().InitAlpha(body);
+
         transform.parent = body.transform;
         transform.position = body.transform.position;
         gameObject.SetActive(false);
@@ -45,6 +54,8 @@ public class Host : MonoBehaviour
     }
     public void GoOutBody(Puppet body)
     {
+        Destroy(body.GetComponent<Alpha>());
+        body.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
         transform.SetParent(null);// = null;
         transform.position = body.transform.position;
         gameObject.SetActive(true);
