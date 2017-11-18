@@ -37,6 +37,8 @@ public class Host : MonoBehaviour
         body.InitAction();
         if (body.Animator != null)
             body.Animator.SetTrigger("Revive");
+
+        GameManager.Instance.FeedbackManager.PossessBody(body);
     }
     public void GoOutBody(Puppet body)
     {
@@ -44,6 +46,7 @@ public class Host : MonoBehaviour
         gameObject.SetActive(true);
         body.PuppetAction = new DeathAction(body);
 
+        GameManager.Instance.FeedbackManager.UnPossessBody(body);
     }
 
     public void AddBody(Puppet deadPuppet)

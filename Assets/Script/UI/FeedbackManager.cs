@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,4 +65,13 @@ public class FeedbackManager : MonoBehaviour {
 			currentlySelectablePuppet = null;
 		}
 	}
+
+    public void PossessBody(Puppet body)
+    {
+        
+    }
+
+    public void UnPossessBody(Puppet body)
+    {
+    }
 }
