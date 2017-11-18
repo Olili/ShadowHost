@@ -9,6 +9,7 @@ public class DeathAction : PuppetAction
     {
         animator = _puppet.Animator;
         CurFixedUpdateFct = OnDeadBody;
+        GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
     }
     public override void OnBegin()
     {

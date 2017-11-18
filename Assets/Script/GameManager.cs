@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     private PlayerBrain playerBrain;
+    public  HordeCreator hordeCreator;
     private static GameManager instance = null;
 
 #region getterSetters
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour {
         }
         private set { }
     }
-   
+
 
     public void Possession(Puppet puppet)
     {

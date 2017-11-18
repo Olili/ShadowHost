@@ -13,11 +13,20 @@ public enum CreatureType
 public class HordeCreator : MonoBehaviour {
 
     CreaturePool creaturePool;
+    List<Puppet> deadList;
+    static readonly float maxDead = 20;
+
+
     public int nbCreaturePop = 10;
 
+    private void Awake()
+    {
+        GameManager.Instance.hordeCreator = this;
+    }
     void Start () {
         creaturePool = GetComponent<CreaturePool>();
-	}
+        deadList = new List<Puppet>(nbCreaturePop);
+    }
 	
     public void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
@@ -60,12 +69,25 @@ public class HordeCreator : MonoBehaviour {
             }
         }
     }
+    public void SendtoPool(Puppet puppet)
+    {
+        puppet.gameObject.SetActive(false);
+        puppet.transform.parent = transform;
+    }
     public void CreateDeadPuppet(CreatureType type)
     {
         Puppet puppet = creaturePool.GetCreature(type);
         puppet.PuppetAction = new DeathAction(puppet);
     }
-
+    public void AddDeadPuppet(Puppet puppet)
+    {
+        deadList.Add(puppet);
+        if (deadList.Count > maxDead)
+        {
+            SendtoPool(deadList[0]);
+            deadList.Remove(deadList[0]);
+        }
+    }
     void Update()
     {
       

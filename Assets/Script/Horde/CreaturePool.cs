@@ -28,11 +28,11 @@ public class CreaturePool : MonoBehaviour
             poolTab[i] = new List<GameObject>();
             for (int j = 0; j < poolSize; j++)
             {
-                AddCreatureToPool(CreatureType.Spider);
+                CreateAndAddToPool(CreatureType.Spider);
             }
         }
     }
-    Puppet AddCreatureToPool(CreatureType type)
+    Puppet CreateAndAddToPool(CreatureType type)
     {
         GameObject poolObject = Instantiate<GameObject>(prefabModel[(int)type]);
         poolObject.transform.parent = transform;
@@ -60,7 +60,7 @@ public class CreaturePool : MonoBehaviour
         }
         if (returnedPuppet == null)
         {
-            returnedPuppet = AddCreatureToPool(type);
+            returnedPuppet = CreateAndAddToPool(type);
         }
         returnedPuppet.gameObject.SetActive(true);
         return returnedPuppet;
