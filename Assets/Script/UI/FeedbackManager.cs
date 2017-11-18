@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InterfaceManager : MonoBehaviour {
+public class FeedbackManager : MonoBehaviour {
 
 	// Use this for initialization
 	public PrefabsLibrary pl;
 
     private void Awake()
     {
-        GameManager.Instance.InterfaceManager = this;
+        GameManager.Instance.FeedbackManager = this;
 		if(pl == null)
 		{
 			pl = Resources.Load("SfxLibrary") as PrefabsLibrary;

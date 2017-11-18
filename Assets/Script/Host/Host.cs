@@ -16,7 +16,7 @@ public class Host : MonoBehaviour
     {
         puppet = GetComponent<Puppet>();
         deadBodyList = new List<Puppet>();
-        OnDeadBodyClose += GameManager.Instance.InterfaceManager.HighlightDeadPuppet;
+        OnDeadBodyClose += GameManager.Instance.FeedbackManager.HighlightDeadPuppet;
     }
 
     public void OnDisable()
@@ -27,11 +27,10 @@ public class Host : MonoBehaviour
             deadBodyList.Clear();
             OnDeadBodyClose(null);
         }
-        OnDeadBodyClose -= GameManager.Instance.InterfaceManager.HighlightDeadPuppet;
+        OnDeadBodyClose -= GameManager.Instance.FeedbackManager.HighlightDeadPuppet;
     }
     public void GoInBody(Puppet body)
     {
-
         transform.parent = body.transform;
         gameObject.SetActive(false);
         GameManager.Instance.Possession(body);

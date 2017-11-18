@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
     private PlayerBrain playerBrain;
     public  HordeCreator hordeCreator;
 
-    private InterfaceManager interfaceManager;
+    private FeedbackManager feedbackManager;
     private static GameManager instance = null;
 
 #region getterSetters
@@ -29,19 +29,19 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public InterfaceManager InterfaceManager
+    public FeedbackManager FeedbackManager
     {
         get
         {
-            if(interfaceManager == null)
+            if(feedbackManager == null)
             {
-                interfaceManager = new GameObject("InterfaceManager").AddComponent<InterfaceManager>();
+                feedbackManager = new GameObject("FeedbackManager").AddComponent<FeedbackManager>();
             }
-            return interfaceManager;
+            return feedbackManager;
         }
         set
         {
-            interfaceManager = value;
+            feedbackManager = value;
         }
     }
 #endregion
