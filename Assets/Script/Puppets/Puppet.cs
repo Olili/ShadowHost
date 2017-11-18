@@ -189,7 +189,8 @@ public class Puppet : MonoBehaviour {
     {
         int mask = LayerMask.GetMask(new string[] { "Default"});
         RaycastHit hit;
-        Vector3 center = transform.position + Vector3.up * Extents.y;
+        Vector3 center = centerDown.position + Vector3.up * Extents.y;
+      
         if (Physics.Raycast(center, -OnPlanNormal, out hit, (Extents.y +0.5f), mask))
         {
             slidingDebug = false;
