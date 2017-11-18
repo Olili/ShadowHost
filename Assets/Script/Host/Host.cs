@@ -21,6 +21,12 @@ public class Host : MonoBehaviour
 
     public void OnDisable()
     {
+        if(OnDeadBodyClose != null)
+        {
+            closestDeadPuppet = null;
+            deadBodyList.Clear();
+            OnDeadBodyClose(null);
+        }
         OnDeadBodyClose -= GameManager.Instance.InterfaceManager.HighlightDeadPuppet;
     }
     public void GoInBody(Puppet body)
