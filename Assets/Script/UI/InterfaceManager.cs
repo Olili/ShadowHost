@@ -10,12 +10,20 @@ public class InterfaceManager : MonoBehaviour {
     {
         GameManager.Instance.interfaceManager = this;
     }
-	void Start () {
-		
+	void Start () 
+	{
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
+	}
+
+	
+	public void HighlightDeadPuppet(Puppet p)
+	{
+
 	}
 }

@@ -13,8 +13,14 @@ public class Host : MonoBehaviour
     {
         puppet = GetComponent<Puppet>();
         deadBodyList = new List<Puppet>();
-        // OnDeadBodyClose += GameManager.Instance.interfaceManager.
+        OnDeadBodyClose += GameManager.Instance.interfaceManager.HighlightDeadPuppet;
     }
+
+    public void OnDestroy()
+    {
+        OnDeadBodyClose -= GameManager.Instance.interfaceManager.HighlightDeadPuppet;
+    }
+
     public void AddBody(Puppet deadPuppet)
     {
         if ((!deadBodyList.Contains(deadPuppet)))
