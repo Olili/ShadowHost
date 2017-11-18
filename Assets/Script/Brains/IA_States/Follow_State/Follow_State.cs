@@ -67,21 +67,23 @@ public class Follow_State : IA_State {
 
             for (int i = 0; i< allPossibleTarget.Length; i++)
             {
-                if (allPossibleTarget[i].GetComponent<Puppet>().GetType() != puppet.GetType()) // espece de creature différent de la mienne => combat de horde
+                if (puppet.Leader != null)
                 {
-                    // J'ai trouvé des ennemies!!!
                     IA_State tempLeaderState = puppet.Leader.gameObject.GetComponent<IA_Brain>().MyIAState;
-                    if(tempLeaderState is Follow_State)
+                    if (allPossibleTarget[i].GetComponent<Puppet>().GetType() != puppet.GetType()) // espece de creature différent de la mienne => combat de horde
                     {
-                        (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                        // J'ai trouvé des ennemies!!!
+                        if (tempLeaderState is Follow_State)
+                        {
+                            (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                        }
                     }
-                }
-                else if (allPossibleTarget[i].GetComponent<Puppet>().Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
-                {
-                    IA_State tempLeaderState = puppet.Leader.gameObject.GetComponent<IA_Brain>().MyIAState;
-                    if (tempLeaderState is Follow_State)
+                    else if (allPossibleTarget[i].GetComponent<Puppet>().Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
                     {
-                        (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                        if (tempLeaderState is Follow_State)
+                        {
+                            (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                        }
                     }
                 }
             }
