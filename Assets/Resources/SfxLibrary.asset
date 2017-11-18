@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534009827af8e1140ab9ce2b68e14fc7, type: 3}
   m_Name: SfxLibrary
   m_EditorClassIdentifier: 
+  FX_Host: {fileID: 1853338042999136, guid: e6d1cff70ff5abe4f931fb9d1292c2f3, type: 2}
   FX_OnDeadSelectable: {fileID: 1928149307647950, guid: 1ea89cd3ba3a3ea41a9be4bee112667d,
     type: 2}
   MAT_OnDeadSelectable: {fileID: 2100000, guid: 2797de2576674fb43b573c342614b9fd,

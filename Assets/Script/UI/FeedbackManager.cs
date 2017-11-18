@@ -18,7 +18,8 @@ public class FeedbackManager : MonoBehaviour {
     }
 	void Start () 
 	{
-
+		GameObject go = GameManager.Instance.PlayerBrain.gameObject;
+		possessionFX = Instantiate(pl.FX_Host, go.transform.position, Quaternion.identity, go.transform);
 	}
 	
 	// Update is called once per frame
@@ -29,6 +30,7 @@ public class FeedbackManager : MonoBehaviour {
 	Puppet currentlySelectablePuppet;
 	Material baseMaterial;
 	GameObject selectableFX;
+
 	public void HighlightDeadPuppet(Puppet p)
 	{
 		if(currentlySelectablePuppet != null)
@@ -66,13 +68,14 @@ public class FeedbackManager : MonoBehaviour {
 		}
 	}
 
-    public void PossessBody(Puppet body)
+	GameObject possessionFX;
+    public void PossessBody(Transform target)
     {
-        
+        possessionFX.transform.SetParent(target, false);
     }
 
-    public void UnPossessBody(Puppet body)
-    {
-		
+    public void UnPossessBody(Transform target)
+    {		
+        possessionFX.transform.SetParent(target, false);
     }
 }
