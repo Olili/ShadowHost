@@ -40,7 +40,12 @@ public class DebugPanel : MonoBehaviour {
       
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {
-            hordeCreator.CreateDeadPuppet(CreatureType.Spider);
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateDeadPuppet(CreatureType.Spider, hit.point);
+            }
+            
         }
         else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {

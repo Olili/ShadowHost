@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     private PlayerBrain playerBrain;
     public  HordeCreator hordeCreator;
+    public InterfaceManager interfaceManager;
     private static GameManager instance = null;
 
 #region getterSetters

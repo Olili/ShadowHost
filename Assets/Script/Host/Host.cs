@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Host : MonoBehaviour {
-
-
+public class Host : MonoBehaviour 
+{
     delegate void SimpleDelegate(Puppet dead);
     SimpleDelegate OnDeadBodyClose;
     Puppet closestDeadPuppet;
@@ -14,6 +13,7 @@ public class Host : MonoBehaviour {
     {
         puppet = GetComponent<Puppet>();
         deadBodyList = new List<Puppet>();
+        // OnDeadBodyClose += GameManager.Instance.interfaceManager.
     }
     public void AddBody(Puppet deadPuppet)
     {

@@ -74,10 +74,14 @@ public class HordeCreator : MonoBehaviour {
         puppet.gameObject.SetActive(false);
         puppet.transform.parent = transform;
     }
-    public void CreateDeadPuppet(CreatureType type)
+    public void CreateDeadPuppet(CreatureType type, Vector3? position = null)
     {
         Puppet puppet = creaturePool.GetCreature(type);
         puppet.PuppetAction = new DeathAction(puppet);
+        if(position.HasValue)
+        {
+            puppet.transform.position = position.Value;
+        }
     }
     public void AddDeadPuppet(Puppet puppet)
     {
