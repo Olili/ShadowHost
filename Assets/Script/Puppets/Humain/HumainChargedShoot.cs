@@ -8,8 +8,10 @@ public class HumainChargedShoot : HumainAction
     float chargeTime;
     float timer;
     bool canLauchAttack;
+    Transform weaponOrigin;
     public HumainChargedShoot(Puppet _puppet) : base(_puppet)
     {
+        weaponOrigin = puppet.transform.Find("WeaponOrigin");
     }
     public override  void OnBegin()
     {
@@ -33,18 +35,18 @@ public class HumainChargedShoot : HumainAction
     }
 
 
-    public virtual void Charge()
+    public override void Charge()
     {
         // nop.
     }
-    public virtual void Shoot()
+    public override void Shoot()
     {
         if (canLauchAttack)
         {
             // shoot
         }
     }
-    public virtual void RetreatAttack()
+    public override void RetreatAttack()
     {
         // why not. cracké
     }

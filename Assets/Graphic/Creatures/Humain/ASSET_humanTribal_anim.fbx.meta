@@ -1,0 +1,393 @@
+fileFormatVersion: 2
+guid: 0dd19dbd4b494fb4980c7925ae3ab6be
+timeCreated: 1511091577
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CTRL_globalSRT_human
+    100004: CTRL_globalSRT_humanParent
+    100006: Group_deformers_human
+    100008: Group_RIG_human
+    100010: joint_Out_arm_L_C1_human
+    100012: joint_Out_arm_L_C2_human
+    100014: joint_Out_arm_L_C2_twist_human
+    100016: joint_Out_arm_L_root_human
+    100018: joint_Out_arm_R_C1_human
+    100020: joint_Out_arm_R_C2_human
+    100022: joint_Out_arm_R_C2_twist_human
+    100024: joint_Out_arm_R_root_human
+    100026: joint_Out_clavicle_L_C1_human
+    100028: joint_Out_clavicle_L_root_human
+    100030: joint_Out_clavicle_R_C1_human
+    100032: joint_Out_clavicle_R_root_human
+    100034: joint_Out_index_L_C1_human
+    100036: joint_Out_index_L_C2_human
+    100038: joint_Out_index_L_C3_human
+    100040: joint_Out_index_R_C1_human
+    100042: joint_Out_index_R_C2_human
+    100044: joint_Out_index_R_C3_human
+    100046: joint_Out_leg_L_C1_human
+    100048: joint_Out_leg_L_C2_human
+    100050: joint_Out_leg_L_C3_human
+    100052: joint_Out_leg_L_C4_human
+    100054: joint_Out_leg_L_root_human
+    100056: joint_Out_leg_R_C1_human
+    100058: joint_Out_leg_R_C2_human
+    100060: joint_Out_leg_R_C3_human
+    100062: joint_Out_leg_R_C4_human
+    100064: joint_Out_leg_R_root_human
+    100066: joint_Out_little_L_C1_human
+    100068: joint_Out_little_L_C2_human
+    100070: joint_Out_little_L_C3_human
+    100072: joint_Out_little_R_C1_human
+    100074: joint_Out_little_R_C2_human
+    100076: joint_Out_little_R_C3_human
+    100078: joint_Out_major_L_C1_human
+    100080: joint_Out_major_L_C2_human
+    100082: joint_Out_major_L_C3_human
+    100084: joint_Out_major_R_C1_human
+    100086: joint_Out_major_R_C2_human
+    100088: joint_Out_major_R_C3_human
+    100090: joint_Out_neck_C1_human
+    100092: joint_Out_neck_C2_human
+    100094: joint_Out_neck_C3_human
+    100096: joint_Out_neck_C4_human
+    100098: joint_Out_ring_L_C1_human
+    100100: joint_Out_ring_L_C2_human
+    100102: joint_Out_ring_L_C3_human
+    100104: joint_Out_ring_R_C1_human
+    100106: joint_Out_ring_R_C2_human
+    100108: joint_Out_ring_R_C3_human
+    100110: joint_Out_spine_C1_human
+    100112: joint_Out_spine_C2_human
+    100114: joint_Out_spine_C3_human
+    100116: joint_Out_spine_C4_human
+    100118: joint_Out_spine_C5_human
+    100120: joint_Out_thumb_L_C1_human
+    100122: joint_Out_thumb_L_C2_human
+    100124: joint_Out_thumb_L_C3_human
+    100126: joint_Out_thumb_R_C1_human
+    100128: joint_Out_thumb_R_C2_human
+    100130: joint_Out_thumb_R_C3_human
+    100132: polySurface_humanTribal
+    400000: //RootNode
+    400002: CTRL_globalSRT_human
+    400004: CTRL_globalSRT_humanParent
+    400006: Group_deformers_human
+    400008: Group_RIG_human
+    400010: joint_Out_arm_L_C1_human
+    400012: joint_Out_arm_L_C2_human
+    400014: joint_Out_arm_L_C2_twist_human
+    400016: joint_Out_arm_L_root_human
+    400018: joint_Out_arm_R_C1_human
+    400020: joint_Out_arm_R_C2_human
+    400022: joint_Out_arm_R_C2_twist_human
+    400024: joint_Out_arm_R_root_human
+    400026: joint_Out_clavicle_L_C1_human
+    400028: joint_Out_clavicle_L_root_human
+    400030: joint_Out_clavicle_R_C1_human
+    400032: joint_Out_clavicle_R_root_human
+    400034: joint_Out_index_L_C1_human
+    400036: joint_Out_index_L_C2_human
+    400038: joint_Out_index_L_C3_human
+    400040: joint_Out_index_R_C1_human
+    400042: joint_Out_index_R_C2_human
+    400044: joint_Out_index_R_C3_human
+    400046: joint_Out_leg_L_C1_human
+    400048: joint_Out_leg_L_C2_human
+    400050: joint_Out_leg_L_C3_human
+    400052: joint_Out_leg_L_C4_human
+    400054: joint_Out_leg_L_root_human
+    400056: joint_Out_leg_R_C1_human
+    400058: joint_Out_leg_R_C2_human
+    400060: joint_Out_leg_R_C3_human
+    400062: joint_Out_leg_R_C4_human
+    400064: joint_Out_leg_R_root_human
+    400066: joint_Out_little_L_C1_human
+    400068: joint_Out_little_L_C2_human
+    400070: joint_Out_little_L_C3_human
+    400072: joint_Out_little_R_C1_human
+    400074: joint_Out_little_R_C2_human
+    400076: joint_Out_little_R_C3_human
+    400078: joint_Out_major_L_C1_human
+    400080: joint_Out_major_L_C2_human
+    400082: joint_Out_major_L_C3_human
+    400084: joint_Out_major_R_C1_human
+    400086: joint_Out_major_R_C2_human
+    400088: joint_Out_major_R_C3_human
+    400090: joint_Out_neck_C1_human
+    400092: joint_Out_neck_C2_human
+    400094: joint_Out_neck_C3_human
+    400096: joint_Out_neck_C4_human
+    400098: joint_Out_ring_L_C1_human
+    400100: joint_Out_ring_L_C2_human
+    400102: joint_Out_ring_L_C3_human
+    400104: joint_Out_ring_R_C1_human
+    400106: joint_Out_ring_R_C2_human
+    400108: joint_Out_ring_R_C3_human
+    400110: joint_Out_spine_C1_human
+    400112: joint_Out_spine_C2_human
+    400114: joint_Out_spine_C3_human
+    400116: joint_Out_spine_C4_human
+    400118: joint_Out_spine_C5_human
+    400120: joint_Out_thumb_L_C1_human
+    400122: joint_Out_thumb_L_C2_human
+    400124: joint_Out_thumb_L_C3_human
+    400126: joint_Out_thumb_R_C1_human
+    400128: joint_Out_thumb_R_C2_human
+    400130: joint_Out_thumb_R_C3_human
+    400132: polySurface_humanTribal
+    4300000: polySurface_humanTribal
+    7400000: Idle
+    7400002: Walk
+    7400004: AttackRangeCharge
+    7400006: AttackChargeLoop
+    7400008: Take 001
+    7400010: Take 001 (1)
+    9500000: //RootNode
+    13700000: polySurface_humanTribal
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 110
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackRangeCharge
+      takeName: Take 001
+      firstFrame: 120
+      lastFrame: 130
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackChargeLoop
+      takeName: Take 001
+      firstFrame: 130
+      lastFrame: 130
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 133
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Take 001 (1)
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
