@@ -13,7 +13,7 @@ public enum CreatureType
 public class HordeCreator : MonoBehaviour {
 
     CreaturePool creaturePool;
-    List<HordeManager> hordeList;
+    [SerializeField] List<HordeManager> hordeList;
     List<Puppet> deadList;
     static readonly float maxDead = 20;
     float timer;
@@ -22,6 +22,7 @@ public class HordeCreator : MonoBehaviour {
     public int maxHordeDistance = 30;
     public int minHordeDistance = 15;
     public bool canGenerateHorde = true;
+
     private void Awake()
     {
         GameManager.Instance.hordeCreator = this;
@@ -85,7 +86,7 @@ public class HordeCreator : MonoBehaviour {
     {
         if (hordeList.Contains(hordeManager))
             hordeList.Remove(hordeManager);
-        if (hordeManager.HordePuppets!=null)
+        if (hordeManager.HordePuppets != null)
         {
             for (int i = 0; i < hordeManager.HordePuppets.Count; i++)
             {

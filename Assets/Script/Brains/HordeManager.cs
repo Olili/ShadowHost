@@ -69,7 +69,7 @@ public class HordeManager : MonoBehaviour
 
         foreach (Puppet pup in HordePuppets)
         {
-            if (pup != currentAlpha && !(pup.PuppetAction is DeathAction))
+            if (pup != currentAlpha && !(pup.PuppetAction is DeathAction)) // Peut être ce cas ne doit pas arriver ? 
             {
                 if (tempLeader == null)
                 {
