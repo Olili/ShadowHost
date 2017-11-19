@@ -13,6 +13,7 @@ public enum CreatureType
 public class HordeCreator : MonoBehaviour {
 
     CreaturePool creaturePool;
+    List<HordeManager> hordList;
     List<Puppet> deadList;
     static readonly float maxDead = 1;
 
@@ -40,6 +41,9 @@ public class HordeCreator : MonoBehaviour {
         alpha.gameObject.AddComponent<Alpha>();
         alpha.gameObject.AddComponent<IA_Brain>();
         alpha.ChangeColorDebug();
+
+        hordList.Add(hordeContainer.GetComponent<HordeManager>());
+
             // faire une carré de pop d'unités
         float margin = 1.3f;
         int rowZ = Mathf.CeilToInt(Mathf.Sqrt(nbCreatures));
@@ -105,4 +109,47 @@ public class HordeCreator : MonoBehaviour {
     {
       
     }
+    float hordePopTimer = 0;
+    public void Stuff()
+    {
+        // si le player est controller de horde
+        PlayerBrain playerBrain = GameManager.Instance.PlayerBrain;
+        HordeManager playerHordeManager = playerBrain.transform.parent.GetComponent<HordeManager>();
+
+        // si le player est ne mode hôte ou n'a pas de horde
+        if (playerBrain.GetComponent<Host>() != null)
+            LonelyPlayerHordePop();
+        if (playerHordeManager!=null)
+        {
+            if (playerHordeManager.HordePuppets.Count < 1) 
+            {
+                LonelyPlayerHordePop();
+            }
+            else
+            {
+                PlayerLeaderPopHorde();
+            }
+        }
+    }
+    public void LonelyPlayerHordePop()
+    {
+
+    }
+    public void PlayerLeaderPopHorde()
+    {
+
+    }
+
 }
+
+
+//spawn rules : Stupid simple iteration : 
+/*
+ *  * Pas de systeme de zone
+ *  Si le joueur est chef de horde :  Ne fait pop qu'une horde à la fois. 
+ *      --> Faire pop une horde proche qui va vers lui allié / ennemis
+ *  Si le joueur n'est pas chef de horde. : 2 hordes  
+ *   --> Faire pop une horde proche qui va vers lui
+ *      ---> Si elle est suffisamment loin du joueur disparait.
+ *      ---> Si le joueur est suffisamment proche on pop une horde proche de lui
+*/

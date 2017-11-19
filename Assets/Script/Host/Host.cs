@@ -40,6 +40,8 @@ public class Host : MonoBehaviour
         GameObject myNewHorde = new GameObject("PlayerHordeManager");
         myNewHorde.AddComponent<HordeManager>();
         myNewHorde.GetComponent<HordeManager>().InitAlpha(body);
+        body.transform.parent = myNewHorde.transform;
+        body.GetComponent<Alpha>().Init();
 
         transform.parent = body.transform;
         transform.position = body.transform.position;
