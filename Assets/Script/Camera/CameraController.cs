@@ -9,12 +9,12 @@ public class CameraController : MonoBehaviour {
 
     public void Awake()
     {
-        cineVC = GetComponentInChildren<CinemachineVirtualCamera>();
+        //cineVC = GetComponentInChildren<CinemachineVirtualCamera>();
     }
 
     public void SetTarget(Transform transform)
     {
-        cineVC.Follow = GameManager.Instance.PlayerBrain.transform;
+        //cineVC.Follow = GameManager.Instance.PlayerBrain.transform;
     }
   
 }
