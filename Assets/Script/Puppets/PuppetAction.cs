@@ -135,39 +135,49 @@ public class PuppetAction  {
     }
     public virtual void OnDeath()
     {
-        if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
-            puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
+        if (!(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
+        {
+            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
+                puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
 
-        //puppet.gameObject.SetActive(false);
-        if (puppet.GetComponent<Alpha>() != null)
-        {
-            if (puppet.GetComponent<IA_Brain>().MyIAState is Chase_State)
+            //puppet.gameObject.SetActive(false);
+            if (puppet.GetComponent<Alpha>() != null)
             {
-                puppet.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
-                GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+                if (puppet.GetComponent<IA_Brain>().MyIAState is Chase_State)
+                {
+                    puppet.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
+                    GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+                }
+                else if (puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && puppet.HordeManager.FoeLeaderPuppet.GetComponent<Alpha>() != null)
+                {
+                    puppet.transform.parent.GetComponent<HordeManager>().TransmitHorde();
+                    GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+                }
             }
-            else if(puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && puppet.HordeManager.FoeLeaderPuppet.GetComponent<Alpha>() != null)
+            if (puppet.gameObject.GetComponent<Brain>() != null && !(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
             {
-                puppet.transform.parent.GetComponent<HordeManager>().TransmitHorde();
-                GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+                GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
             }
-        }   
-        if (puppet.gameObject.GetComponent<Brain>() != null && !(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
-        {
-            GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
-        }
-        if(puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Count==0)
-        {
-            GameObject tempManagerToRemove = puppet.transform.parent.GetComponent<HordeManager>().gameObject;
-            puppet.transform.parent = null;
-            GameObject.Destroy(tempManagerToRemove);
+            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Count == 0)
+            {
+                GameObject tempManagerToRemove = puppet.transform.parent.GetComponent<HordeManager>().gameObject;
+                puppet.transform.parent = null;
+                puppet.HordeManager = null;
+                GameObject.Destroy(tempManagerToRemove);
+            }
+            else
+            {
+                puppet.transform.parent = null;
+                puppet.HordeManager = null;
+
+            }
+
+            puppet.PuppetAction = new DeathAction(puppet);
         }
         else
         {
-            puppet.transform.parent = null;
+            puppet.gameObject.GetComponent<PlayerBrain>().host.GoOutBody(puppet);
         }
-
-        puppet.PuppetAction = new DeathAction(puppet);
     }
     public virtual void BasicAttack()
     {
