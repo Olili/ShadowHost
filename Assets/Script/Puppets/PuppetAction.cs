@@ -164,7 +164,8 @@ public class PuppetAction  {
                 GameObject tempManagerToRemove = puppet.transform.parent.GetComponent<HordeManager>().gameObject;
                 puppet.transform.parent = null;
                 puppet.HordeManager = null;
-                GameObject.Destroy(tempManagerToRemove);
+                GameManager.Instance.hordeCreator.DestroyHorde(tempManagerToRemove.GetComponent<HordeManager>());
+                //GameObject.Destroy(tempManagerToRemove);
             }
             else
             {
