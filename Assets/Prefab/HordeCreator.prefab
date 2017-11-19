@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114247874060776696}
   - component: {fileID: 114690087883756948}
   m_Layer: 0
-  m_Name: HordeManager
+  m_Name: HordeCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2537a2e23155a7540a4a03a12d45f580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hordePopDelay: 5
   nbCreaturePop: 40
+  maxHordeDistance: 30
+  minHordeDistance: 15
+  canGenerateHorde: 1
 --- !u!114 &114690087883756948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,4 +70,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabModel:
   - {fileID: 1957509282031604, guid: 9d6081520afde4d44af2ddc1a30d4de5, type: 2}
+  - {fileID: 1826378672955778, guid: 99f41c167927bb84bbe677f4088ecc67, type: 2}
+  - {fileID: 1826378672955778, guid: 99f41c167927bb84bbe677f4088ecc67, type: 2}
   - {fileID: 1826378672955778, guid: 99f41c167927bb84bbe677f4088ecc67, type: 2}
