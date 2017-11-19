@@ -35,7 +35,7 @@ public class HordeCreator : MonoBehaviour {
         hordeContainer.transform.position = position;
 
         Puppet alpha = creaturePool.GetCreature(type);
-        alpha.name = "AlphaSpider";
+        alpha.name = "Alpha_" + type.ToString();
         hordeContainer.GetComponent<HordeManager>().InitAlpha(alpha);
         alpha.Init(position, alpha, hordeContainer.transform);
         alpha.gameObject.AddComponent<Alpha>();
