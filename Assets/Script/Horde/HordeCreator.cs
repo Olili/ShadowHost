@@ -13,15 +13,19 @@ public enum CreatureType
 public class HordeCreator : MonoBehaviour {
 
     CreaturePool creaturePool;
-    List<HordeManager> hordList;
+    List<HordeManager> hordeList;
     List<Puppet> deadList;
     static readonly float maxDead = 20;
-
+    float timer;
+    public float hordePopDelay = 5;
     public int nbCreaturePop = 10;
+    public int maxHordeDistance = 15;
 
     private void Awake()
     {
         GameManager.Instance.hordeCreator = this;
+        hordeList = new List<HordeManager>();
+        timer = 0;
     }
     void Start () {
         creaturePool = GetComponent<CreaturePool>();
@@ -43,9 +47,9 @@ public class HordeCreator : MonoBehaviour {
         alpha.gameObject.AddComponent<IA_Brain>();
         alpha.ChangeColorDebug();
 
-        if (hordList == null)
-            hordList = new List<HordeManager>();
-        hordList.Add(hordeContainer.GetComponent<HordeManager>());
+        if (hordeList == null)
+            hordeList = new List<HordeManager>();
+        hordeList.Add(hordeContainer.GetComponent<HordeManager>());
 
             // faire une carré de pop d'unités
         float margin = 1.3f;
@@ -76,10 +80,27 @@ public class HordeCreator : MonoBehaviour {
             }
         }
     }
+    public void DestroyHorde(HordeManager hordeManager)
+    {
+        if (hordeList.Contains(hordeManager))
+            hordeList.Remove(hordeManager);
+        if (hordeManager.HordePuppets!=null)
+        {
+            for (int i = 0; i < hordeManager.HordePuppets.Count; i++)
+            {
+                SendtoPool(hordeManager.HordePuppets[i]);
+                if (hordeManager.HordePuppets[i].GetComponent<Alpha>())
+                    Destroy(hordeManager.HordePuppets[i].GetComponent<Alpha>());
+            }
+        }
+        Destroy(hordeManager.gameObject);
+    }
     public void SendtoPool(Puppet puppet)
     {
         puppet.gameObject.SetActive(false);
         puppet.transform.parent = transform;
+        if (puppet.GetComponent<Brain>() != null)
+            Destroy(puppet.GetComponent<Brain>());
     }
     public void CreateDeadPuppet(CreatureType type, Vector3? position = null)
     {
@@ -110,37 +131,80 @@ public class HordeCreator : MonoBehaviour {
     }
     void Update()
     {
-      
+        PopHordeContinue();
     }
-    float hordePopTimer = 0;
-    public void Stuff()
+
+
+    public void PopHordeContinue()
     {
         // si le player est controller de horde
         PlayerBrain playerBrain = GameManager.Instance.PlayerBrain;
-        HordeManager playerHordeManager = playerBrain.transform.parent.GetComponent<HordeManager>();
+        RemoveFarAwayHorde(playerBrain);
 
         // si le player est ne mode hôte ou n'a pas de horde
         if (playerBrain.GetComponent<Host>() != null)
-            LonelyPlayerHordePop();
-        if (playerHordeManager!=null)
+            LonelyPlayerHordePop(playerBrain);
+        else
         {
-            if (playerHordeManager.HordePuppets.Count < 1) 
+            HordeManager playerHordeManager = playerBrain.transform.parent.GetComponent<HordeManager>();
+            if (playerHordeManager!=null)
             {
-                LonelyPlayerHordePop();
-            }
-            else
-            {
-                PlayerLeaderPopHorde();
+                if (playerHordeManager.HordePuppets.Count < 1) 
+                    LonelyPlayerHordePop(playerBrain);
+                else
+                    PlayerLeaderPopHorde(playerBrain);
             }
         }
     }
-    public void LonelyPlayerHordePop()
+    public void LonelyPlayerHordePop(PlayerBrain playerBrain)
     {
+        if (hordeList.Count > 3)
+        {
+        }
+        else
+        {
+            timer += Time.deltaTime;
 
+            if (timer > hordePopDelay)
+            {
+                timer = 0;
+                PopHordeAroundPlayer(playerBrain);
+            }
+        }
     }
-    public void PlayerLeaderPopHorde()
-    {
 
+    public void PlayerLeaderPopHorde(PlayerBrain playerBrain)
+    {
+        if (hordeList.Count > 2 )
+        {
+            return;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer > hordePopDelay)
+            {
+                timer = 0;
+                PopHordeAroundPlayer(playerBrain);
+            }
+        }
+    }
+    public void PopHordeAroundPlayer(PlayerBrain playerBrain)
+    {
+        Vector3 direction = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.up) * playerBrain.transform.forward;
+        Vector3 position = playerBrain.transform.position + direction * 10;
+        CreateHorde(position, (CreatureType)Random.Range(0, (int)CreatureType.Max_Creatures), 10);
+    }
+    public void RemoveFarAwayHorde(PlayerBrain playerBrain)
+    {
+        for (int i = 0; i < hordeList.Count; i++)
+        {
+            float distance = Vector3.Distance(hordeList[i].CurrentAlpha.transform.position, playerBrain.transform.position);
+            if (distance > maxHordeDistance)
+            {
+                DestroyHorde(hordeList[i]);
+            }
+        }
     }
 
 }

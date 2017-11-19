@@ -34,12 +34,33 @@ public class HordeManager : MonoBehaviour
             foeLeaderPuppet = value;
         }
     }
+
+    public Puppet CurrentAlpha
+    {
+        get
+        {
+            return currentAlpha;
+        }
+
+        set
+        {
+            currentAlpha = value;
+        }
+    }
     #endregion
+<<<<<<< refs/remotes/origin/master
 
     public void InitAlpha(Puppet _firstAlpha)
     {
         currentAlpha = _firstAlpha;
         AddHordePuppet(currentAlpha);
+=======
+
+    public void InitAlpha(Puppet _firstAlpha)
+    {
+        currentAlpha = _firstAlpha;
+        AddHordePuppet(currentAlpha);
+>>>>>>> Auto stash before rebase of "origin/master"
     }
     public void AddHordePuppet(Puppet puppet)
     {
