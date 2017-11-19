@@ -136,38 +136,51 @@ public class PuppetAction  {
     }
     public virtual void OnDeath()
     {
-        if (!(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
+        if (puppet.transform.parent == null)
         {
-            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
-                puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
+            Debug.Log("Wherer are we ?");
+        }
+        HordeManager myHordeManager = puppet.HordeManager;
+        if (myHordeManager == null)
+        {
+            Debug.Log("Wherer are we ?");
+        }
+        if (!(puppet.gameObject.GetComponent<Brain>() is PlayerBrain)) // si c'est pas un player 
+        {
+            if (myHordeManager.HordePuppets.Contains(puppet)) // enlève de la horde.
+                myHordeManager.RemoveHordePuppet(puppet);
 
-            //puppet.gameObject.SetActive(false);
-            if (puppet.GetComponent<Alpha>() != null)
+            if (puppet.GetComponent<Alpha>() != null) // Si le puppet est un alpha
             {
-                if (puppet.GetComponent<IA_Brain>().MyIAState is Chase_State)
+                if (puppet.GetComponent<IA_Brain>().MyIAState is Chase_State) // si le puppet chasse
                 {
-                    puppet.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
-                    GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
+                    myHordeManager.NeedNewAlpha(); // besion d'alpha
+                    GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());    // detruire le comportement alpha
                 }
+                // Si je fight un alpha et que l'apha adverse n'est pas mort.
                 else if (puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && puppet.HordeManager.FoeLeaderPuppet.GetComponent<Alpha>() != null)
                 {
-                    puppet.transform.parent.GetComponent<HordeManager>().TransmitHorde();
+                    // transmission de horde destruction du script alpha
+                    myHordeManager.TransmitHorde();
                     GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
                 }
             }
+                //s'il ya un brain et que ce n'est pas le player
             if (puppet.gameObject.GetComponent<Brain>() != null && !(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
             {
+                // detruire brain
                 GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
             }
-            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Count == 0) // passer par le Horde manager pour remove horde
+                // si la horde est vide on la détruit.
+            if (myHordeManager.HordePuppets.Count == 0) // passer par le Horde manager pour remove horde
             {
-                GameObject tempManagerToRemove = puppet.transform.parent.GetComponent<HordeManager>().gameObject;
+                GameObject tempManagerToRemove = myHordeManager.gameObject;
                 puppet.transform.parent = null;
                 puppet.HordeManager = null;
                 GameManager.Instance.hordeCreator.DestroyHorde(tempManagerToRemove.GetComponent<HordeManager>());
                 //GameObject.Destroy(tempManagerToRemove);
             }
-            else
+            else // sinon on a juste plus de parent et plus de lien vers la horde.
             {
                 puppet.transform.parent = null;
                 puppet.HordeManager = null;

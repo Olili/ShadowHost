@@ -8,7 +8,7 @@ public class DebugPanel : MonoBehaviour {
 
     PlayerBrain playerBrain;
     HordeCreator hordeCreator;
-    [Range(0, 1)]  public float timeScale = 1;
+    [Range(0, 15)]  public float timeScale = 1;
 
 	void Start () {
         playerBrain = FindObjectOfType<PlayerBrain>();

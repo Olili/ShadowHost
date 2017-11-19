@@ -36,14 +36,14 @@ public class HordeCreator : MonoBehaviour {
 	
     public void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
-        GameObject hordeContainer = new GameObject("horde");
-        hordeContainer.AddComponent<HordeManager>();
+        GameObject hordeContainer = new GameObject("horde"+ type.ToString()+" "+ hordeList.Count);
+        HordeManager hordeManager = hordeContainer.AddComponent<HordeManager>();
         hordeContainer.transform.position = position;
 
         Puppet alpha = creaturePool.GetCreature(type);
         alpha.name = "Alpha_" + type.ToString();
-        hordeContainer.GetComponent<HordeManager>().InitAlpha(alpha);
-        alpha.Init(position, alpha, hordeContainer.transform);
+        hordeManager.InitAlpha(alpha);
+        alpha.Init(position, alpha, hordeContainer.transform, hordeManager);
         alpha.gameObject.AddComponent<Alpha>();
         alpha.GetComponent<Alpha>().Init();
         alpha.gameObject.AddComponent<IA_Brain>();
@@ -51,7 +51,7 @@ public class HordeCreator : MonoBehaviour {
 
         if (hordeList == null)
             hordeList = new List<HordeManager>();
-        hordeList.Add(hordeContainer.GetComponent<HordeManager>());
+        hordeList.Add(hordeManager);
 
             // faire une carré de pop d'unités
         float margin = 1.3f;
@@ -74,9 +74,9 @@ public class HordeCreator : MonoBehaviour {
                 creaturePosition.x += x * margin;
                 creaturePosition.z -= z * margin;
 
-                follower.Init(creaturePosition,alpha, hordeContainer.transform);
+                follower.Init(creaturePosition,alpha, hordeContainer.transform, hordeManager);
                 follower.gameObject.AddComponent<IA_Brain>();
-                alpha.transform.parent.GetComponent<HordeManager>().AddHordePuppet(follower);
+                alpha.HordeManager.AddHordePuppet(follower);
                 if (++nbUnit >= nbCreatures)
                     return;
             }
@@ -112,12 +112,14 @@ public class HordeCreator : MonoBehaviour {
         {
             puppet.transform.position = position.Value;
         }
+        AddDeadPuppet(puppet);
     }
     public void AddDeadPuppet(Puppet puppet)
     {
         if (deadList.Contains(puppet))
             return;
         deadList.Add(puppet);
+        puppet.transform.SetParent(transform,true);
         if (deadList.Count > maxDead)
         {
             SendtoPool(deadList[0]);
@@ -149,7 +151,7 @@ public class HordeCreator : MonoBehaviour {
             LonelyPlayerHordePop(playerBrain);
         else
         {
-            HordeManager playerHordeManager = playerBrain.transform.parent.GetComponent<HordeManager>();
+            HordeManager playerHordeManager = playerBrain.puppet.HordeManager;
             if (playerHordeManager!=null)
             {
                 if (playerHordeManager.HordePuppets.Count < 1) 
@@ -161,7 +163,7 @@ public class HordeCreator : MonoBehaviour {
     }
     public void LonelyPlayerHordePop(PlayerBrain playerBrain)
     {
-        if (hordeList.Count > 2) // le player est une horde ou pas ?
+        if (hordeList.Count > 1) // le player est une horde ou pas ?
         {
             return;
         }
@@ -202,7 +204,7 @@ public class HordeCreator : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(position + (Vector3.up*100),Vector3.down,out hit,200))
         {
-            CreateHorde(hit.point, (CreatureType)Random.Range(0, (int)CreatureType.Max_Creatures), Random.Range(5, 12));
+            CreateHorde(hit.point, (CreatureType)Random.Range(0, creaturePool.prefabModel.Length), Random.Range(5, 12));
         }
     }
     public void RemoveFarAwayHorde(PlayerBrain playerBrain)

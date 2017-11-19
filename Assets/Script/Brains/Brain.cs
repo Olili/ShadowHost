@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Brain : MonoBehaviour {
 
-    protected Puppet puppet;
+    public  Puppet puppet;
 
     // Use this for initialization
     public virtual void Awake()

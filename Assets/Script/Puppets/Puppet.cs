@@ -207,13 +207,13 @@ public class Puppet : MonoBehaviour {
                 break;
         }
     }
-    public void Init(Vector3 position,Puppet _leader, Transform parent)
+    public void Init(Vector3 position,Puppet _leader, Transform parent, HordeManager _hordeManager)
     {
         gameObject.SetActive(true);
         transform.position = position;
         transform.parent = parent;
         Leader = _leader;
-        HordeManager = parent.GetComponent<HordeManager>();
+        HordeManager = _hordeManager;
     }
     protected virtual void GroundGravityCheck()
     {
@@ -331,6 +331,7 @@ public class Puppet : MonoBehaviour {
     {
         Vector3 forceApply = targetCollider.transform.position - transform.position;
         Puppet targetPuppet = targetCollider.GetComponent<Puppet>();
+        //if (pup)
         //if (type != targetPuppet.type) 
         //{
         //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);

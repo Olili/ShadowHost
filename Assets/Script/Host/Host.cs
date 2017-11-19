@@ -32,14 +32,14 @@ public class Host : MonoBehaviour
     public void GoInBody(Puppet body)
     {
         //if (body.PuppetAction is Dea)
-        if (body.transform.parent != null && body.transform.parent.GetComponent<HordeManager>() != null)
+        if (body.transform.parent != null && body.HordeManager != null)
         {
-            body.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(body);
+            body.HordeManager.RemoveHordePuppet(body);
         }
         body.gameObject.AddComponent<Alpha>();
         GameObject myNewHorde = new GameObject("PlayerHordeManager");
-        myNewHorde.AddComponent<HordeManager>();
-        myNewHorde.GetComponent<HordeManager>().InitAlpha(body);
+        body.HordeManager = myNewHorde.AddComponent<HordeManager>();
+        body.HordeManager.InitAlpha(body);
         body.transform.parent = myNewHorde.transform;
         body.GetComponent<Alpha>().Init();
 
@@ -57,7 +57,7 @@ public class Host : MonoBehaviour
     public void GoOutBody(Puppet body)
     {
         Destroy(body.GetComponent<Alpha>());
-        body.transform.parent.GetComponent<HordeManager>().NeedNewAlpha();
+        body.HordeManager.NeedNewAlpha();
         transform.SetParent(null);// = null;
         transform.position = body.transform.position;
         gameObject.SetActive(true);
@@ -116,7 +116,7 @@ public class Host : MonoBehaviour
         if (closest != closestDeadPuppet)
         {
             closestDeadPuppet = closest;
-            Debug.Log("DeadBody = " + closest.gameObject.name);
+            //Debug.Log("DeadBody = " + closest.gameObject.name);
             if (OnDeadBodyClose != null)
             {
                 OnDeadBodyClose(closestDeadPuppet);

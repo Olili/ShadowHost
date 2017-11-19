@@ -17,8 +17,7 @@ public class Alpha : MonoBehaviour
         alphaPuppet = GetComponent<Puppet>();
         refToHordeManager = null;
         Transform trans = transform.parent;
-        HordeManager hm = trans.GetComponent<HordeManager>();
-        refToHordeManager = transform.parent.GetComponent<HordeManager>();
+        refToHordeManager = alphaPuppet.HordeManager;
 
     }
 
@@ -38,6 +37,11 @@ public class Alpha : MonoBehaviour
     // On recommence en augmentant la taille du cercle.
     void CircleChill()
     {
+        if (alphaPuppet == null)
+        {
+            Debug.Log("point d'arret a mettre pour comprendre"+ gameObject.name);
+            
+        }
         float creatureRay = alphaPuppet.Extents.magnitude * 1.2f;
         float unitArea = (Mathf.PI * creatureRay * creatureRay);
         float totalHordeArea = unitArea * refToHordeManager.HordePuppets.Count;

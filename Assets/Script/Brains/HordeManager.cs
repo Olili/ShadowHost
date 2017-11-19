@@ -95,7 +95,7 @@ public class HordeManager : MonoBehaviour
             }
         }
         HordePuppets.Clear();
-
+        // Comment ça se passe si c'est le dernier qui est tué.
         //Destroy(this.gameObject);
     }
 }
