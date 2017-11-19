@@ -83,20 +83,17 @@ public class ChaseGrunt_State : Chase_State
 
         if (foeLeaderPuppet != null)
         {
-            if (foeLeaderPuppet.GetComponent<Alpha>() != null)
+            if (foeLeaderPuppet.HordeManager == null)
             {
-                if (foeLeaderPuppet.HordeManager == null)
+                Debug.Log("i want to knwo");
+            }
+            foreach (Puppet pup in foeLeaderPuppet.HordeManager.HordePuppets)
+            {
+                float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
+                if (tempDist < nearestDistance)
                 {
-                    Debug.Log("i want to knwo");
-                }
-                foreach (Puppet pup in foeLeaderPuppet.HordeManager.HordePuppets)
-                {
-                    float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
-                    if (tempDist < nearestDistance)
-                    {
-                        nearestDistance = tempDist;
-                        myPossibleTarget = pup;
-                    }
+                    nearestDistance = tempDist;
+                    myPossibleTarget = pup;
                 }
             }
         }

@@ -36,18 +36,21 @@ public class HordeCreator : MonoBehaviour {
 	
     public void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
+            // Creation hordeManager
         GameObject hordeContainer = new GameObject("horde"+ type.ToString()+" "+ hordeList.Count);
         HordeManager hordeManager = hordeContainer.AddComponent<HordeManager>();
         hordeContainer.transform.position = position;
 
-        Puppet alpha = creaturePool.GetCreature(type);
-        alpha.name = "Alpha_" + type.ToString();
-        hordeManager.InitAlpha(alpha);
-        alpha.Init(position, alpha, hordeContainer.transform, hordeManager);
-        alpha.gameObject.AddComponent<Alpha>();
-        alpha.GetComponent<Alpha>().Init();
-        alpha.gameObject.AddComponent<IA_Brain>();
-        alpha.ChangeColorDebug();
+            // création puppet qui sera alpha
+        Puppet alphaPuppet = creaturePool.GetCreature(type);
+        alphaPuppet.name = "Alpha_" + type.ToString()+" "+ hordeList.Count;
+
+            // init alpha Puppet
+        alphaPuppet.Init(position, alphaPuppet, hordeContainer.transform, hordeManager);
+
+          
+            // ajout brain
+        alphaPuppet.gameObject.AddComponent<IA_Brain>();
 
         if (hordeList == null)
             hordeList = new List<HordeManager>();
@@ -74,9 +77,8 @@ public class HordeCreator : MonoBehaviour {
                 creaturePosition.x += x * margin;
                 creaturePosition.z -= z * margin;
 
-                follower.Init(creaturePosition,alpha, hordeContainer.transform, hordeManager);
+                follower.Init(creaturePosition,alphaPuppet, hordeContainer.transform, hordeManager);
                 follower.gameObject.AddComponent<IA_Brain>();
-                alpha.HordeManager.AddHordePuppet(follower);
                 if (++nbUnit >= nbCreatures)
                     return;
             }
@@ -91,8 +93,6 @@ public class HordeCreator : MonoBehaviour {
             for (int i = 0; i < hordeManager.HordePuppets.Count; i++)
             {
                 SendtoPool(hordeManager.HordePuppets[i]);
-                if (hordeManager.HordePuppets[i].GetComponent<Alpha>())
-                    Destroy(hordeManager.HordePuppets[i].GetComponent<Alpha>());
             }
         }
         Destroy(hordeManager.gameObject);

@@ -150,19 +150,17 @@ public class PuppetAction  {
             if (myHordeManager.HordePuppets.Contains(puppet)) // enlève de la horde.
                 myHordeManager.RemoveHordePuppet(puppet);
 
-            if (puppet.GetComponent<Alpha>() != null) // Si le puppet est un alpha
+            if (puppet.Leader == puppet) // Si le puppet est un alpha
             {
                 if (puppet.GetComponent<IA_Brain>().MyIAState is Chase_State) // si le puppet chasse
                 {
                     myHordeManager.NeedNewAlpha(); // besion d'alpha
-                    GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());    // detruire le comportement alpha
                 }
                 // Si je fight un alpha et que l'apha adverse n'est pas mort.
-                else if (puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && puppet.HordeManager.FoeLeaderPuppet.GetComponent<Alpha>() != null)
+                else if (puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && puppet.HordeManager.FoeLeaderPuppet.Life > 0)
                 {
                     // transmission de horde destruction du script alpha
                     myHordeManager.TransmitHorde();
-                    GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
                 }
             }
                 //s'il ya un brain et que ce n'est pas le player

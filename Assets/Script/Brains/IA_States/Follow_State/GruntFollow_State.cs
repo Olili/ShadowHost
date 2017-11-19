@@ -47,7 +47,7 @@ public class GruntFollow_State : Follow_State
         }
         Move();
 
-        if (puppet.GetComponent<Alpha>() != null)
+        if (puppet.Leader != puppet)
         {
             puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
         }
@@ -56,7 +56,7 @@ public class GruntFollow_State : Follow_State
     protected override void FollowImmobilePlayer()
     {
         base.FollowImmobilePlayer();
-        if (puppet.GetComponent<Alpha>() != null)
+        if (puppet.Leader != puppet)
         {
             puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
         }

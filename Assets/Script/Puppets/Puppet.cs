@@ -214,6 +214,19 @@ public class Puppet : MonoBehaviour {
         transform.parent = parent;
         Leader = _leader;
         HordeManager = _hordeManager;
+        if (leader == this)
+        {
+            hordeManager.InitAlpha(this);
+            // creation et init de l'alpha .
+        }
+        else
+        {
+            leader.HordeManager.AddHordePuppet(this);
+        }
+    }
+    public void SetLeader(Puppet _leader)
+    {
+        leader = _leader;
     }
     protected virtual void GroundGravityCheck()
     {

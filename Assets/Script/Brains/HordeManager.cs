@@ -48,7 +48,18 @@ public class HordeManager : MonoBehaviour
         }
     }
     #endregion
-
+    //public void SetNewLeader(Puppet _leader)
+    //{
+    //    currentAlpha = _leader;
+    //    HordeManager newHorde = _leader.HordeManager;
+    //    for (int i = 0; i < hordePuppets.Count; i++)
+    //    {
+    //        newHorde.AddHordePuppet(hordePuppets[i]);
+    ////        hordePuppets[i].Leader = _leader;
+    ////        hordePuppets[i].transform.parent = _leader.HordeManager.transform;
+    ////        hordePuppets[i].HordeManager = _leader.HordeManager;
+    ////    }
+    //}
     public void InitAlpha(Puppet _firstAlpha)
     {
         currentAlpha = _firstAlpha;
@@ -74,8 +85,6 @@ public class HordeManager : MonoBehaviour
                 if (tempLeader == null)
                 {
                     tempLeader = pup;
-                    tempLeader.gameObject.AddComponent<Alpha>();
-                    tempLeader.gameObject.GetComponent<Alpha>().Init();
                 }
                 pup.Leader = tempLeader;
             }
