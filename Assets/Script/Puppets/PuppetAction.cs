@@ -135,7 +135,8 @@ public class PuppetAction  {
     }
     public virtual void OnDeath()
     {
-        puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
+        if(puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
+            puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
 
         //puppet.gameObject.SetActive(false);
         if (puppet.GetComponent<Alpha>() != null)
@@ -151,7 +152,7 @@ public class PuppetAction  {
                 GameObject.Destroy(puppet.gameObject.GetComponent<Alpha>());
             }
         }   
-        if (puppet.gameObject.GetComponent<Brain>() != null)
+        if (puppet.gameObject.GetComponent<Brain>() != null && !(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
         {
             GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
         }
