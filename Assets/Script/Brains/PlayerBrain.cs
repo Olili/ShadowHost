@@ -6,6 +6,7 @@ public class PlayerBrain : Brain {
 
     Rigidbody rb;
     StatBuff turnSpeedBuff;
+    StatBuff speedBuff;
     public Host host;
     // Use this for initialization
     public override void Awake()
@@ -16,6 +17,7 @@ public class PlayerBrain : Brain {
     public override void Start () {
         base.Start();
         turnSpeedBuff = new StatBuff(Stats.StatType.maxTurnSpeed, 500, -1);
+        speedBuff = new StatBuff(Stats.StatType.move_speed, 0.5f, -1);
         puppet.stats.AddBuff(turnSpeedBuff);
         puppet.Leader = puppet;
         GameManager.Instance.PlayerBrain = this;
@@ -59,5 +61,6 @@ public class PlayerBrain : Brain {
     public override void OnDestroy()
     {
         puppet.stats.RemoveBuff(turnSpeedBuff);
+        puppet.stats.RemoveBuff(speedBuff);
     }
 }
