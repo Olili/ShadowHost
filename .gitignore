@@ -32,3 +32,12 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+houdini-engine.scripts.unitypackage.meta
+Houdini
+HoudiniApi
+Houdini.meta
+HoudiniApi.meta
+houdini-engine.scripts.unitypackage
+Baked Assets
+/Assets/Scenes/Houdini.unity.meta
+/Assets/Scenes/Houdini.unity
