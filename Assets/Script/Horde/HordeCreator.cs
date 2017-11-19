@@ -15,7 +15,7 @@ public class HordeCreator : MonoBehaviour {
     CreaturePool creaturePool;
     List<HordeManager> hordList;
     List<Puppet> deadList;
-    static readonly float maxDead = 20;
+    static readonly float maxDead = 1;
 
     public int nbCreaturePop = 10;
 
@@ -42,6 +42,8 @@ public class HordeCreator : MonoBehaviour {
         alpha.gameObject.AddComponent<IA_Brain>();
         alpha.ChangeColorDebug();
 
+        if (hordList == null)
+            hordList = new List<HordeManager>();
         hordList.Add(hordeContainer.GetComponent<HordeManager>());
 
             // faire une carré de pop d'unités
