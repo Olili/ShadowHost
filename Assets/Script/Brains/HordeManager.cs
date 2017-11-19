@@ -67,7 +67,7 @@ public class HordeManager : MonoBehaviour
                 pup.Leader = tempLeader;
             }
         }
-        
+
     }
     public void TransmitHorde()
     {
@@ -83,23 +83,5 @@ public class HordeManager : MonoBehaviour
         HordePuppets.Clear();
 
         //Destroy(this.gameObject);
-    }
-
-
-    private float timerBeforeDestroy = 0.0f;
-    public void FixedUpdate()
-    {
-        if (hordePuppets.Count == 0)
-        {
-            timerBeforeDestroy += Time.deltaTime;
-            if (timerBeforeDestroy > 1.5f)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            timerBeforeDestroy = 0.0f;
-        }
     }
 }

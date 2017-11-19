@@ -11,12 +11,15 @@ public class Alpha : MonoBehaviour
 
     private void Awake()
     {
-        Init();
     }
     public void Init()
     {
         alphaPuppet = GetComponent<Puppet>();
+        refToHordeManager = null;
+        Transform trans = transform.parent;
+        HordeManager hm = trans.GetComponent<HordeManager>();
         refToHordeManager = transform.parent.GetComponent<HordeManager>();
+
     }
 
     public void FixedUpdate()

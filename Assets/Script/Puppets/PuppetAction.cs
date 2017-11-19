@@ -135,7 +135,7 @@ public class PuppetAction  {
     }
     public virtual void OnDeath()
     {
-        if(puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
+        if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
             puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
 
         //puppet.gameObject.SetActive(false);
@@ -156,6 +156,17 @@ public class PuppetAction  {
         {
             GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
         }
+        if(puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Count==0)
+        {
+            GameObject tempManagerToRemove = puppet.transform.parent.GetComponent<HordeManager>().gameObject;
+            puppet.transform.parent = null;
+            GameObject.Destroy(tempManagerToRemove);
+        }
+        else
+        {
+            puppet.transform.parent = null;
+        }
+
         puppet.PuppetAction = new DeathAction(puppet);
     }
     public virtual void BasicAttack()
