@@ -14,12 +14,18 @@ public class Alpha : MonoBehaviour
     }
     public void Init()
     {
+        GameManager.Instance.FeedbackManager.NewAlpha(transform);
         alphaPuppet = GetComponent<Puppet>();
         refToHordeManager = null;
         Transform trans = transform.parent;
         HordeManager hm = trans.GetComponent<HordeManager>();
         refToHordeManager = transform.parent.GetComponent<HordeManager>();
 
+    }
+
+    public void OnDestroy()
+    {
+        GameManager.Instance.FeedbackManager.NoAlpha(transform);
     }
 
     public void FixedUpdate()

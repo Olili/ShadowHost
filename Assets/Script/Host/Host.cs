@@ -63,7 +63,7 @@ public class Host : MonoBehaviour
         gameObject.SetActive(true);
         body.PuppetAction = new DeathAction(body);
         GameManager.Instance.Possession(puppet);
-
+        transform.position += Vector3.up * 0.2f;
         GameManager.Instance.FeedbackManager.UnPossessBody(transform);
     }
 

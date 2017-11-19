@@ -7,7 +7,7 @@ public class FeedbackManager : MonoBehaviour {
 
 	// Use this for initialization
 	public PrefabsLibrary pl;
-
+	Dictionary<Transform, GameObject> alphaDic;
     private void Awake()
     {
         GameManager.Instance.FeedbackManager = this;
@@ -15,8 +15,42 @@ public class FeedbackManager : MonoBehaviour {
 		{
 			pl = Resources.Load("SfxLibrary") as PrefabsLibrary;
 		}
+		alphaDic = new Dictionary<Transform, GameObject>();
     }
-	void Start () 
+
+    public void NewAlpha(Transform transform)
+    {
+        alphaDic[transform] = Instantiate(pl.FX_Alpha, transform.position, Quaternion.identity, transform);
+		SkinnedMeshRenderer smr = transform.GetComponentInChildren<SkinnedMeshRenderer>();
+		if(smr != null)
+		{
+			smr.material.SetColor("_EmissionColor", Color.white);
+		}	
+    }
+
+
+    public void NoAlpha(Transform transform)
+    {
+		if(transform != null)
+		{
+			SkinnedMeshRenderer smr = transform.GetComponentInChildren<SkinnedMeshRenderer>();
+			if(smr != null)
+			{
+				smr.material.SetColor("_EmissionColor", Color.black);
+			}	
+			
+			if(alphaDic.ContainsKey(transform))
+			{
+				if(alphaDic[transform] != null)
+				{
+					Destroy(alphaDic[transform]);
+				}
+				alphaDic.Remove(transform);
+			}
+		}
+    }
+
+    void Start () 
 	{
 		GameObject go = GameManager.Instance.PlayerBrain.gameObject;
 		possessionFX = Instantiate(pl.FX_Host, go.transform.position, Quaternion.identity, go.transform);
@@ -27,7 +61,9 @@ public class FeedbackManager : MonoBehaviour {
 	{
 		
 	}
-	Puppet currentlySelectablePuppet;
+
+
+    Puppet currentlySelectablePuppet;
 	Material baseMaterial;
 	GameObject selectableFX;
 
@@ -78,5 +114,6 @@ public class FeedbackManager : MonoBehaviour {
     public void UnPossessBody(Transform target)
     {		
         possessionFX.transform.SetParent(target, false);
+		Instantiate(pl.FX_OneShotLeaveBody, target.position, Quaternion.identity, null);
     }
 }
