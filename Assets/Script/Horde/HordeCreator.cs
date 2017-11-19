@@ -94,15 +94,12 @@ public class HordeCreator : MonoBehaviour {
                     Destroy(hordeManager.HordePuppets[i].GetComponent<Alpha>());
             }
         }
-        if(hordeManager != null)
-            Destroy(hordeManager.gameObject);
+        Destroy(hordeManager.gameObject);
     }
     public void SendtoPool(Puppet puppet)
     {
         puppet.gameObject.SetActive(false);
         puppet.transform.parent = transform;
-        puppet.HordeManager = null;
-        puppet.Leader = null;
         if (puppet.GetComponent<Brain>() != null)
             Destroy(puppet.GetComponent<Brain>());
     }

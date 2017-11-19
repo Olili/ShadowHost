@@ -137,8 +137,7 @@ public class PuppetAction  {
     {
         if (!(puppet.gameObject.GetComponent<Brain>() is PlayerBrain))
         {
-            if (puppet != null && puppet.transform.parent != null && puppet.transform.parent.GetComponent<HordeManager>() != null &&
-                puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
+            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Contains(puppet))
                 puppet.transform.parent.GetComponent<HordeManager>().RemoveHordePuppet(puppet);
 
             //puppet.gameObject.SetActive(false);
@@ -177,8 +176,7 @@ public class PuppetAction  {
         }
         else
         {
-            if (puppet != null && puppet.gameObject.GetComponent<PlayerBrain>() != null && puppet.gameObject.GetComponent<PlayerBrain>().host != null)
-                puppet.gameObject.GetComponent<PlayerBrain>().host.GoOutBody(puppet);
+            puppet.gameObject.GetComponent<PlayerBrain>().host.GoOutBody(puppet);
         }
     }
     public virtual void BasicAttack()
