@@ -17,6 +17,16 @@ public class GruntAlphasFight_State : AlphasFight_State
         base.OnEnd();
     }
 
+    public override void WaitSceneristique()
+    {
+        base.WaitSceneristique();
+
+        timerWait += Time.deltaTime;
+        if (timerWait > maxWait)
+        {
+            FixedUpdateFct = GoToMyOpponent;
+        }
+    }
     public override void GoToMyOpponent()
     {
         base.GoToMyOpponent();

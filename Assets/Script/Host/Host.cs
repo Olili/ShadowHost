@@ -51,6 +51,7 @@ public class Host : MonoBehaviour
         if (body.Animator != null)
             body.Animator.SetTrigger("Revive");
         GameManager.Instance.PlayerBrain.host = this;
+        body.transform.position += Vector3.up * 0.2f;
 
         GameManager.Instance.FeedbackManager.PossessBody(body.transform);
     }
@@ -61,6 +62,7 @@ public class Host : MonoBehaviour
         transform.SetParent(null);// = null;
         transform.position = body.transform.position;
         gameObject.SetActive(true);
+        transform.position += Vector3.up * 0.2f;
         body.PuppetAction = new DeathAction(body);
         GameManager.Instance.Possession(puppet);
 
