@@ -15,7 +15,7 @@ public class HordeCreator : MonoBehaviour {
     CreaturePool creaturePool;
     List<HordeManager> hordList;
     List<Puppet> deadList;
-    static readonly float maxDead = 1;
+    static readonly float maxDead = 20;
 
     public int nbCreaturePop = 10;
 
