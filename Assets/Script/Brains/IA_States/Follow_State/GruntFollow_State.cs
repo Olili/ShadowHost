@@ -49,7 +49,7 @@ public class GruntFollow_State : Follow_State
 
         if (puppet.GetComponent<Alpha>() != null)
         {
-            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type, true);
+            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
         }
 
     }
@@ -58,7 +58,7 @@ public class GruntFollow_State : Follow_State
         base.FollowImmobilePlayer();
         if (puppet.GetComponent<Alpha>() != null)
         {
-            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type, true);
+            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
         }
 
 

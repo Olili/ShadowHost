@@ -37,8 +37,12 @@ public class Brain : MonoBehaviour {
         chase,
         alphaFight
     }
-    public virtual IA_State GetTypeState(Puppet _myPuppet, E_State _state, CreatureType _type, bool iAmAnAplha = false)
+    public virtual IA_State GetTypeState(E_State _state)
     {
+        Puppet _myPuppet = puppet;
+        CreatureType _type = puppet.Type;
+        bool iAmAnAplha = puppet.Leader == puppet;
+
         if (!iAmAnAplha)
         {
             if (_state == E_State.follow)

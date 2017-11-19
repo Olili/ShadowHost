@@ -111,18 +111,18 @@ public class Follow_State : IA_State {
         puppet.HordeManager.FoeLeaderPuppet = _foePuppet;
         foreach (Puppet myFollowers in puppet.transform.parent.GetComponent<HordeManager>().HordePuppets)
         {
-            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(myFollowers, Brain.E_State.chase, myFollowers.Type);
+            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
         }
-        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.chase, puppet.Type, true);
+        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
     }
     public virtual void AlphaFight(Puppet _foePuppet)
     {
         puppet.HordeManager.FoeLeaderPuppet = _foePuppet;
         foreach (Puppet myFollowers in puppet.transform.parent.GetComponent<HordeManager>().HordePuppets)
         {
-            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(myFollowers, Brain.E_State.alphaFight, myFollowers.Type);
+            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
         }
-        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.alphaFight, puppet.Type, true);
+        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
     }
 
 }

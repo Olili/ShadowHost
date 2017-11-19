@@ -28,11 +28,11 @@ public class Chase_State : IA_State
         {
             if (puppet.GetComponent<Alpha>() == null)
             {
-                puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type);
+                puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
             }
             else
             {
-                puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type, true);
+                puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
             }
         }
     }

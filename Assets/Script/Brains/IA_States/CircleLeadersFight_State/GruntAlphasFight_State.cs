@@ -69,7 +69,7 @@ public class GruntAlphasFight_State : AlphasFight_State
         }
         else
         {
-            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(puppet, Brain.E_State.follow, puppet.Type, true);
+            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
         }
         Move();
     }
