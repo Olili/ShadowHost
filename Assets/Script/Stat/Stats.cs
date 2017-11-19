@@ -73,14 +73,14 @@ public class Stats
             buffList = new List<StatBuff>();
         buffList.Add(buff);
         UpdateStat(buff.StatType);
-        Debug.Log("Buff Added");
+        //Debug.Log("Buff Added");
     }
     public void RemoveBuff(StatBuff buff)
     {
         StatType stat = buff.StatType;
         buffList.Remove(buff);
         UpdateStat(stat);
-        Debug.Log("Buff Removed");
+        //Debug.Log("Buff Removed");
     }
     public  void UpdateStat(StatType stat)
     {

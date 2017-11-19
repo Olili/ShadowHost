@@ -34,7 +34,8 @@ public class ChaseSpider_State : Chase_State
             if (vecFromFoe.magnitude < 2.0f)
             {
                 puppet.transform.LookAt(new Vector3(myTarget.transform.position.x, puppet.transform.position.y, myTarget.transform.position.z));
-                (puppet.PuppetAction as SpiderAction).BasicAttack();
+                if (puppet.PuppetAction is SpiderAction)
+                    (puppet.PuppetAction as SpiderAction).BasicAttack();
             }
             else
             {

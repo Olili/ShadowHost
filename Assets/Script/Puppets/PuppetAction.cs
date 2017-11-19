@@ -127,7 +127,8 @@ public class PuppetAction  {
     public virtual void OnHit(float damage, Vector3 force)
     {
         puppet.Life -= damage;
-        puppet.Rb.AddForce(force, ForceMode.Impulse);
+        puppet.Rb.velocity = force;
+        puppet.PuppetAction = new OnStunAction(puppet, force);
         if (puppet.Life <= 0)
         {
             OnDeath();
@@ -158,12 +159,13 @@ public class PuppetAction  {
             {
                 GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
             }
-            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Count == 0)
+            if (puppet.transform.parent.GetComponent<HordeManager>().HordePuppets.Count == 0) // passer par le Horde manager pour remove horde
             {
                 GameObject tempManagerToRemove = puppet.transform.parent.GetComponent<HordeManager>().gameObject;
                 puppet.transform.parent = null;
                 puppet.HordeManager = null;
-                GameObject.Destroy(tempManagerToRemove);
+                GameManager.Instance.hordeCreator.DestroyHorde(tempManagerToRemove.GetComponent<HordeManager>());
+                //GameObject.Destroy(tempManagerToRemove);
             }
             else
             {

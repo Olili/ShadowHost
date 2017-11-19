@@ -8,6 +8,7 @@ public class GruntQuickAttack : GruntAction
     float chargeTime ;
     Vector3 attackExtents;
     Vector3 attackOrigin;
+    float pushValue;
     bool attackStarted = false;
 
 
@@ -21,6 +22,7 @@ public class GruntQuickAttack : GruntAction
         base.OnBegin();
         timer = 0;
         chargeTime = 0.1f;
+        pushValue = 12;
         attackStarted = false;
         CurUpdateFct = Charge;
         puppet.Animator.SetTrigger("StartAttack");
@@ -74,28 +76,12 @@ public class GruntQuickAttack : GruntAction
     }
 
         // autres
-    public void AttackCollision()
-    {
-        int mask = LayerMask.GetMask(new string[] { "Puppet" });
-        Vector3 attackCenter = puppet.transform.position + puppet.transform.forward* attackExtents.z;
-        Collider[] collTab = Physics.OverlapBox(attackCenter, attackExtents, puppet.transform.rotation, mask);
-        cubeCenter = attackCenter;
-        for (int i = 0; i < collTab.Length;i++)
-        {
-            if (collTab[i].transform != puppet.transform)
-            {
-                Vector3 forceApply = collTab[i].transform.position - puppet.transform.position;
-                Puppet targetPuppet = collTab[i].GetComponent<Puppet>();
-                if(targetPuppet.Leader != puppet.Leader)
-                    targetPuppet.PuppetAction.OnHit(puppet.stats.Get(Stats.StatType.strengh), forceApply.normalized * 5);
-            }
-        }
-    }
+   
     public override void OnAnimationEvent()
     {
         puppet.GetComponentInChildren<ParticleSystem>().Play();
         //AttackCollision();
-        puppet.AttackCollision(attackExtents,attackOrigin, 5);
+        puppet.AttackCollision(attackExtents,attackOrigin, pushValue);
     }
 
         // Les ordres/transition des brain   :

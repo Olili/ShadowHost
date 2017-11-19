@@ -323,18 +323,22 @@ public class Puppet : MonoBehaviour {
         {
             if (collTab[i].transform != transform)
             {
-                Vector3 forceApply = collTab[i].transform.position - transform.position;
-                Puppet targetPuppet = collTab[i].GetComponent<Puppet>();
-                //if (type != targetPuppet.type) 
-                //{
-                //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
-                //}
-                //else if (friendlyFire && targetPuppet.friendlyFire)
-                //{
-                //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
-                //}
-                targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+                HitPuppet(collTab[i], pushForce);
             }
         }
+    }
+    public void HitPuppet(Collider targetCollider,float pushForce)
+    {
+        Vector3 forceApply = targetCollider.transform.position - transform.position;
+        Puppet targetPuppet = targetCollider.GetComponent<Puppet>();
+        //if (type != targetPuppet.type) 
+        //{
+        //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+        //}
+        //else if (friendlyFire && targetPuppet.friendlyFire)
+        //{
+        //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+        //}
+        targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
     }
 }

@@ -34,7 +34,8 @@ public class ChaseGrunt_State : Chase_State
             if (vecFromFoe.magnitude < 2.0f)
             {
                 puppet.transform.LookAt(new Vector3(myTarget.transform.position.x, puppet.transform.position.y, myTarget.transform.position.z));
-                (puppet.PuppetAction as GruntAction).BasicAttack();
+                if (puppet.PuppetAction is GruntAction)
+                    (puppet.PuppetAction as GruntAction).BasicAttack();
             }
             else
             {

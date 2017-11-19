@@ -64,7 +64,8 @@ public class GruntAlphasFight_State : AlphasFight_State
         puppet.transform.LookAt(new Vector3(alphaOpposent.transform.position.x, puppet.transform.position.y, alphaOpposent.transform.position.z));
         if (alphaOpposent.GetComponent<Alpha>() != null)
         {
-            (puppet.PuppetAction as GruntAction).BasicAttack();
+            if (puppet.PuppetAction is GruntAction)
+                (puppet.PuppetAction as GruntAction).BasicAttack();
         }
         else
         {
