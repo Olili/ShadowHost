@@ -19,8 +19,9 @@ public class HordeCreator : MonoBehaviour {
     float timer;
     public float hordePopDelay = 5;
     public int nbCreaturePop = 10;
-    public int maxHordeDistance = 15;
-
+    public int maxHordeDistance = 30;
+    public int minHordeDistance = 15;
+    public bool canGenerateHorde = true;
     private void Awake()
     {
         GameManager.Instance.hordeCreator = this;
@@ -131,7 +132,8 @@ public class HordeCreator : MonoBehaviour {
     }
     void Update()
     {
-        PopHordeContinue();
+        if (canGenerateHorde)
+            PopHordeContinue();
     }
 
 
@@ -158,8 +160,9 @@ public class HordeCreator : MonoBehaviour {
     }
     public void LonelyPlayerHordePop(PlayerBrain playerBrain)
     {
-        if (hordeList.Count > 3)
+        if (hordeList.Count > 2) // le player est une horde ou pas ?
         {
+            return;
         }
         else
         {
@@ -191,9 +194,15 @@ public class HordeCreator : MonoBehaviour {
     }
     public void PopHordeAroundPlayer(PlayerBrain playerBrain)
     {
-        Vector3 direction = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.up) * playerBrain.transform.forward;
-        Vector3 position = playerBrain.transform.position + direction * 10;
-        CreateHorde(position, (CreatureType)Random.Range(0, (int)CreatureType.Max_Creatures), 10);
+
+
+        Vector3 direction = (Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * Vector3.forward).normalized;
+        Vector3 position = playerBrain.transform.position + (direction * minHordeDistance);
+        RaycastHit hit;
+        if (Physics.Raycast(position + (Vector3.up*100),Vector3.down,out hit,200))
+        {
+            CreateHorde(hit.point, (CreatureType)Random.Range(0, (int)CreatureType.Max_Creatures), Random.Range(5, 12));
+        }
     }
     public void RemoveFarAwayHorde(PlayerBrain playerBrain)
     {
