@@ -7,7 +7,7 @@ using UnityEngine;
 */
 public enum CreatureType
 {
-    Spider,Grunt, Max_Creatures
+    Spider,Grunt,Humain,Wolf, Max_Creatures
 }
 
 public class HordeCreator : MonoBehaviour {

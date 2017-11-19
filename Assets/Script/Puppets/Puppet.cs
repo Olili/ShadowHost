@@ -19,7 +19,8 @@ public class Puppet : MonoBehaviour {
     [SerializeField] private bool isOnGround;
     [HideInInspector] public Vector3 OnPlanNormal;
     public bool slidingDebug = false;
-    Transform centerDown;
+    public Transform centerDown;
+    bool friendlyFire;
 
     // State machine : 
     private PuppetAction puppetAction;
@@ -193,6 +194,12 @@ public class Puppet : MonoBehaviour {
             case CreatureType.Grunt:
                 PuppetAction = new GruntAction(this);
                 break;
+            case CreatureType.Humain:
+                PuppetAction = new HumainAction(this);
+                break;
+            case CreatureType.Wolf:
+                PuppetAction = new WolfAction(this);
+                break;
             case CreatureType.Max_Creatures:
                 Debug.Log("Error : creatureType");
                 break;
@@ -300,5 +307,34 @@ public class Puppet : MonoBehaviour {
     {
         if (puppetAction != null)
             puppetAction.TriggerExit(other);
+    }
+
+    public void AttackCollision(float circleRadius,float pushForce)
+    {
+
+    }
+    public void AttackCollision(Vector3 attackExtents,Vector3 attackOrigin, float pushForce,float angleStop = 180)
+    {
+        int mask = LayerMask.GetMask(new string[] { "Puppet" });
+        
+        Collider[] collTab = Physics.OverlapBox(attackOrigin, attackExtents, transform.rotation, mask);
+        //cubeCenter = attackCenter;
+        for (int i = 0; i < collTab.Length; i++)
+        {
+            if (collTab[i].transform != transform)
+            {
+                Vector3 forceApply = collTab[i].transform.position - transform.position;
+                Puppet targetPuppet = collTab[i].GetComponent<Puppet>();
+                //if (type != targetPuppet.type) 
+                //{
+                //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+                //}
+                //else if (friendlyFire && targetPuppet.friendlyFire)
+                //{
+                //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+                //}
+                targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+            }
+        }
     }
 }

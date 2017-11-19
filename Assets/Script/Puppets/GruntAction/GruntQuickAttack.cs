@@ -7,6 +7,7 @@ public class GruntQuickAttack : GruntAction
     float timer;
     float chargeTime ;
     Vector3 attackExtents;
+    Vector3 attackOrigin;
     bool attackStarted = false;
 
 
@@ -23,6 +24,7 @@ public class GruntQuickAttack : GruntAction
         attackStarted = false;
         CurUpdateFct = Charge;
         puppet.Animator.SetTrigger("StartAttack");
+        attackOrigin = puppet.transform.position + puppet.transform.forward * attackExtents.z;
     }
     public override void OnEnd()
     {
@@ -92,7 +94,8 @@ public class GruntQuickAttack : GruntAction
     public override void OnAnimationEvent()
     {
         puppet.GetComponentInChildren<ParticleSystem>().Play();
-        AttackCollision();
+        //AttackCollision();
+        puppet.AttackCollision(attackExtents,attackOrigin, 5);
     }
 
         // Les ordres/transition des brain   :
