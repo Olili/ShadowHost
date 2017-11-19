@@ -84,7 +84,8 @@ public class GruntQuickAttack : GruntAction
             {
                 Vector3 forceApply = collTab[i].transform.position - puppet.transform.position;
                 Puppet targetPuppet = collTab[i].GetComponent<Puppet>();
-                targetPuppet.PuppetAction.OnHit(puppet.stats.Get(Stats.StatType.strengh), forceApply.normalized * 5);
+                if(targetPuppet.Leader != puppet.Leader)
+                    targetPuppet.PuppetAction.OnHit(puppet.stats.Get(Stats.StatType.strengh), forceApply.normalized * 5);
             }
         }
     }

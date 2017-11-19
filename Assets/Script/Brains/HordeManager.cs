@@ -77,6 +77,7 @@ public class HordeManager : MonoBehaviour
             {
                 pup.Leader = foeLeaderPuppet;
                 foeLeaderPuppet.HordeManager.AddHordePuppet(pup);
+                pup.HordeManager = foeLeaderPuppet.HordeManager;
                 pup.transform.parent = foeLeaderPuppet.HordeManager.transform;
             }
         }

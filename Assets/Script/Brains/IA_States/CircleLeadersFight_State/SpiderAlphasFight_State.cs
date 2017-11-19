@@ -32,7 +32,7 @@ public class SpiderAlphasFight_State : AlphasFight_State
             if (vecFromFoe.magnitude < 2.0f)
             {
                 puppet.transform.LookAt(new Vector3(alphaOpposent.transform.position.x, puppet.transform.position.y, alphaOpposent.transform.position.z));
-                (puppet.PuppetAction as GruntAction).BasicAttack();
+
             }
             else
             {
