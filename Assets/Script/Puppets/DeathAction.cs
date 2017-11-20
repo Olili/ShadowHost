@@ -49,7 +49,7 @@ public class DeathAction : PuppetAction
             }
         }
     }
-    public override void OnDeath()
+    public override void OnDeath(Puppet hitter)
     {
         Debug.Log("Error, trying to kill dead stuff");
     }
@@ -58,7 +58,7 @@ public class DeathAction : PuppetAction
         base.OnEnd();
         puppet.GetComponent<Collider>().enabled = true;
     }
-    public override void OnHit(float damage, Vector3 force)
+    public override void OnHit(float damage, Vector3 force, Puppet hitter = null)
     {
     }
     public override void SetRotation(Vector3 direction)

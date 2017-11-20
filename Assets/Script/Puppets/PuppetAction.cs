@@ -124,7 +124,7 @@ public class PuppetAction  {
         if (CurFixedUpdateFct != null)
             CurFixedUpdateFct();
     }
-    public virtual void OnHit(float damage, Vector3 force)
+    public virtual void OnHit(float damage, Vector3 force, Puppet hitter = null)
     {
         if (puppet.GetComponent<Host>() != null)
             return;
@@ -133,12 +133,11 @@ public class PuppetAction  {
         puppet.PuppetAction = new OnStunAction(puppet, force);
         if (puppet.Life <= 0)
         {
-            OnDeath();
+            OnDeath(hitter);
         }
     }
-    public virtual void OnDeath()
+    public virtual void OnDeath(Puppet hitter = null)
     {
-       
         HordeManager myHordeManager = puppet.HordeManager;
         
         if (myHordeManager.HordePuppets.Contains(puppet)) // enlève de la horde.
@@ -158,6 +157,10 @@ public class PuppetAction  {
                 else
                 {
                     myHordeManager.NeedNewAlpha(); // besoin d'alpha
+                }
+                if (hitter != null)
+                {
+                    hitter.HordeManager.CurrentAlpha = myHordeManager.CurrentAlpha;
                 }
             }
             if (puppet.gameObject.GetComponent<Brain>() != null) // detruire brain

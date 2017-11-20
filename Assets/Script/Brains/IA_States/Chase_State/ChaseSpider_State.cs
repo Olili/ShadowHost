@@ -80,7 +80,7 @@ public class ChaseSpider_State : Chase_State
         float nearestDistance = float.MaxValue;
         Puppet myPossibleTarget = null;
 
-        if (foeLeaderPuppet != null)
+        if (foeLeaderPuppet.HordeManager!=null)
         {
             foreach (Puppet pup in foeLeaderPuppet.HordeManager.HordePuppets)
             {
@@ -91,10 +91,6 @@ public class ChaseSpider_State : Chase_State
                     myPossibleTarget = pup;
                 }
             }
-        }
-        else
-        {
-            Debug.LogError("Pas de puppet leader ennemie!!");
         }
 
         if (myPossibleTarget != null)
