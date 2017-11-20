@@ -47,8 +47,7 @@ public class HordeCreator : MonoBehaviour {
 
             // init alpha Puppet
         alphaPuppet.Init(position, alphaPuppet, hordeContainer.transform, hordeManager);
-
-          
+        
             // ajout brain
         alphaPuppet.gameObject.AddComponent<IA_Brain>();
 
@@ -86,23 +85,25 @@ public class HordeCreator : MonoBehaviour {
     }
     public void DestroyHorde(HordeManager hordeManager)
     {
-        if (hordeList.Contains(hordeManager))
-            hordeList.Remove(hordeManager);
         if (hordeManager.HordePuppets != null)
         {
             for (int i = 0; i < hordeManager.HordePuppets.Count; i++)
             {
+                Brain brain = hordeManager.HordePuppets[i].GetComponent<Brain>();
+                if (brain != null)
+                    Destroy(brain);
                 SendtoPool(hordeManager.HordePuppets[i]);
             }
         }
+        if (hordeList.Contains(hordeManager))
+            hordeList.Remove(hordeManager);
         Destroy(hordeManager.gameObject);
     }
-    public void SendtoPool(Puppet puppet)
+    void SendtoPool(Puppet puppet)
     {
         puppet.gameObject.SetActive(false);
         puppet.transform.parent = transform;
-        if (puppet.GetComponent<Brain>() != null)
-            Destroy(puppet.GetComponent<Brain>());
+        
     }
     public void CreateDeadPuppet(CreatureType type, Vector3? position = null)
     {
@@ -119,6 +120,7 @@ public class HordeCreator : MonoBehaviour {
         if (deadList.Contains(puppet))
             return;
         deadList.Add(puppet);
+
         puppet.transform.SetParent(transform,true);
         if (deadList.Count > maxDead)
         {
@@ -181,7 +183,7 @@ public class HordeCreator : MonoBehaviour {
 
     public void PlayerLeaderPopHorde(PlayerBrain playerBrain)
     {
-        if (hordeList.Count > 2 )
+        if (hordeList.Count > 1 )
         {
             return;
         }

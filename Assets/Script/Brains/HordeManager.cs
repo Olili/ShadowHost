@@ -5,9 +5,9 @@ using UnityEngine;
 public class HordeManager : MonoBehaviour
 {
 
-    private Puppet foeLeaderPuppet;
-    private List<Puppet> hordePuppets = new List<Puppet>();
-    private Puppet currentAlpha;
+    [SerializeField] private Puppet foeLeaderPuppet;
+    [SerializeField] private List<Puppet> hordePuppets = new List<Puppet>();
+    [SerializeField] private Puppet currentAlpha;
 
     #region GetSet
     public List<Puppet> HordePuppets
@@ -48,18 +48,7 @@ public class HordeManager : MonoBehaviour
         }
     }
     #endregion
-    //public void SetNewLeader(Puppet _leader)
-    //{
-    //    currentAlpha = _leader;
-    //    HordeManager newHorde = _leader.HordeManager;
-    //    for (int i = 0; i < hordePuppets.Count; i++)
-    //    {
-    //        newHorde.AddHordePuppet(hordePuppets[i]);
-    ////        hordePuppets[i].Leader = _leader;
-    ////        hordePuppets[i].transform.parent = _leader.HordeManager.transform;
-    ////        hordePuppets[i].HordeManager = _leader.HordeManager;
-    ////    }
-    //}
+   
     public void InitAlpha(Puppet _firstAlpha)
     {
         currentAlpha = _firstAlpha;
@@ -80,7 +69,7 @@ public class HordeManager : MonoBehaviour
 
         foreach (Puppet pup in HordePuppets)
         {
-            if (pup != currentAlpha && !(pup.PuppetAction is DeathAction)) // Peut être ce cas ne doit pas arriver ? 
+            if (pup != currentAlpha) 
             {
                 if (tempLeader == null)
                 {
@@ -88,6 +77,12 @@ public class HordeManager : MonoBehaviour
                 }
                 pup.Leader = tempLeader;
             }
+        }
+            // si on a trouvé un leader et que ce n'est pas le joueur
+        if (tempLeader != null && tempLeader.GetComponent<PlayerBrain>() == null)
+        {
+            IA_Brain ia_Brain = tempLeader.GetComponent<IA_Brain>();
+            ia_Brain.MyIAState = ia_Brain.GetTypeState(Brain.E_State.follow);
         }
 
     }

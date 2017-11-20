@@ -3,7 +3,7 @@ guid: 0dd19dbd4b494fb4980c7925ae3ab6be
 timeCreated: 1511091577
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     100002: CTRL_globalSRT_human
@@ -144,14 +144,22 @@ ModelImporter:
     7400002: Walk
     7400004: AttackRangeCharge
     7400006: AttackChargeLoop
-    7400008: Take 001
-    7400010: Take 001 (1)
+    7400008: AttackChargeEnd
+    7400010: BackDash
+    7400012: Death
     9500000: //RootNode
     13700000: polySurface_humanTribal
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 760ee3eb2318a174f8aee07f91c7d1aa, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -164,6 +172,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -211,7 +220,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -260,7 +269,7 @@ ModelImporter:
       name: AttackChargeLoop
       takeName: Take 001
       firstFrame: 130
-      lastFrame: 130
+      lastFrame: 131
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -285,9 +294,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Take 001
+      name: AttackChargeEnd
       takeName: Take 001
-      firstFrame: 133
+      firstFrame: 130
       lastFrame: 150
       wrapMode: 0
       orientationOffsetY: 0
@@ -313,10 +322,38 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Take 001 (1)
+      name: BackDash
       takeName: Take 001
       firstFrame: 160
       lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 190
+      lastFrame: 220
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -58,10 +58,14 @@ public class Host : MonoBehaviour
         transform.SetParent(null);// = null;
         transform.position = body.transform.position;
         gameObject.SetActive(true);
-        body.PuppetAction = new DeathAction(body);
-        GameManager.Instance.Possession(puppet);
+        if (body.Life >0)
+            body.PuppetAction = new DeathAction(body);
 
+        GameManager.Instance.Possession(puppet);
         GameManager.Instance.FeedbackManager.UnPossessBody(transform);
+        // si la horde est vide on la détruit.
+        if (body.HordeManager.HordePuppets.Count == 0)
+            GameManager.Instance.hordeCreator.DestroyHorde(body.HordeManager);
     }
 
     public void AddBody(Puppet deadPuppet)

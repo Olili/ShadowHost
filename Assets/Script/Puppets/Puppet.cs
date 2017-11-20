@@ -177,11 +177,6 @@ public class Puppet : MonoBehaviour {
         OnPlanNormal = Vector3.up;
         PhysicMaterial.dynamicFriction = 0;
         centerDown = transform.Find("CenterDown");
-        Init();
-    }
-    public void Init()
-    {
-        Life = stats.Get(Stats.StatType.maxLife);
         InitAction();
     }
     public void InitAction()
@@ -223,6 +218,8 @@ public class Puppet : MonoBehaviour {
         {
             leader.HordeManager.AddHordePuppet(this);
         }
+        Life = stats.Get(Stats.StatType.maxLife);
+        InitAction();
     }
     public void SetLeader(Puppet _leader)
     {

@@ -49,19 +49,29 @@ public class DebugPanel : MonoBehaviour {
         }
         else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {
-            hordeCreator.CreateHorde(Vector3.zero, CreatureType.Spider, 10);
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateHorde(hit.point, CreatureType.Spider, 1);
+            }
+            
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
         {
-             RaycastHit hit;
-            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 hordeCreator.CreateDeadPuppet(CreatureType.Grunt, hit.point);
             }
         }
         else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
         {
-            hordeCreator.CreateHorde(Vector3.zero, CreatureType.Grunt, 4);
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateHorde(hit.point, CreatureType.Grunt, 1);
+
+            }
         }
      
     }
@@ -75,5 +85,11 @@ public class DebugPanel : MonoBehaviour {
         Possession();
         UpdateFrameRate();
         PopHordDebug();
+
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.PlayerBrain.puppet.PuppetAction.OnDeath();
+        }
     }
 }

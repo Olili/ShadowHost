@@ -74,7 +74,7 @@ public class Follow_State : IA_State {
                 {
                     if (puppet.Leader.gameObject.GetComponent<IA_Brain>() == null)
                     {
-                        Debug.Log("point arret");
+                        Debug.LogError("point arret");
                     }
                     IA_State tempLeaderState = puppet.Leader.gameObject.GetComponent<IA_Brain>().MyIAState;
                     if (allPossibleTarget[i].transform.parent != null && allPossibleTarget[i].GetComponent<Puppet>().HordeManager != null)
@@ -117,7 +117,7 @@ public class Follow_State : IA_State {
         {
             myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
         }
-        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
+        //puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
     }
     public virtual void AlphaFight(Puppet _foePuppet)
     {
@@ -126,7 +126,7 @@ public class Follow_State : IA_State {
         {
             myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
         }
-        puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
+        //puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
     }
 
 }

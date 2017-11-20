@@ -17,8 +17,9 @@ public class PlayerBrain : Brain {
     public override void Start () {
         base.Start();
         turnSpeedBuff = new StatBuff(Stats.StatType.maxTurnSpeed, 500, -1);
-        speedBuff = new StatBuff(Stats.StatType.move_speed, 0.5f, -1);
+        speedBuff = new StatBuff(Stats.StatType.move_speed, 1.5f, -1);
         puppet.stats.AddBuff(turnSpeedBuff);
+        puppet.stats.AddBuff(speedBuff);
         puppet.Leader = puppet;
         GameManager.Instance.PlayerBrain = this;
     }
@@ -28,7 +29,7 @@ public class PlayerBrain : Brain {
 
         if (Input.GetKeyDown(KeyCode.P) && GetComponent<Host>() == false)
         {
-            host.GoOutBody(puppet);
+            puppet.PuppetAction.OnDeath();
         }
     }
 

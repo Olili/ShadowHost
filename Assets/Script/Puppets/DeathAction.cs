@@ -11,7 +11,6 @@ public class DeathAction : PuppetAction
         animator = _puppet.Animator;
         CurFixedUpdateFct = OnDeadBody;
         puppet.GetComponent<Collider>().enabled = false;
-        GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
         timer = 0;
     }
     public override void OnBegin()
@@ -22,7 +21,9 @@ public class DeathAction : PuppetAction
         {
             animator.SetTrigger("Death");
         }
-        // Creation / activation trigger stuff.
+       
+        puppet.Leader = null;
+        GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
     }
     public void OnDeadBody()
     {
@@ -48,7 +49,10 @@ public class DeathAction : PuppetAction
             }
         }
     }
-    
+    public override void OnDeath()
+    {
+        Debug.Log("Error, trying to kill dead stuff");
+    }
     public override void OnEnd()
     {
         base.OnEnd();
