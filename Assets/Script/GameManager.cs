@@ -82,6 +82,9 @@ public class GameManager : MonoBehaviour {
             case CreatureType.Grunt:
                 PlayerBrain = puppet.gameObject.AddComponent<PlayerGruntBrain>();
                 break;
+            case CreatureType.Humain:
+                PlayerBrain = puppet.gameObject.AddComponent<PlayerHumanBrain>();
+                break;
             case CreatureType.Max_Creatures:
                 Debug.Log("What it is ?");
                 break;

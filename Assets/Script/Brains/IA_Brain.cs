@@ -21,11 +21,14 @@ public class IA_Brain : Brain {
                 myIAState.OnEnd();
             myIAState = value;
             if (myIAState != null)
+            {
                 myIAState.OnBegin();
+                IADebugState = myIAState.ToString();
+            }
             else
+            {
                 Debug.Log("myIAState est null t'es sur ?");
-
-            IADebugState = myIAState.ToString();
+            }
         }
     }
     public override void Awake()

@@ -37,7 +37,7 @@ public class DebugPanel : MonoBehaviour {
     }
     void PopHordDebug()
     {
-      
+        // Spider corpse
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {
             RaycastHit hit;
@@ -45,8 +45,8 @@ public class DebugPanel : MonoBehaviour {
             {
                 hordeCreator.CreateDeadPuppet(CreatureType.Spider, hit.point);
             }
-            
-        }
+
+        }        // Spider horde
         else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha2))
         {
             RaycastHit hit;
@@ -54,8 +54,8 @@ public class DebugPanel : MonoBehaviour {
             {
                 hordeCreator.CreateHorde(hit.point, CreatureType.Spider, 1);
             }
-            
-        }
+
+        }   // Grunt horde
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha3))
         {
             RaycastHit hit;
@@ -73,7 +73,26 @@ public class DebugPanel : MonoBehaviour {
 
             }
         }
-     
+            // Humain horde
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateDeadPuppet(CreatureType.Humain, hit.point);
+            }
+        }
+        // Humain corpse
+        else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateHorde(hit.point, CreatureType.Humain, 1);
+
+            }
+        }
+
     }
     void UpdateFrameRate()
     {
