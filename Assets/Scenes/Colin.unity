@@ -14216,7 +14216,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1944674289029950, guid: 29dc3318898d0fc4baa3f3a826c77eba, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29dc3318898d0fc4baa3f3a826c77eba, type: 2}
@@ -24720,7 +24720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1024257085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31859,7 +31859,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4158755815459996, guid: 91218667836e0d646bafd1261d66fc02, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 4158755815459996, guid: 91218667836e0d646bafd1261d66fc02, type: 2}
       propertyPath: m_LocalPosition.z
@@ -39218,7 +39218,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -927836674
+  randomSeed: 1844436068
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -52947,7 +52947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1843033969
 MonoBehaviour:
   m_ObjectHideFlags: 0
