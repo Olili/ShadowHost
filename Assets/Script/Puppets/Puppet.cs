@@ -299,9 +299,9 @@ public class Puppet : MonoBehaviour {
             puppetAction.DrawGizmo();
     }
 
-    public void OnAnimationEvent()
+    public void OnAnimationEvent(string functionName)
     {
-        puppetAction.OnAnimationEvent();
+        puppetAction.OnAnimationEvent(functionName);
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -351,5 +351,21 @@ public class Puppet : MonoBehaviour {
         //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
         //}
         targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, this);
+    }
+
+    public Transform FindChildByName(string _name, Transform _tr)
+    {
+        Transform _obj = null;
+
+        if ((_obj = _tr.Find(_name)) != null)
+            return _obj;
+        else
+            for (int i = 0; i < _tr.childCount; i++)
+            {
+                _obj = FindChildByName(_name, _tr.GetChild(i));
+                if (_obj != null)
+                    return _obj;
+            }
+        return null;
     }
 }

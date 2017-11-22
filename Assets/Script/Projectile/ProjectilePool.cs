@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-enum ProjectileType
+public enum ProjectileType
 {
     lance, maxProjectile
 }
@@ -12,6 +12,9 @@ public class ProjectilePool : MonoBehaviour {
     List<GameObject>[] poolTab;
     int poolSize = 25;
     // Use this for initialization
+    static private int ID = 0;
+   
+
     void Start () {
         poolTab = new List<GameObject>[(int)ProjectileType.maxProjectile];
         for (int i = 0; i < (int)ProjectileType.maxProjectile; i++)
@@ -21,16 +24,18 @@ public class ProjectilePool : MonoBehaviour {
             {
             }
         }
+        GameManager.Instance.ProjectilePool = this;
     }
     Projectile CreateProjectile(ProjectileType type)
     {
         GameObject poolObject = Instantiate<GameObject>(modelTab[(int)type]);
+        poolObject.name = "lance" + (ID++);
         poolObject.transform.parent = transform;
         poolObject.SetActive(false);
         poolTab[(int)type].Add(poolObject);
         return poolObject.GetComponent<Projectile>();
     }
-    Projectile GetProjectile(ProjectileType type)
+    public Projectile GetProjectile(ProjectileType type,Puppet _laucher,Vector3 position,Quaternion oriention)
     {
         List<GameObject> pool = poolTab[(int)type];
         Projectile returnedProjectile = null;
@@ -43,7 +48,7 @@ public class ProjectilePool : MonoBehaviour {
                 if (!projectile.gameObject.activeInHierarchy)
                 {
                     returnedProjectile = projectile;
-                    projectile.Init();
+                    projectile.Init(_laucher);
                     break;
                 }
             }
@@ -52,9 +57,12 @@ public class ProjectilePool : MonoBehaviour {
         {
             returnedProjectile = CreateProjectile(type);
         }
+        returnedProjectile.transform.position = position;
+        returnedProjectile.transform.rotation = oriention;
+        returnedProjectile.gameObject.SetActive(true);
         return returnedProjectile;
     }
-    void SendToPool(GameObject projectile)
+    public void SendToPool(GameObject projectile)
     {
         projectile.transform.parent = transform;
         projectile.gameObject.SetActive(false);

@@ -189,7 +189,7 @@ public class PuppetAction  {
     {
 
     }
-    public virtual void OnAnimationEvent()
+    public virtual void OnAnimationEvent(string functionName)
     {
 
     }

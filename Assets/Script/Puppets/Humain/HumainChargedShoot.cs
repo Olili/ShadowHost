@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
 
 public class HumainChargedShoot : HumainAction
 {
@@ -10,14 +11,15 @@ public class HumainChargedShoot : HumainAction
     bool canLauchAttack;
     Transform weaponOrigin;
     bool animationStarted;
+    Transform lanceOrigin;
+
     public HumainChargedShoot(Puppet _puppet) : base(_puppet)
     {
-        
+        lanceOrigin = puppet.FindChildByName("LanceOrigin", puppet.transform);
     }
     public override  void OnBegin()
     {
         base.OnBegin();
-        Debug.Log("OnBegin");
         timer = 0;
         chargeTime = 0.2f;
         canLauchAttack = false;
@@ -25,6 +27,7 @@ public class HumainChargedShoot : HumainAction
         puppet.Animator.SetTrigger("Charge");
         CurUpdateFct = OnCharge;
         animationStarted = false;
+        //Debug.Log("Begin State");
     }
     public override void OnEnd()
     {
@@ -33,6 +36,7 @@ public class HumainChargedShoot : HumainAction
     }
     public void OnCharge()
     {
+        puppet.Rb.velocity = Vector3.zero;
         timer += Time.deltaTime;
         if (timer > chargeTime && canLauchAttack)
         {
@@ -65,16 +69,39 @@ public class HumainChargedShoot : HumainAction
         }
     }
 
+    public override void OnAnimationEvent(string functionName)
+    {
+        //Debug.Log(functionName);
+        //Get the method information using the method info class
+        MethodInfo mi = this.GetType().GetMethod(functionName);
+        //Invoke the method
+        // (null- no parameter for the method call
+        // or you can pass the array of parameters...)
+        mi.Invoke(this, null);
+    }
+    public void OnLauchEvent()
+    {
+        //Debug.Log("je suis heureux");
+        Projectile projectile  = GameManager.Instance.ProjectilePool.GetProjectile(ProjectileType.lance,puppet, lanceOrigin.position, lanceOrigin.rotation);
+        projectile.Lauch(puppet.transform.forward, 20);
+    }
 
-        /// overrride
+    /// overrride
+    public override void SetVelocity(Vector3 velocity)
+    {
 
+    }
     public override void Charge()
     {
         canLauchAttack = false;
+        //Debug.Log("PushBack State");
+
     }
     public override void Shoot()
     {
         canLauchAttack = true;
+        //Debug.Log("Unleash");
+
     }
     public override void RetreatAttack()
     {

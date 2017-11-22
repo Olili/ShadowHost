@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     private PlayerBrain playerBrain;
     public  HordeCreator hordeCreator;
+    private ProjectilePool projectilePool;
 
     private FeedbackManager feedbackManager;
     private static GameManager instance = null;
@@ -44,7 +45,26 @@ public class GameManager : MonoBehaviour {
             feedbackManager = value;
         }
     }
-#endregion
+    public ProjectilePool ProjectilePool
+    {
+        get
+        {
+            if (projectilePool == null)
+                Debug.LogError("MISSING Projectile pool in scene");
+            return projectilePool;
+        }
+
+        set
+        {
+            if (projectilePool!=null)
+            {
+                Debug.LogError("MISSING 2Projectile pool in scene");
+                Destroy(projectilePool.gameObject);
+            }
+            projectilePool = value;
+        }
+    }
+    #endregion
 
     public static GameManager Instance
     {
@@ -60,6 +80,7 @@ public class GameManager : MonoBehaviour {
         private set { }
     }
 
+   
 
     public void Possession(Puppet puppet)
     {

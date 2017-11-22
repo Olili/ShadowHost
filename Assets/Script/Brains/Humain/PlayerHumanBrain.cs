@@ -9,10 +9,11 @@ public class PlayerHumanBrain : PlayerBrain
         base.FixedUpdate();
 
         if (Input.GetButtonDown("Fire1"))
+        {
             if (puppet.PuppetAction is HumainAction)
                 (puppet.PuppetAction as HumainAction).Charge();
-
-        if (Input.GetButtonUp("Fire1"))
+        }
+        if (!(Input.GetButton("Fire1")))
             if (puppet.PuppetAction is HumainAction)
                 (puppet.PuppetAction as HumainAction).Shoot();
     }

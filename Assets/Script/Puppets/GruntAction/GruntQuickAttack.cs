@@ -77,7 +77,7 @@ public class GruntQuickAttack : GruntAction
 
         // autres
    
-    public override void OnAnimationEvent()
+    public override void OnAnimationEvent(string functionName)
     {
         puppet.GetComponentInChildren<ParticleSystem>().Play();
         //AttackCollision();

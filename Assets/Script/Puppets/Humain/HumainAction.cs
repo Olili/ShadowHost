@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class HumainAction : PuppetAction
 {
     public HumainAction(Puppet _puppet) : base(_puppet)
@@ -27,6 +26,6 @@ public class HumainAction : PuppetAction
             puppet.Animator.SetFloat("Velocity", velocity.magnitude);
         }
     }
-     
+    
 
 }

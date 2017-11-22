@@ -76,7 +76,7 @@ public class WolfJumpAction : WolfAction
  
     // autres
 
-    public override void OnAnimationEvent()
+    public override void OnAnimationEvent(string functionName)
     {
         puppet.GetComponentInChildren<ParticleSystem>().Play();
         puppet.AttackCollision(attackExtents,attackOrigin, pushForce);

@@ -4,27 +4,36 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    public int damage;
     public bool isLauched;
     public Puppet laucher;
-    public int speed;
+    public float speed ;
     Vector3 direction;
     float pushForce;
+    float distance;
 
-    public void Init()
+    public void Init(Puppet laucher)
     {
         isLauched = false;
+        distance = 0;
         Physics.IgnoreCollision(GetComponent<Collider>(), laucher.GetComponent<Collider>());
     }
     public void Update()
     {
         if (isLauched)
-            transform.position += direction * speed;
+        {
+            transform.position += direction * speed * Time.deltaTime;
+            distance += speed * Time.deltaTime;
+        }
+        if (distance >40)
+        {
+            GameManager.Instance.ProjectilePool.SendToPool(this.gameObject);
+        }
     }
-    public void Lauch(Vector3 _direction)
+    public void Lauch(Vector3 _direction,float _speed)
     {
         isLauched = true;
         this.direction = _direction;
+        speed = _speed;
     }
     public void OnTriggerEnter(Collider collider)
     {
