@@ -14216,7 +14216,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1944674289029950, guid: 29dc3318898d0fc4baa3f3a826c77eba, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20463949863676052, guid: 29dc3318898d0fc4baa3f3a826c77eba,
+        type: 2}
+      propertyPath: near clip plane
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29dc3318898d0fc4baa3f3a826c77eba, type: 2}
@@ -39218,7 +39223,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1844436068
+  randomSeed: -245491835
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -52745,6 +52750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4160a3d971cee034aa63e0938e8e5f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puppet: {fileID: 0}
   host: {fileID: 0}
 --- !u!114 &1782597197
 MonoBehaviour:
