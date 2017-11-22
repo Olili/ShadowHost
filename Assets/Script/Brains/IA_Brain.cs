@@ -31,14 +31,7 @@ public class IA_Brain : Brain {
     public override void Awake()
     {
         base.Awake();
-        if(puppet.GetComponent<Alpha>() == null)
-        {
-            MyIAState = this.GetTypeState(puppet, E_State.follow, puppet.Type);
-        }
-        else
-        {
-            MyIAState = this.GetTypeState(puppet, E_State.follow, puppet.Type, true);
-        }
+        MyIAState = this.GetTypeState(E_State.follow);
     }
     // Use this for initialization
     public override void Start () {
@@ -55,8 +48,8 @@ public class IA_Brain : Brain {
         if (MyIAState != null && MyIAState.FixedUpdateFct != null) 
             MyIAState.FixedUpdateFct();
     }
-    public override IA_State GetTypeState(Puppet _myPuppet, E_State _state, CreatureType _type, bool iAmAnAplha = false)
+    public override IA_State GetTypeState(E_State _state)
     {
-        return base.GetTypeState(_myPuppet, _state, _type, iAmAnAplha);
+        return base.GetTypeState(_state);
     }
 }

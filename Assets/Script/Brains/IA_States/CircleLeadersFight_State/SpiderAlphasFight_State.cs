@@ -12,7 +12,7 @@ public class SpiderAlphasFight_State : AlphasFight_State
     public override void OnBegin()
     {
         base.OnBegin();
-        alphaOpposent = puppet.transform.parent.GetComponent<HordeManager>().FoeLeaderPuppet;
+        alphaOpposent = puppet.HordeManager.FoeLeaderPuppet;
         FixedUpdateFct = GoToMyOpponent;
     }
     public override void OnEnd()

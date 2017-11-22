@@ -177,11 +177,6 @@ public class Puppet : MonoBehaviour {
         OnPlanNormal = Vector3.up;
         PhysicMaterial.dynamicFriction = 0;
         centerDown = transform.Find("CenterDown");
-        Init();
-    }
-    public void Init()
-    {
-        Life = stats.Get(Stats.StatType.maxLife);
         InitAction();
     }
     public void InitAction()
@@ -207,13 +202,28 @@ public class Puppet : MonoBehaviour {
                 break;
         }
     }
-    public void Init(Vector3 position,Puppet _leader, Transform parent)
+    public void Init(Vector3 position,Puppet _leader, Transform parent, HordeManager _hordeManager)
     {
         gameObject.SetActive(true);
         transform.position = position;
         transform.parent = parent;
         Leader = _leader;
-        HordeManager = parent.GetComponent<HordeManager>();
+        HordeManager = _hordeManager;
+        if (leader == this)
+        {
+            hordeManager.InitAlpha(this);
+            // creation et init de l'alpha .
+        }
+        else
+        {
+            leader.HordeManager.AddHordePuppet(this);
+        }
+        Life = stats.Get(Stats.StatType.maxLife);
+        InitAction();
+    }
+    public void SetLeader(Puppet _leader)
+    {
+        leader = _leader;
     }
     protected virtual void GroundGravityCheck()
     {
@@ -331,6 +341,7 @@ public class Puppet : MonoBehaviour {
     {
         Vector3 forceApply = targetCollider.transform.position - transform.position;
         Puppet targetPuppet = targetCollider.GetComponent<Puppet>();
+        //if (pup)
         //if (type != targetPuppet.type) 
         //{
         //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
@@ -339,6 +350,6 @@ public class Puppet : MonoBehaviour {
         //{
         //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
         //}
-        targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
+        targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, this);
     }
 }

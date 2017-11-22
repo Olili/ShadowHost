@@ -1016,12 +1016,15 @@ MonoBehaviour:
       baseStat: 3
       currentStat: 1
     - name: maxLife
-      baseStat: 10
+      baseStat: 1
       currentStat: 1
   leader: {fileID: 0}
+  hordeManager: {fileID: 0}
   debugAction: 
+  isOnGround: 0
   OnPlanNormal: {x: 0, y: 0, z: 0}
   slidingDebug: 0
+  centerDown: {fileID: 0}
 --- !u!137 &137617255255689134
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
