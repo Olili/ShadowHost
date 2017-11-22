@@ -13,7 +13,7 @@ public class CreaturePool : MonoBehaviour
 {
     List<GameObject>[] poolTab; // contient un tableau de pool de creatures
     int poolSize = 25;
-    [SerializeField] GameObject[] prefabModel;
+    [SerializeField] public GameObject[] prefabModel;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class CreaturePool : MonoBehaviour
     }
     Puppet CreateAndAddToPool(CreatureType type)
     {
-        GameObject poolObject = Instantiate<GameObject>(prefabModel[(int)type]);
+        GameObject poolObject = Instantiate<GameObject>(prefabModel[(int)type],transform);
         poolObject.transform.parent = transform;
         poolObject.SetActive(false);
         poolTab[(int)type].Add(poolObject);
@@ -54,7 +54,6 @@ public class CreaturePool : MonoBehaviour
                 if (!puppet.gameObject.activeInHierarchy)
                 {
                     returnedPuppet = puppet;
-                    returnedPuppet.Init();
                     break;
                 }
             }
@@ -63,6 +62,7 @@ public class CreaturePool : MonoBehaviour
         {
             returnedPuppet = CreateAndAddToPool(type);
         }
+        returnedPuppet.name = type.ToString() + "0" + poolTab[(int)type].Count;
         returnedPuppet.gameObject.SetActive(true);
         return returnedPuppet;
     }

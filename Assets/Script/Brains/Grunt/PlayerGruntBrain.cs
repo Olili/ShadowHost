@@ -14,7 +14,8 @@ public class PlayerGruntBrain : PlayerBrain
         base.FixedUpdate();
         if (Input.GetButton("Fire2"))
         {
-            (puppet.PuppetAction as GruntAction).OnSimpleAttack();
+            if (puppet.PuppetAction is GruntAction)
+                (puppet.PuppetAction as GruntAction).OnSimpleAttack();
         }
     }
 }

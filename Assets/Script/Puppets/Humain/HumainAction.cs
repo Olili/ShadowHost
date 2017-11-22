@@ -9,7 +9,7 @@ public class HumainAction : PuppetAction
     }
     public virtual void Charge()
     {
-
+        puppet.PuppetAction = new HumainChargedShoot(puppet);
     }
     public virtual void Shoot()
     {
@@ -19,5 +19,14 @@ public class HumainAction : PuppetAction
     {
 
     }
+    public override void SetVelocity(Vector3 velocity)
+    {
+        base.SetVelocity(velocity);
+        if (puppet.Animator != null)
+        {
+            puppet.Animator.SetFloat("Velocity", velocity.magnitude);
+        }
+    }
+     
 
 }

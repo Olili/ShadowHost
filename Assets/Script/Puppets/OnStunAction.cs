@@ -39,7 +39,7 @@ public class OnStunAction : PuppetAction
     public override void SetVelocity(Vector3 velocity)
     {
     }
-    public override void OnHit(float damage, Vector3 force)
+    public override void OnHit(float damage, Vector3 force, Puppet hitter=null)
     {
         
     }

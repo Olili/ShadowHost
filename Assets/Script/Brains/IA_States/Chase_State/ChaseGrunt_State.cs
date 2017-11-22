@@ -46,6 +46,7 @@ public class ChaseGrunt_State : Chase_State
         }
         else
         {
+            //puppet.HordeManager.FoeLeaderPuppet = myTarget.Leader;
             FindTheNearestFoe();
         }
 
@@ -81,24 +82,17 @@ public class ChaseGrunt_State : Chase_State
         float nearestDistance = float.MaxValue;
         Puppet myPossibleTarget = null;
 
-        if (foeLeaderPuppet != null)
+        if (foeLeaderPuppet.HordeManager != null)
         {
-            if (foeLeaderPuppet.GetComponent<Alpha>() != null)
+            foreach (Puppet pup in foeLeaderPuppet.HordeManager.HordePuppets)
             {
-                foreach (Puppet pup in foeLeaderPuppet.transform.parent.GetComponent<HordeManager>().HordePuppets)
+                float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
+                if (tempDist < nearestDistance)
                 {
-                    float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
-                    if (tempDist < nearestDistance)
-                    {
-                        nearestDistance = tempDist;
-                        myPossibleTarget = pup;
-                    }
+                    nearestDistance = tempDist;
+                    myPossibleTarget = pup;
                 }
             }
-        }
-        else
-        {
-            Debug.LogError("Pas de puppet leader ennemie!!");
         }
 
         if (myPossibleTarget != null)
