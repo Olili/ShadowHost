@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour {
     public void Init(Puppet laucher)
     {
         isLauched = false;
+        pushForce = 0;
         distance = 0;
         Physics.IgnoreCollision(GetComponent<Collider>(), laucher.GetComponent<Collider>());
     }
@@ -43,6 +44,7 @@ public class Projectile : MonoBehaviour {
             if (target!=null)
             {
                 laucher.HitPuppet(collider, pushForce);
+                GameManager.Instance.ProjectilePool.SendToPool(this.gameObject);
             }
         }
     }
