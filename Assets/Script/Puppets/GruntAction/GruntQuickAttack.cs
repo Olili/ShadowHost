@@ -81,7 +81,7 @@ public class GruntQuickAttack : GruntAction
     {
         puppet.GetComponentInChildren<ParticleSystem>().Play();
         //AttackCollision();
-        puppet.AttackCollision(attackExtents,attackOrigin, pushValue);
+        puppet.AttackCollision(puppet,attackExtents, attackOrigin, pushValue);
     }
 
         // Les ordres/transition des brain   :

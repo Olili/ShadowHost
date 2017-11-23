@@ -20,7 +20,7 @@ public class Puppet : MonoBehaviour {
     [HideInInspector] public Vector3 OnPlanNormal;
     public bool slidingDebug = false;
     public Transform centerDown;
-    bool friendlyFire;
+    [SerializeField] private bool friendlyFire;
 
     // State machine : 
     private PuppetAction puppetAction;
@@ -162,6 +162,19 @@ public class Puppet : MonoBehaviour {
         }
     }
 
+    public bool FriendlyFire
+    {
+        get
+        {
+            return friendlyFire;
+        }
+
+        set
+        {
+            friendlyFire = value;
+        }
+    }
+
 
     #endregion
 
@@ -204,6 +217,7 @@ public class Puppet : MonoBehaviour {
     public void Init(Vector3 position,Puppet _leader, Transform parent, HordeManager _hordeManager)
     {
         gameObject.SetActive(true);
+        friendlyFire = false;
         transform.position = position;
         _hordeManager.AddHordePuppet(this);
         Life = stats.Get(Stats.StatType.maxLife);
@@ -318,7 +332,7 @@ public class Puppet : MonoBehaviour {
     {
 
     }
-    public void AttackCollision(Vector3 attackExtents,Vector3 attackOrigin, float pushForce,float angleStop = 180)
+    public void AttackCollision(Puppet hitter,Vector3 attackExtents,Vector3 attackOrigin, float pushForce,float angleStop = 180)
     {
         int mask = LayerMask.GetMask(new string[] { "Puppet" });
         
@@ -328,24 +342,23 @@ public class Puppet : MonoBehaviour {
         {
             if (collTab[i].transform != transform)
             {
-                HitPuppet(collTab[i], pushForce);
+                HitPuppet(collTab[i], pushForce, hitter);
             }
         }
     }
-    public void HitPuppet(Collider targetCollider,float pushForce)
+    public void HitPuppet(Collider targetCollider,float pushForce,Puppet hitter)
     {
         Vector3 forceApply = targetCollider.transform.position - transform.position;
         Puppet targetPuppet = targetCollider.GetComponent<Puppet>();
-        //if (pup)
-        //if (type != targetPuppet.type) 
-        //{
-        //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
-        //}
-        //else if (friendlyFire && targetPuppet.friendlyFire)
-        //{
-        //    targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce);
-        //}
-        targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, this);
+        if (type != targetPuppet.type)
+        {
+            targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, hitter);
+        }
+        else if (friendlyFire && targetPuppet.friendlyFire)
+        {
+            targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, hitter);
+        }
+        //targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, this);
     }
 
     public Transform FindChildByName(string _name, Transform _tr)

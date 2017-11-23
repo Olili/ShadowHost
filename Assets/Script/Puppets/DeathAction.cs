@@ -9,7 +9,6 @@ public class DeathAction : PuppetAction
     public DeathAction(Puppet _puppet) : base(_puppet)
     {
         animator = _puppet.Animator;
-        CurFixedUpdateFct = OnDeadBody;
     }
     public override void OnBegin()
     {
@@ -24,14 +23,16 @@ public class DeathAction : PuppetAction
         puppet.gameObject.layer = LayerMask.NameToLayer("Dead_Puppet");
         timer = 0;
         puppet.Leader = null;
+        puppet.IsOnGround = false;
         GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
+        CurFixedUpdateFct = OnDeadBody;
     }
     public void OnDeadBody()
     {
         timer += Time.deltaTime;
         if (timer >0.5f)
         {
-            puppet.Rb.velocity = Vector3.zero;
+            puppet.Rb.velocity = new Vector3(0,Mathf.Max(puppet.Rb.velocity.y,-8),0);
             puppet.Rb.angularVelocity = Vector3.zero;
         }
       

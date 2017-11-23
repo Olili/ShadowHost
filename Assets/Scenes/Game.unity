@@ -151,6 +151,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1572575836485808, guid: 5b801f2e05feecb4fbafc18f0724c575, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b801f2e05feecb4fbafc18f0724c575, type: 2}
   m_IsPrefabParent: 0
@@ -196,7 +200,7 @@ Prefab:
     - target: {fileID: 114247874060776696, guid: 5b39112b5041c674f922baa8ac62cd66,
         type: 2}
       propertyPath: canGenerateHorde
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114247874060776696, guid: 5b39112b5041c674f922baa8ac62cd66,
         type: 2}

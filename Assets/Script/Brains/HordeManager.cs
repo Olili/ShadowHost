@@ -8,6 +8,9 @@ public class HordeManager : MonoBehaviour
     [SerializeField] private Puppet foeLeaderPuppet;
     [SerializeField] private List<Puppet> hordePuppets = new List<Puppet>();
     [SerializeField] private Puppet currentAlpha;
+
+
+
     bool isAlphaFighting;
 
     #region GetSet
@@ -110,6 +113,7 @@ public class HordeManager : MonoBehaviour
             if (pup != currentAlpha && !(pup.PuppetAction is DeathAction))
             {
                 newLeader.HordeManager.AddHordePuppet(pup);
+                pup.GetComponent<IA_Brain>().MyIAState = pup.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
                 //pup.Leader = foeLeaderPuppet;
                 //foeLeaderPuppet.HordeManager.AddHordePuppet(pup);
                 //pup.HordeManager = foeLeaderPuppet.HordeManager;

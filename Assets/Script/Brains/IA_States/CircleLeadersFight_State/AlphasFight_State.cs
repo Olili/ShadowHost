@@ -14,10 +14,12 @@ public class AlphasFight_State : IA_State
         base.OnBegin();
         alphaOpposent = puppet.HordeManager.FoeLeaderPuppet;
         FixedUpdateFct = GoToMyOpponent;
+        puppet.FriendlyFire = true;
     }
     public override void OnEnd()
     {
         base.OnEnd();
+        puppet.FriendlyFire = false;
     }
 
     public virtual void GoToMyOpponent()

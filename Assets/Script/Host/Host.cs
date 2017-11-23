@@ -51,6 +51,7 @@ public class Host : MonoBehaviour
         GameManager.Instance.PlayerBrain.host = this;
 
         GameManager.Instance.FeedbackManager.PossessBody(body.transform);
+        body.FriendlyFire = true;
     }
     public void GoOutBody(Puppet body)
     {

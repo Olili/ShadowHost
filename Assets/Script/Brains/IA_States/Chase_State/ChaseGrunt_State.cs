@@ -42,7 +42,6 @@ public class ChaseGrunt_State : Chase_State
                 steering.Seek(myTarget.transform.position, 0.7f);
                 Move();
             }
-
         }
         else
         {

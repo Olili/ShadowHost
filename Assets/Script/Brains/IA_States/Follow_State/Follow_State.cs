@@ -73,10 +73,7 @@ public class Follow_State : IA_State {
                 Puppet spottedPuppet = allPossibleTarget[i].GetComponent<Puppet>();
                 if (puppet.Leader != null)
                 {
-                    if (puppet.Leader.gameObject.GetComponent<IA_Brain>() == null)
-                    {
-                        Debug.LogError("point arret");
-                    }
+                 
                     IA_State tempLeaderState = puppet.Leader.gameObject.GetComponent<IA_Brain>().MyIAState;
                     //if (spottedPuppet.transform.parent != null && spottedPuppet.HordeManager != null)
                     {

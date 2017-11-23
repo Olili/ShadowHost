@@ -79,7 +79,7 @@ public class WolfJumpAction : WolfAction
     public override void OnAnimationEvent(string functionName)
     {
         puppet.GetComponentInChildren<ParticleSystem>().Play();
-        puppet.AttackCollision(attackExtents,attackOrigin, pushForce);
+        puppet.AttackCollision(puppet,attackExtents,attackOrigin, pushForce);
     }
 
     // Les ordres/transition des brain   :
