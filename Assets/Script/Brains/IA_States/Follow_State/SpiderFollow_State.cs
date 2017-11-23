@@ -11,8 +11,6 @@ public class SpiderFollow_State : Follow_State
     public override void OnBegin()
     {
         base.OnBegin();
-        chillTest = false;
-        FixedUpdateFct = FollowMovingPlayer;
     }
     public override void OnEnd()
     {

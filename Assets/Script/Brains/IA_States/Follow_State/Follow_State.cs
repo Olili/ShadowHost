@@ -12,12 +12,13 @@ public class Follow_State : IA_State {
 
     public Follow_State(Puppet _puppet) : base(_puppet)
     {
-
     }
     public override void OnBegin()
     {
         base.OnBegin();
         timerForCheckingFoes = Random.value; // chaque puppet aura un timer différent => évite d'avoir tous les spherecast des puppet à la meme frame!
+        FixedUpdateFct = FollowImmobilePlayer;
+        chillTest = false;
     }
     public override void OnEnd()
     {
