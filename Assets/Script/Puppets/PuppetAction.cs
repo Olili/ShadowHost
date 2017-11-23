@@ -138,50 +138,7 @@ public class PuppetAction  {
             OnDeath(hitter);
         }
     }
-    //public virtual void OnDeath(Puppet hitter = null)
-    //{
-    //    HordeManager myHordeManager = puppet.HordeManager;
-
-    //    myHordeManager.RemoveHordePuppet(puppet);
-    //    puppet.transform.parent = null;
-
-    //    if (!(puppet.GetComponent<Brain>() is PlayerBrain)) // si c'est pas un player 
-    //    {
-    //        if (puppet.Leader == puppet) // Si le puppet est un alpha
-    //        {
-    //            // Si je fight un alpha et que l'apha adverse n'est pas mort.
-    //            if (puppet.GetComponent<IA_Brain>().MyIAState is AlphasFight_State && myHordeManager.FoeLeaderPuppet.Life > 0)
-    //            {
-    //                // transmission de horde destruction du script alpha
-    //                myHordeManager.TransmitHorde(myHordeManager.FoeLeaderPuppet);
-    //            }
-    //            else
-    //            {
-    //                myHordeManager.NeedNewAlpha(); // besoin d'alpha
-    //                if (hitter != null)
-    //                {
-    //                    hitter.HordeManager.CurrentAlpha = myHordeManager.CurrentAlpha;
-    //                }
-    //            }
-    //        }
-    //        if (puppet.gameObject.GetComponent<Brain>() != null) // detruire brain
-    //            GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
-
-
-
-    //        // si la horde est vide on la détruit.
-    //        if (myHordeManager.HordePuppets.Count == 0) // passer par le Horde manager pour remove horde
-    //            GameManager.Instance.hordeCreator.DestroyHorde(myHordeManager);
-
-    //        puppet.PuppetAction = new DeathAction(puppet);
-    //    }
-    //    else
-    //    {
-
-    //        puppet.gameObject.GetComponent<PlayerBrain>().host.GoOutBody(puppet);
-    //    }
-    //    puppet.HordeManager = null;
-    //}
+   
     public virtual void OnDeath(Puppet hitter = null)
     {
         HordeManager myHordeManager = puppet.HordeManager;

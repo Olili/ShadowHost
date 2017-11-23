@@ -45,7 +45,6 @@ public class ChaseGrunt_State : Chase_State
         }
         else
         {
-            //puppet.HordeManager.FoeLeaderPuppet = myTarget.Leader;
             FindTheNearestFoe();
         }
 

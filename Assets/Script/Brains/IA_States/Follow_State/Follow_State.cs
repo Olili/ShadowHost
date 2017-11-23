@@ -88,10 +88,7 @@ public class Follow_State : IA_State {
                 {
                     if (tempLeaderState is Follow_State)
                     {
-                        if((spottedPuppet.HordeManager.HordePuppets.Count > 0))
-                        {
-                            (tempLeaderState as Follow_State).AlphaFight(spottedPuppet.Leader);
-                        }
+                        (tempLeaderState as Follow_State).AlphaFight(spottedPuppet.Leader);
                     }
                 }
             }
@@ -111,7 +108,6 @@ public class Follow_State : IA_State {
         {
             myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
         }
-        //puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
     }
     public virtual void AlphaFight(Puppet _foePuppet)
     {
@@ -120,7 +116,6 @@ public class Follow_State : IA_State {
         {
             myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
         }
-        //puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
     }
 
 }
