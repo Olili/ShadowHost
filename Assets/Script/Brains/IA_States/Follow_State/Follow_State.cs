@@ -81,42 +81,21 @@ public class Follow_State : IA_State {
                     // J'ai trouvé des ennemies!!!
                     if (tempLeaderState is Follow_State)
                     {
-                        (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(spottedPuppet.Leader);
+                        //(tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(spottedPuppet.Leader);
+                        puppet.HordeManager.PuppetFindFoe(spottedPuppet.Leader);
                     }
                 }
                 else if (spottedPuppet.Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
                 {
                     if (tempLeaderState is Follow_State)
                     {
-                        (tempLeaderState as Follow_State).AlphaFight(spottedPuppet.Leader);
+                        puppet.HordeManager.AlphaFight(spottedPuppet.Leader);
+                        //(tempLeaderState as Follow_State).AlphaFight(spottedPuppet.Leader);
                     }
                 }
             }
             timerForCheckingFoes = 0.0f;
         }
     }
-
-    /// <summary>
-    /// Fonction qui permet à une puppet de prevenir l'aplha qu'elle a vu un ennemie.
-    /// Fonction appelé uniquement chez l'alpha.
-    /// </summary>
-    /// <param name="_FoePuppet"> puppet ennemie detecté </param>
-    public virtual void OneOfMyPuppetFindFoes(Puppet _foePuppet)
-    {
-        puppet.HordeManager.FoeLeaderPuppet = _foePuppet;
-        foreach (Puppet myFollowers in puppet.HordeManager.HordePuppets)
-        {
-            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.chase);
-        }
-    }
-    public virtual void AlphaFight(Puppet _foePuppet)
-    {
-        puppet.HordeManager.FoeLeaderPuppet = _foePuppet;
-        foreach (Puppet myFollowers in puppet.HordeManager.HordePuppets)
-        {
-            myFollowers.GetComponent<IA_Brain>().MyIAState = myFollowers.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.alphaFight);
-        }
-    }
-
 }
 

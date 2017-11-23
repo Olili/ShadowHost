@@ -96,7 +96,6 @@ public class HordeManager : MonoBehaviour
                 tempLeader = pup;
             }
             AddHordePuppet(pup);
-            //pup.Leader = tempLeader;
         }
             // si on a trouvé un leader et que ce n'est pas le joueur
         if (tempLeader != null && tempLeader.GetComponent<PlayerBrain>() == null)
@@ -114,14 +113,34 @@ public class HordeManager : MonoBehaviour
             {
                 newLeader.HordeManager.AddHordePuppet(pup);
                 pup.GetComponent<IA_Brain>().MyIAState = pup.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
-                //pup.Leader = foeLeaderPuppet;
-                //foeLeaderPuppet.HordeManager.AddHordePuppet(pup);
-                //pup.HordeManager = foeLeaderPuppet.HordeManager;
-                //pup.transform.parent = foeLeaderPuppet.HordeManager.transform;
             }
         }
         HordePuppets.Clear();
         // Comment ça se passe si c'est le dernier qui est tué.
         //Destroy(this.gameObject);
+    }
+    /// <summary>
+    /// Fonction qui permet à une puppet de prevenir l'aplha qu'elle a vu un ennemie.
+    /// </summary>
+    /// <param name="_FoePuppet"> puppet ennemie detecté </param>
+    public void PuppetFindFoe(Puppet _foePuppet)
+    {
+        FoeLeaderPuppet = _foePuppet;
+        foreach (Puppet myFollowers in HordePuppets)
+        {
+            Brain brain = myFollowers.GetComponent<Brain>();
+            if (brain is IA_Brain)
+                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.chase);
+        }
+    }
+    public void AlphaFight(Puppet _foePuppet)
+    {
+        FoeLeaderPuppet = _foePuppet;
+        foreach (Puppet myFollowers in HordePuppets)
+        {
+            Brain brain = myFollowers.GetComponent<Brain>();
+            if (brain is IA_Brain)
+                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.alphaFight);
+        }
     }
 }
