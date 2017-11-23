@@ -2177,7 +2177,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65921379664829960
 BoxCollider:
@@ -2240,7 +2240,7 @@ MonoBehaviour:
   stats:
     statTab:
     - name: move_speed
-      baseStat: 5
+      baseStat: 7
       currentStat: 1
     - name: maxAcceleration
       baseStat: 0.3
@@ -2256,6 +2256,7 @@ MonoBehaviour:
       currentStat: 1
   leader: {fileID: 114137373149535908}
   hordeManager: {fileID: 0}
+  life: 0
   debugAction: 
   isOnGround: 0
   OnPlanNormal: {x: 0, y: 0, z: 0}

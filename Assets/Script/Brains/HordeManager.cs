@@ -8,6 +8,7 @@ public class HordeManager : MonoBehaviour
     [SerializeField] private Puppet foeLeaderPuppet;
     [SerializeField] private List<Puppet> hordePuppets = new List<Puppet>();
     [SerializeField] private Puppet currentAlpha;
+    bool isAlphaFighting;
 
     #region GetSet
     public List<Puppet> HordePuppets
@@ -51,15 +52,31 @@ public class HordeManager : MonoBehaviour
    
     public void InitAlpha(Puppet _firstAlpha)
     {
+        if (_firstAlpha != currentAlpha)
+        {
+            GameManager.Instance.FeedbackManager.NewAlpha(_firstAlpha.transform);
+        }
         currentAlpha = _firstAlpha;
         AddHordePuppet(currentAlpha);
     }
     public void AddHordePuppet(Puppet puppet)
     {
-        HordePuppets.Add(puppet);
+        if (currentAlpha == null)
+            Debug.LogError("l'alpha n'est pas set");
+        puppet.transform.parent = transform;
+        puppet.Leader = currentAlpha;
+        if (!hordePuppets.Contains(puppet))
+        {
+            HordePuppets.Add(puppet);
+        }
+        puppet.HordeManager = this;
     }
     public void RemoveHordePuppet(Puppet puppet)
     {
+        if (puppet == currentAlpha)
+        {
+            GameManager.Instance.FeedbackManager.NoAlpha(puppet.transform);
+        }
         HordePuppets.Remove(puppet);
     }
 

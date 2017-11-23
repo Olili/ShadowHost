@@ -36,6 +36,7 @@ public class Projectile : MonoBehaviour {
         isLauched = true;
         this.direction = _direction;
         speed = _speed;
+        transform.rotation = Quaternion.LookRotation(direction, launcher.OnPlanNormal);
     }
     public void OnTriggerEnter(Collider collider)
     {

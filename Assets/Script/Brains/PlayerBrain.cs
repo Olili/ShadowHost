@@ -41,17 +41,18 @@ public class PlayerBrain : Brain {
         direction.y = 0;
         direction.Normalize();
         direction = direction * puppet.stats.Get(Stats.StatType.move_speed);
-        if (direction!=Vector3.zero)
-            direction.y = 0;
 
         direction.y = puppet.Rb.velocity.y;
 
         if (puppet.IsOnGround == true)
             puppet.PuppetAction.SetVelocity(direction);
 
+        if (direction.x != 0 || direction.z != 0)
+        {
+            //direction = GetComponent<Steering>().GetDvOnPlan(transform.position + direction);
+            puppet.PuppetAction.SetRotation(direction.normalized);
+        }
 
-        direction = GetComponent<Steering>().GetDvOnPlan(transform.position + direction);
-        puppet.PuppetAction.SetRotation(direction.normalized);
     }
 
     public override void FixedUpdate () {

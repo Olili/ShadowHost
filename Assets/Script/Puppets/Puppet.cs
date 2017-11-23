@@ -43,7 +43,6 @@ public class Puppet : MonoBehaviour {
         {
             return puppetAction;
         }
-
         set
         {
             if (puppetAction != null)
@@ -206,18 +205,7 @@ public class Puppet : MonoBehaviour {
     {
         gameObject.SetActive(true);
         transform.position = position;
-        transform.parent = parent;
-        Leader = _leader;
-        HordeManager = _hordeManager;
-        if (leader == this)
-        {
-            hordeManager.InitAlpha(this);
-            // creation et init de l'alpha .
-        }
-        else
-        {
-            leader.HordeManager.AddHordePuppet(this);
-        }
+        _hordeManager.AddHordePuppet(this);
         Life = stats.Get(Stats.StatType.maxLife);
         InitAction();
     }
@@ -227,7 +215,7 @@ public class Puppet : MonoBehaviour {
     }
     protected virtual void GroundGravityCheck()
     {
-        int mask = LayerMask.GetMask(new string[] { "Default"});
+        int mask = LayerMask.GetMask(new string[] { "Ground"});
         RaycastHit hit;
         Vector3 center = centerDown.position + Vector3.up * Extents.y;
         if (Physics.Raycast(center, -OnPlanNormal, out hit, (Extents.y +0.5f), mask))
@@ -255,6 +243,7 @@ public class Puppet : MonoBehaviour {
         else // Raycast failure : on est loin du sol
         {
             IsOnGround = false;
+            OnPlanNormal = Vector3.up;
         }
     }
     private void Slide()
@@ -297,6 +286,12 @@ public class Puppet : MonoBehaviour {
     {
         if (puppetAction!=null)
             puppetAction.DrawGizmo();
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.green;
+            Vector3 start = centerDown.position + Vector3.up * Extents.y;
+            Gizmos.DrawLine(start, start + -OnPlanNormal * (extents.y + 0.5f));
+        }
     }
 
     public void OnAnimationEvent(string functionName)

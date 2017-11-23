@@ -24,7 +24,7 @@ public class FeedbackManager : MonoBehaviour {
 		SkinnedMeshRenderer smr = transform.GetComponentInChildren<SkinnedMeshRenderer>();
 		if(smr != null)
 		{
-			smr.material.SetColor("_EmissionColor", Color.white);
+			smr.material.SetColor("_EmissionColor", Color.red);
 		}	
     }
 

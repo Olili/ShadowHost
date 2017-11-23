@@ -70,6 +70,7 @@ public class Follow_State : IA_State {
 
             for (int i = 0; i< allPossibleTarget.Length; i++)
             {
+                Puppet spottedPuppet = allPossibleTarget[i].GetComponent<Puppet>();
                 if (puppet.Leader != null)
                 {
                     if (puppet.Leader.gameObject.GetComponent<IA_Brain>() == null)
@@ -77,24 +78,24 @@ public class Follow_State : IA_State {
                         Debug.LogError("point arret");
                     }
                     IA_State tempLeaderState = puppet.Leader.gameObject.GetComponent<IA_Brain>().MyIAState;
-                    if (allPossibleTarget[i].transform.parent != null && allPossibleTarget[i].GetComponent<Puppet>().HordeManager != null)
+                    if (spottedPuppet.transform.parent != null && spottedPuppet.HordeManager != null)
                     {
-                        if (allPossibleTarget[i].GetComponent<Puppet>().Type != puppet.Type) // espece de creature différent de la mienne => combat de horde
+                        if (spottedPuppet.Type != puppet.Type) // espece de creature différent de la mienne => combat de horde
                         {
                             // J'ai trouvé des ennemies!!!
                             if (tempLeaderState is Follow_State)
                             {
-                                (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                                (tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(spottedPuppet.Leader);
                             }
                         }
-                        else if (allPossibleTarget[i].GetComponent<Puppet>().Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
+                        else if (spottedPuppet.Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
                         {
 
                             if (tempLeaderState is Follow_State)
                             {
-                                if(allPossibleTarget[i].GetComponent<PlayerBrain>() == null || (allPossibleTarget[i].GetComponent<Puppet>().HordeManager.HordePuppets.Count > 1))
+                                if((spottedPuppet.HordeManager.HordePuppets.Count > 0))
                                 {
-                                    (tempLeaderState as Follow_State).AlphaFight(allPossibleTarget[i].GetComponent<Puppet>().Leader);
+                                    (tempLeaderState as Follow_State).AlphaFight(spottedPuppet.Leader);
                                 }
                             }
                         }

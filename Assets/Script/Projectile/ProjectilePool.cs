@@ -48,7 +48,6 @@ public class ProjectilePool : MonoBehaviour {
                 if (!projectile.gameObject.activeInHierarchy)
                 {
                     returnedProjectile = projectile;
-                    projectile.Init(_laucher);
                     break;
                 }
             }
@@ -57,6 +56,7 @@ public class ProjectilePool : MonoBehaviour {
         {
             returnedProjectile = CreateProjectile(type);
         }
+        returnedProjectile.Init(_laucher);
         returnedProjectile.transform.position = position;
         returnedProjectile.transform.rotation = oriention;
         returnedProjectile.gameObject.SetActive(true);

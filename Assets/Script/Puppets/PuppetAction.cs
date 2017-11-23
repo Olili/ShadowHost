@@ -88,7 +88,6 @@ public class PuppetAction  {
     {
         if ((!puppet.IsOnGround))
             return;
-
         Vector3 right;
         if (direction.magnitude > 0.1f)
             right = Vector3.Cross(direction, puppet.OnPlanNormal);
@@ -105,7 +104,10 @@ public class PuppetAction  {
             puppet.Rb.MoveRotation(finalRotation);
         }
     }
-    public void RotateTowardGround()
+  
+
+
+        public void RotateTowardGround()
     {
         float speed = puppet.stats.Get(Stats.StatType.maxTurnSpeed) * Time.fixedDeltaTime;
         Vector3 right = Vector3.Cross(puppet.transform.forward, Vector3.up);

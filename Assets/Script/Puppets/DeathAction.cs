@@ -10,8 +10,6 @@ public class DeathAction : PuppetAction
     {
         animator = _puppet.Animator;
         CurFixedUpdateFct = OnDeadBody;
-        puppet.GetComponent<Collider>().enabled = false;
-        timer = 0;
     }
     public override void OnBegin()
     {
@@ -21,14 +19,17 @@ public class DeathAction : PuppetAction
         {
             animator.SetTrigger("Death");
         }
-       
+        //puppet.GetComponent<Collider>().enabled = false;
+        //puppet.GetComponent<Collider>().se
+        puppet.gameObject.layer = LayerMask.NameToLayer("Dead_Puppet");
+        timer = 0;
         puppet.Leader = null;
         GameManager.Instance.hordeCreator.AddDeadPuppet(puppet);
     }
     public void OnDeadBody()
     {
         timer += Time.deltaTime;
-        if (timer > 0.5f)
+        if (timer >0.5f)
         {
             puppet.Rb.velocity = Vector3.zero;
             puppet.Rb.angularVelocity = Vector3.zero;
@@ -60,7 +61,8 @@ public class DeathAction : PuppetAction
     public override void OnEnd()
     {
         base.OnEnd();
-        puppet.GetComponent<Collider>().enabled = true;
+        puppet.gameObject.layer = LayerMask.NameToLayer("Puppet");
+        //puppet.GetComponent<Collider>().enabled = true;
     }
     public override void OnHit(float damage, Vector3 force, Puppet hitter = null)
     {

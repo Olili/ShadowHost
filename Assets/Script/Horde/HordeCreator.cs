@@ -22,6 +22,8 @@ public class HordeCreator : MonoBehaviour {
     public int maxHordeDistance = 30;
     public int minHordeDistance = 15;
     public bool canGenerateHorde = true;
+    [SerializeField] private int maxHordeInGame = 1;
+
 
     private void Awake()
     {
@@ -43,6 +45,8 @@ public class HordeCreator : MonoBehaviour {
 
             // création puppet qui sera alpha
         Puppet alphaPuppet = creaturePool.GetCreature(type);
+        hordeManager.InitAlpha(alphaPuppet);
+
         alphaPuppet.name = "Alpha_" + type.ToString()+" "+ hordeList.Count;
 
             // init alpha Puppet
@@ -165,7 +169,7 @@ public class HordeCreator : MonoBehaviour {
     }
     public void LonelyPlayerHordePop(PlayerBrain playerBrain)
     {
-        if (hordeList.Count > 1) // le player est une horde ou pas ?
+        if (hordeList.Count >= maxHordeInGame) // le player est une horde ou pas ?
         {
             return;
         }
@@ -183,7 +187,7 @@ public class HordeCreator : MonoBehaviour {
 
     public void PlayerLeaderPopHorde(PlayerBrain playerBrain)
     {
-        if (hordeList.Count > 1 )
+        if (hordeList.Count >= maxHordeInGame)
         {
             return;
         }
