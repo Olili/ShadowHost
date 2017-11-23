@@ -16,7 +16,6 @@ public class GruntCircleLeaders_state : CircleLeaders_state
     {
         base.OnEnd();
     }
-
     protected override void Rotate()
     {
         Vector3 myVel = puppet.Rb.velocity;

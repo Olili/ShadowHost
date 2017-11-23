@@ -41,6 +41,9 @@ public class Brain : MonoBehaviour {
     {
         Puppet _myPuppet = puppet;
         CreatureType _type = puppet.Type;
+
+        if (puppet.Leader == null)
+            Debug.LogError("Leader must be set to give good state");
         bool iAmAnAplha = puppet.Leader == puppet;
 
         if (!iAmAnAplha)
@@ -64,11 +67,8 @@ public class Brain : MonoBehaviour {
                 {
                     case CreatureType.Spider:
                         return new ChaseSpider_State(_myPuppet);
-                        break;
-
                     case CreatureType.Grunt:
                         return new ChaseGrunt_State(_myPuppet);
-                        break;
                     default:
                         return new Follow_State(_myPuppet);
                 }
@@ -79,11 +79,8 @@ public class Brain : MonoBehaviour {
                 {
                     case CreatureType.Spider:
                         return new CircleLeaders_state(_myPuppet);
-                        break;
-
                     case CreatureType.Grunt:
                         return new CircleLeaders_state(_myPuppet);
-                        break;
                     default:
                         return new CircleLeaders_state(_myPuppet);
                 }
@@ -91,41 +88,38 @@ public class Brain : MonoBehaviour {
         }
         else
         {
-            if (_type == CreatureType.Spider)
+            if (_state == E_State.follow)
             {
-                switch (_state)
+                switch (_type)
                 {
-                    case E_State.follow:
+                    default:
                         return new AlphaGuide_State(_myPuppet);
-
-                    case E_State.chase:
+                }
+            }
+            else if (_state == E_State.chase)
+            {
+                switch (_type)
+                {
+                    case CreatureType.Spider:
                         return new ChaseSpider_State(_myPuppet);
-                    case E_State.alphaFight:
-                        return new SpiderAlphasFight_State(_myPuppet);
-                        break;
-                    default:
-                        return new AlphaGuide_State(_myPuppet);
-                }
-            }
-            else if (_type == CreatureType.Grunt)
-            {
-                switch (_state)
-                {
-                    case E_State.follow:
-                        return new AlphaGuide_State(_myPuppet);
-                        break;
-                    case E_State.chase:
+                    case CreatureType.Grunt:
                         return new ChaseGrunt_State(_myPuppet);
-                        break;
-                    case E_State.alphaFight:
-                        return new GruntAlphasFight_State(_myPuppet);
-                        break;
                     default:
-                        return new AlphaGuide_State(_myPuppet); 
-                        break;
+                        return new Chase_State(_myPuppet);
                 }
             }
-
+            else if (_state == E_State.alphaFight)
+            {
+                switch (_type)
+                {
+                    case CreatureType.Spider:
+                        return new SpiderAlphasFight_State(_myPuppet);
+                    case CreatureType.Grunt:
+                        return new GruntAlphasFight_State(_myPuppet);
+                    default:
+                        return new AlphasFight_State(_myPuppet);
+                }
+            }
         }
         return null;
     }

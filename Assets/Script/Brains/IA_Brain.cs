@@ -34,12 +34,11 @@ public class IA_Brain : Brain {
     public override void Awake()
     {
         base.Awake();
-        MyIAState = this.GetTypeState(E_State.follow);
     }
     // Use this for initialization
     public override void Start () {
-		
-	}
+        MyIAState = this.GetTypeState(E_State.follow);
+    }
 
     public override void Update()
     {
