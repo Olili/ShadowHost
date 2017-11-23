@@ -116,6 +116,7 @@ public class HordeManager : MonoBehaviour
             }
         }
         HordePuppets.Clear();
+        newLeader.HordeManager.EndAlphaFight();
         // Comment ça se passe si c'est le dernier qui est tué.
         //Destroy(this.gameObject);
     }
@@ -133,7 +134,7 @@ public class HordeManager : MonoBehaviour
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.chase);
         }
     }
-    public void AlphaFight(Puppet _foePuppet)
+    public void StartAlphaFight(Puppet _foePuppet)
     {
         FoeLeaderPuppet = _foePuppet;
         foreach (Puppet myFollowers in HordePuppets)
@@ -141,6 +142,15 @@ public class HordeManager : MonoBehaviour
             Brain brain = myFollowers.GetComponent<Brain>();
             if (brain is IA_Brain)
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.alphaFight);
+        }
+    }
+    public void EndAlphaFight()
+    {
+        foreach (Puppet myFollowers in HordePuppets)
+        {
+            Brain brain = myFollowers.GetComponent<Brain>();
+            if (brain is IA_Brain)
+                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.follow);
         }
     }
 }

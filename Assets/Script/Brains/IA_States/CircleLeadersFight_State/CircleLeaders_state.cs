@@ -36,16 +36,6 @@ public class CircleLeaders_state : IA_State
         Vector3 finalPoint = point + (deltaDistanceFromFight * Vector3.Normalize(puppet.Leader.transform.position - point));
         steering.Seek(finalPoint, 0.7f);
         Move();
-
-        if (puppet.Leader.GetComponent<IA_Brain>() == null)
-        {
-            Debug.Log("poijnt d'arret");
-        }
-
-        if (!(puppet.Leader.GetComponent<IA_Brain>().MyIAState is AlphasFight_State))
-        {
-            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
-        }
     }
     protected void Move()
     {

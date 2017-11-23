@@ -67,10 +67,6 @@ public class GruntAlphasFight_State : AlphasFight_State
             if (puppet.PuppetAction is GruntAction)
                 (puppet.PuppetAction as GruntAction).BasicAttack();
         }
-        else
-        {
-            puppet.GetComponent<IA_Brain>().MyIAState = puppet.GetComponent<IA_Brain>().GetTypeState(Brain.E_State.follow);
-        }
         Move();
     }
 }
