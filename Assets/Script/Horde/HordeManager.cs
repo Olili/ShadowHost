@@ -87,16 +87,15 @@ public class HordeManager : MonoBehaviour
     {
         Puppet tempLeader = null;
 
+
         foreach (Puppet pup in HordePuppets)
         {
-            if (pup != currentAlpha) 
+            if (tempLeader == null)
             {
-                if (tempLeader == null)
-                {
-                    tempLeader = pup;
-                }
-                pup.Leader = tempLeader;
+                tempLeader = pup;
             }
+            AddHordePuppet(pup);
+            //pup.Leader = tempLeader;
         }
             // si on a trouvé un leader et que ce n'est pas le joueur
         if (tempLeader != null && tempLeader.GetComponent<PlayerBrain>() == null)
