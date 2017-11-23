@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 114312641968495048}
   - component: {fileID: 114774439673053000}
   - component: {fileID: 135668994217875740}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Host
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1834,11 +1834,14 @@ MonoBehaviour:
       currentStat: 1
   leader: {fileID: 114042282086952008}
   hordeManager: {fileID: 0}
+  life: 0
   debugAction: 
   isOnGround: 0
   OnPlanNormal: {x: 0, y: 0, z: 0}
   slidingDebug: 0
   centerDown: {fileID: 0}
+  friendlyFire: 0
+  brain: {fileID: 0}
 --- !u!114 &114259707989128040
 MonoBehaviour:
   m_ObjectHideFlags: 1
