@@ -360,7 +360,6 @@ public class Puppet : MonoBehaviour {
         {
             targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, hitter);
         }
-        //targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, this);
     }
 
     public Transform FindChildByName(string _name, Transform _tr)

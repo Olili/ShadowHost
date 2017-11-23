@@ -82,8 +82,6 @@ public class HordeManager : MonoBehaviour
     public void NeedNewAlpha()
     {
         Puppet tempLeader = null;
-
-
         foreach (Puppet pup in HordePuppets)
         {
             if (tempLeader == null)

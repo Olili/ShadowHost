@@ -8,7 +8,6 @@ public class ChaseSpider_State : Chase_State
     {
 
     }
-
     public override void OnBegin()
     {
         base.OnBegin();
@@ -20,7 +19,6 @@ public class ChaseSpider_State : Chase_State
     {
         base.OnEnd();
     }
-
     public override void FixedUpdate_ChaseFoe()
     {
         base.FixedUpdate_ChaseFoe();
@@ -53,53 +51,4 @@ public class ChaseSpider_State : Chase_State
     {
         base.Update_ChaseFoe();
     }
-    protected override void Move()
-    {
-        base.Move();
-
-        Vector3 velocity = Vector3.zero;
-        steering.Separation(0.7f);
-        velocity = steering.ComputedVelocity;
-
-        if (velocity.magnitude > 0.3f)
-        {
-            puppet.PuppetAction.SetVelocity(velocity);
-            velocity.y = 0;
-            puppet.PuppetAction.SetRotation(velocity.normalized);
-        }
-        else
-        {
-            puppet.PuppetAction.SetVelocity(Vector3.zero);
-            puppet.PuppetAction.SetRotation(Vector3.zero);
-        }
-    }
-
-    protected override bool FindTheNearestFoe()
-    {
-
-        float nearestDistance = float.MaxValue;
-        Puppet myPossibleTarget = null;
-
-        if (foeLeaderPuppet.HordeManager!=null)
-        {
-            foreach (Puppet pup in foeLeaderPuppet.HordeManager.HordePuppets)
-            {
-                float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
-                if (tempDist < nearestDistance)
-                {
-                    nearestDistance = tempDist;
-                    myPossibleTarget = pup;
-                }
-            }
-        }
-
-        if (myPossibleTarget != null)
-        {
-            myTarget = myPossibleTarget;
-            return true;
-        }
-        myTarget = null;
-        return false;
-    }
-
 }

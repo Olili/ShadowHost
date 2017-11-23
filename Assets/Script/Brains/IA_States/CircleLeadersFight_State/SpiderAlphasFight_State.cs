@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpiderAlphasFight_State : AlphasFight_State
 {
-    private Puppet alphaOpposent;
 
     public SpiderAlphasFight_State(Puppet _puppet) : base(_puppet)
     {
