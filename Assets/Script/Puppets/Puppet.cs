@@ -21,6 +21,7 @@ public class Puppet : MonoBehaviour {
     public bool slidingDebug = false;
     public Transform centerDown;
     [SerializeField] private bool friendlyFire;
+    public Brain brain;
 
     // State machine : 
     private PuppetAction puppetAction;
@@ -222,6 +223,7 @@ public class Puppet : MonoBehaviour {
         _hordeManager.AddHordePuppet(this);
         Life = stats.Get(Stats.StatType.maxLife);
         InitAction();
+        brain = GetComponent<Brain>();
     }
     public void SetLeader(Puppet _leader)
     {

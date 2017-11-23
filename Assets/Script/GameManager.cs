@@ -84,9 +84,7 @@ public class GameManager : MonoBehaviour {
 
     public void Possession(Puppet puppet)
     {
-        Brain brain = puppet.GetComponent<Brain>();
-
-        if (brain == PlayerBrain && PlayerBrain != null)
+        if (puppet.brain == PlayerBrain && PlayerBrain != null)
         {
             Debug.Log("Unit déjà possedee");
             return;

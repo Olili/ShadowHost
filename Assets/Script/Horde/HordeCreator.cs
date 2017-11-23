@@ -50,11 +50,11 @@ public class HordeCreator : MonoBehaviour {
 
         alphaPuppet.name = "Alpha_" + type.ToString()+" "+ (ID++);
 
+            // ajout brain
+        alphaPuppet.gameObject.AddComponent<IA_Brain>();
             // init alpha Puppet
         alphaPuppet.Init(position, alphaPuppet, hordeContainer.transform, hordeManager);
         
-            // ajout brain
-        alphaPuppet.gameObject.AddComponent<IA_Brain>();
 
         if (hordeList == null)
             hordeList = new List<HordeManager>();
@@ -81,8 +81,8 @@ public class HordeCreator : MonoBehaviour {
                 creaturePosition.x += x * margin;
                 creaturePosition.z -= z * margin;
 
-                follower.Init(creaturePosition,alphaPuppet, hordeContainer.transform, hordeManager);
                 follower.gameObject.AddComponent<IA_Brain>();
+                follower.Init(creaturePosition,alphaPuppet, hordeContainer.transform, hordeManager);
                 if (++nbUnit >= nbCreatures)
                     return;
             }
@@ -94,7 +94,7 @@ public class HordeCreator : MonoBehaviour {
         {
             for (int i = 0; i < hordeManager.HordePuppets.Count; i++)
             {
-                Brain brain = hordeManager.HordePuppets[i].GetComponent<Brain>();
+                Brain brain = hordeManager.HordePuppets[i].brain;
                 if (brain != null)
                     Destroy(brain);
                 SendtoPool(hordeManager.HordePuppets[i]);

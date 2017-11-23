@@ -125,8 +125,8 @@ public class HordeManager : MonoBehaviour
         FoeLeaderPuppet = _foePuppet;
         foreach (Puppet myFollowers in HordePuppets)
         {
-            Brain brain = myFollowers.GetComponent<Brain>();
-            if (brain is IA_Brain)
+            Brain brain = myFollowers.brain;
+            if (myFollowers.brain is IA_Brain)
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.chase);
         }
     }
@@ -135,7 +135,7 @@ public class HordeManager : MonoBehaviour
         FoeLeaderPuppet = _foePuppet;
         foreach (Puppet myFollowers in HordePuppets)
         {
-            Brain brain = myFollowers.GetComponent<Brain>();
+            Brain brain = myFollowers.brain;
             if (brain is IA_Brain)
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.alphaFight);
         }
@@ -144,7 +144,7 @@ public class HordeManager : MonoBehaviour
     {
         foreach (Puppet myFollowers in HordePuppets)
         {
-            Brain brain = myFollowers.GetComponent<Brain>();
+            Brain brain = myFollowers.brain;
             if (brain is IA_Brain)
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.follow);
         }
