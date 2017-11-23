@@ -14,7 +14,7 @@ public class Puppet : MonoBehaviour {
     [SerializeField]private Puppet leader;
     [SerializeField] private HordeManager hordeManager;
     private Vector3 extents;
-    private float life;
+    [SerializeField]private float life;
     public string debugAction;
     [SerializeField] private bool isOnGround;
     [HideInInspector] public Vector3 OnPlanNormal;

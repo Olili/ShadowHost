@@ -28,8 +28,12 @@ public class DeathAction : PuppetAction
     public void OnDeadBody()
     {
         timer += Time.deltaTime;
-        puppet.Rb.velocity = Vector3.zero;
-        puppet.Rb.angularVelocity = Vector3.zero;
+        if (timer > 0.5f)
+        {
+            puppet.Rb.velocity = Vector3.zero;
+            puppet.Rb.angularVelocity = Vector3.zero;
+        }
+      
         Host host;
         if (GameManager.Instance.PlayerBrain != null)
         {

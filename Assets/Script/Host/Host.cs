@@ -60,6 +60,8 @@ public class Host : MonoBehaviour
         gameObject.SetActive(true);
         if (body.Life >0)
             body.PuppetAction = new DeathAction(body);
+        else
+            body.PuppetAction = new DeathAction(body);
 
         GameManager.Instance.Possession(puppet);
         transform.position += Vector3.up * 0.2f;

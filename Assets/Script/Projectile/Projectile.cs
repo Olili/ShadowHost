@@ -5,18 +5,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
     public bool isLauched;
-    public Puppet laucher;
+    public Puppet launcher;
     public float speed ;
     Vector3 direction;
     float pushForce;
     float distance;
 
-    public void Init(Puppet laucher)
+    public void Init(Puppet _laucher)
     {
         isLauched = false;
         pushForce = 0;
         distance = 0;
-        Physics.IgnoreCollision(GetComponent<Collider>(), laucher.GetComponent<Collider>());
+        launcher = _laucher;
+        Physics.IgnoreCollision(GetComponent<Collider>(), launcher.GetComponent<Collider>());
     }
     public void Update()
     {
@@ -43,7 +44,7 @@ public class Projectile : MonoBehaviour {
             Puppet target = collider.GetComponent<Puppet>();
             if (target!=null)
             {
-                laucher.HitPuppet(collider, pushForce);
+                launcher.HitPuppet(collider, pushForce);
                 GameManager.Instance.ProjectilePool.SendToPool(this.gameObject);
             }
         }
