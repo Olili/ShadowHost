@@ -31,6 +31,7 @@ public class AlphaGuide_State : Follow_State
     {
         timerToApplyThisDirection += Time.deltaTime;
         Move();
+        CheckForFoes();
         if (timerToApplyThisDirection > maxTimerToApplyThisDirection)
         {
             FixedUpdateFct = LookingForDirection;

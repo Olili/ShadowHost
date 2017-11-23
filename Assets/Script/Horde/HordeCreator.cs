@@ -23,6 +23,7 @@ public class HordeCreator : MonoBehaviour {
     public int minHordeDistance = 15;
     public bool canGenerateHorde = true;
     [SerializeField] private int maxHordeInGame = 1;
+    [SerializeField] private int ID;
 
 
     private void Awake()
@@ -39,7 +40,7 @@ public class HordeCreator : MonoBehaviour {
     public void CreateHorde(Vector3 position,CreatureType type,int nbCreatures)
     {
             // Creation hordeManager
-        GameObject hordeContainer = new GameObject("horde"+ type.ToString()+" "+ hordeList.Count);
+        GameObject hordeContainer = new GameObject("horde"+ type+" "+ (ID++));
         HordeManager hordeManager = hordeContainer.AddComponent<HordeManager>();
         hordeContainer.transform.position = position;
 
@@ -47,7 +48,7 @@ public class HordeCreator : MonoBehaviour {
         Puppet alphaPuppet = creaturePool.GetCreature(type);
         hordeManager.InitAlpha(alphaPuppet);
 
-        alphaPuppet.name = "Alpha_" + type.ToString()+" "+ hordeList.Count;
+        alphaPuppet.name = "Alpha_" + type.ToString()+" "+ (ID++);
 
             // init alpha Puppet
         alphaPuppet.Init(position, alphaPuppet, hordeContainer.transform, hordeManager);

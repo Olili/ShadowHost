@@ -14,6 +14,7 @@ public class CreaturePool : MonoBehaviour
     List<GameObject>[] poolTab; // contient un tableau de pool de creatures
     int poolSize = 25;
     [SerializeField] public GameObject[] prefabModel;
+    [SerializeField] public static int ID = 0;
 
     private void Awake()
     {
@@ -62,7 +63,7 @@ public class CreaturePool : MonoBehaviour
         {
             returnedPuppet = CreateAndAddToPool(type);
         }
-        returnedPuppet.name = type.ToString() + "0" + poolTab[(int)type].Count;
+        returnedPuppet.name = type.ToString() + (ID++);
         returnedPuppet.gameObject.SetActive(true);
         return returnedPuppet;
     }

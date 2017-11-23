@@ -69,7 +69,7 @@ public class DebugPanel : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                hordeCreator.CreateHorde(hit.point, CreatureType.Grunt, 1);
+                hordeCreator.CreateHorde(hit.point, CreatureType.Grunt, 3);
 
             }
         }

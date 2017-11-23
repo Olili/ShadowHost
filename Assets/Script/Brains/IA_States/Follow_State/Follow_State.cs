@@ -78,7 +78,7 @@ public class Follow_State : IA_State {
                         Debug.LogError("point arret");
                     }
                     IA_State tempLeaderState = puppet.Leader.gameObject.GetComponent<IA_Brain>().MyIAState;
-                    if (spottedPuppet.transform.parent != null && spottedPuppet.HordeManager != null)
+                    //if (spottedPuppet.transform.parent != null && spottedPuppet.HordeManager != null)
                     {
                         if (spottedPuppet.Type != puppet.Type) // espece de creature différent de la mienne => combat de horde
                         {
@@ -90,7 +90,6 @@ public class Follow_State : IA_State {
                         }
                         else if (spottedPuppet.Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
                         {
-
                             if (tempLeaderState is Follow_State)
                             {
                                 if((spottedPuppet.HordeManager.HordePuppets.Count > 0))
