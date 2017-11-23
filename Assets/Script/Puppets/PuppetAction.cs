@@ -201,7 +201,7 @@ public class PuppetAction  {
             else // si espèces différentes
             {
                 myHordeManager.NeedNewAlpha(); // nouvel alpha
-                hitter.HordeManager.CurrentAlpha = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
+                hitter.HordeManager.FoeLeaderPuppet = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
             }
         }
 

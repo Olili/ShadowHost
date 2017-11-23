@@ -92,6 +92,7 @@ public class HordeManager : MonoBehaviour
         {
             if (tempLeader == null)
             {
+                InitAlpha(pup);
                 tempLeader = pup;
             }
             AddHordePuppet(pup);
