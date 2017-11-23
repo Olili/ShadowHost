@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GruntAlphasFight_State : AlphasFight_State
 {
-
     public GruntAlphasFight_State(Puppet _puppet) : base(_puppet)
     {
     }
@@ -21,24 +20,18 @@ public class GruntAlphasFight_State : AlphasFight_State
     {
         base.GoToMyOpponent();
 
-        if (alphaOpposent != null && !(alphaOpposent.PuppetAction is DeathAction))
+        Vector3 myVel = puppet.Rb.velocity;
+        Vector3 vecFromFoe = puppet.transform.position - alphaOpposent.transform.position;
+
+        if (vecFromFoe.magnitude < 2.0f)
         {
-            Vector3 myVel = puppet.Rb.velocity;
-
-            Vector3 vecFromFoe = puppet.transform.position - alphaOpposent.transform.position;
-
-            if (vecFromFoe.magnitude < 2.0f)
-            {
-                FixedUpdateFct = Fight;
-            }
-            else
-            {
-                steering.Seek(alphaOpposent.transform.position, 0.7f);
-                Move();
-            }
-
+            FixedUpdateFct = Fight;
         }
-
+        else
+        {
+            steering.Seek(alphaOpposent.transform.position, 0.7f);
+            Move();
+        }
     }
     protected override void Move()
     {

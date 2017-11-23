@@ -9,10 +9,6 @@ public class HordeManager : MonoBehaviour
     [SerializeField] private List<Puppet> hordePuppets = new List<Puppet>();
     [SerializeField] private Puppet currentAlpha;
 
-
-
-    bool isAlphaFighting;
-
     #region GetSet
     public List<Puppet> HordePuppets
     {

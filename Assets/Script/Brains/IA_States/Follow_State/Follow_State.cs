@@ -71,20 +71,14 @@ public class Follow_State : IA_State {
             for (int i = 0; i< allPossibleTarget.Length; i++)
             {
                 Puppet spottedPuppet = allPossibleTarget[i].GetComponent<Puppet>();
-               if (puppet.Leader == null)
-                {
-                    Debug.Log("What here ?");
-                }
+              
                 if (spottedPuppet.Type != puppet.Type) // espece de creature différent de la mienne => combat de horde
                 {
-                    // J'ai trouvé des ennemies!!!
-                        //(tempLeaderState as Follow_State).OneOfMyPuppetFindFoes(spottedPuppet.Leader);
                     puppet.HordeManager.PuppetFindFoe(spottedPuppet.Leader);
                 }
                 else if (spottedPuppet.Leader != puppet.Leader) // meme espece mais pas le meme leader => combat d'alpha
                 {
                     puppet.HordeManager.StartAlphaFight(spottedPuppet.Leader);
-                    //(tempLeaderState as Follow_State).AlphaFight(spottedPuppet.Leader);
                 }
             }
             timerForCheckingFoes = 0.0f;

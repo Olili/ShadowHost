@@ -11,9 +11,7 @@ public class AlphaGuide_State : Follow_State
 
     public AlphaGuide_State(Puppet _puppet) : base(_puppet)
     {
-        
     }
-
     public override void OnBegin()
     {
         base.OnBegin();
@@ -67,8 +65,4 @@ public class AlphaGuide_State : Follow_State
             puppet.PuppetAction.SetRotation(Vector3.zero);
         }
     }
-
-
-
-
 }

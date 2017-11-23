@@ -23,7 +23,7 @@ public class CircleLeaders_state : IA_State
         base.OnEnd();
     }
 
-    protected void Rotate()
+    protected virtual void Rotate()
     {
         Vector3 myVel = puppet.Rb.velocity;
 
@@ -54,6 +54,5 @@ public class CircleLeaders_state : IA_State
             puppet.PuppetAction.SetVelocity(Vector3.zero);
             puppet.PuppetAction.SetRotation(Vector3.zero);
         }
-
     }
 }
