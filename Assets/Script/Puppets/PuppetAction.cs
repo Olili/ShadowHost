@@ -213,6 +213,8 @@ public class PuppetAction  {
         {
             if (myHordeManager.HordePuppets.Count == 0) // passer par le Horde manager pour remove horde
                 GameManager.Instance.hordeCreator.DestroyHorde(myHordeManager);
+            if (puppet.gameObject.GetComponent<Brain>() != null) // detruire brain
+                GameObject.Destroy(puppet.gameObject.GetComponent<Brain>());
             puppet.PuppetAction = new DeathAction(puppet);
         }
 
