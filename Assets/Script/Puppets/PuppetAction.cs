@@ -138,7 +138,7 @@ public class PuppetAction  {
             OnDeath(hitter);
         }
     }
-   
+
     public virtual void OnDeath(Puppet hitter = null)
     {
         HordeManager myHordeManager = puppet.HordeManager;
@@ -148,17 +148,20 @@ public class PuppetAction  {
 
         if (puppet.Leader == puppet) // si je suis un alpha
         {
-            if (hitter.Type == puppet.Type)// si combat inter Espece == combat alpha
+            if (hitter!=null)
             {
-                if (hitter.Life > 0)
-                    myHordeManager.TransmitHorde(hitter);
-                else
-                    myHordeManager.NeedNewAlpha();
-            }
-            else // si espèces différentes
-            {
-                myHordeManager.NeedNewAlpha(); // nouvel alpha
-                hitter.HordeManager.FoeLeaderPuppet = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
+                if (hitter.Type == puppet.Type)// si combat inter Espece == combat alpha
+                {
+                    if (hitter.Life > 0)
+                        myHordeManager.TransmitHorde(hitter);
+                    else
+                        myHordeManager.NeedNewAlpha();
+                }
+                else // si espèces différentes
+                {
+                    myHordeManager.NeedNewAlpha(); // nouvel alpha
+                    hitter.HordeManager.FoeLeaderPuppet = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
+                }
             }
         }
 
