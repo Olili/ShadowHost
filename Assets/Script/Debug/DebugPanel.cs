@@ -11,6 +11,7 @@ public class DebugPanel : MonoBehaviour {
     [Range(0, 15)]  public float timeScale = 1;
     [SerializeField] public int nbGrunt = 5;
     [SerializeField] public int nbSpider = 5;
+    [SerializeField] public int nbHuman = 5;
 
     void Start () {
         playerBrain = FindObjectOfType<PlayerBrain>();
@@ -75,7 +76,7 @@ public class DebugPanel : MonoBehaviour {
 
             }
         }
-            // Humain horde
+            // Humain  corpse
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha4))
         {
             RaycastHit hit;
@@ -84,16 +85,17 @@ public class DebugPanel : MonoBehaviour {
                 hordeCreator.CreateDeadPuppet(CreatureType.Humain, hit.point);
             }
         }
-        // Humain corpse
+        // Humain horde
         else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha4))
         {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                hordeCreator.CreateHorde(hit.point, CreatureType.Humain, 1);
+                hordeCreator.CreateHorde(hit.point, CreatureType.Humain, nbHuman);
 
             }
         }
+        // wolf horde
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha5))
         {
             RaycastHit hit;
@@ -102,7 +104,7 @@ public class DebugPanel : MonoBehaviour {
                 hordeCreator.CreateDeadPuppet(CreatureType.Wolf, hit.point);
             }
         }
-        // Humain corpse
+        // wolf corpse
         else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha5))
         {
             RaycastHit hit;

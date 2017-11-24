@@ -57,7 +57,9 @@ MonoBehaviour:
   nbCreaturePop: 40
   maxHordeDistance: 30
   minHordeDistance: 15
-  canGenerateHorde: 1
+  canGenerateHorde: 0
+  maxHordeInGame: 2
+  ID: 0
 --- !u!114 &114690087883756948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,3 +75,4 @@ MonoBehaviour:
   - {fileID: 1957509282031604, guid: 9d6081520afde4d44af2ddc1a30d4de5, type: 2}
   - {fileID: 1826378672955778, guid: 99f41c167927bb84bbe677f4088ecc67, type: 2}
   - {fileID: 1155937348152700, guid: bae7b9d769cea6d4186d98b0632b86e0, type: 2}
+  - {fileID: 1344426668440336, guid: 0b9161385e4301a49985473715ad24a6, type: 2}

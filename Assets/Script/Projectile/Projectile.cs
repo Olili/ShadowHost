@@ -45,8 +45,16 @@ public class Projectile : MonoBehaviour {
             Puppet target = collider.GetComponent<Puppet>();
             if (target!=null)
             {
-                launcher.HitPuppet(collider, pushForce, launcher);
-                GameManager.Instance.ProjectilePool.SendToPool(this.gameObject);
+                if (target.Type != launcher.Type)
+                {
+                    launcher.HitPuppet(collider, pushForce, launcher);
+                    GameManager.Instance.ProjectilePool.SendToPool(this.gameObject);
+                }
+                else if (target.FriendlyFire && launcher.FriendlyFire)
+                {
+                    launcher.HitPuppet(collider, pushForce, launcher);
+                    GameManager.Instance.ProjectilePool.SendToPool(this.gameObject);
+                }
             }
         }
     }

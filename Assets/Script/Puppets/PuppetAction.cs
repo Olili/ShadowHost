@@ -160,7 +160,10 @@ public class PuppetAction  {
                 else // si espèces différentes
                 {
                     myHordeManager.NeedNewAlpha(); // nouvel alpha
-                    hitter.HordeManager.FoeLeaderPuppet = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
+                    if (!(hitter.PuppetAction is DeathAction))
+                        hitter.HordeManager.FoeLeaderPuppet = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
+                    else // cheville marchera mal selon combien de horde. (Vrai solution : on connait la horde pas le foePuppet)
+                        myHordeManager.FoeLeaderPuppet.HordeManager.FoeLeaderPuppet = myHordeManager.CurrentAlpha; // acutalise la cible ennemie.
                 }
             }
         }
