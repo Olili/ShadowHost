@@ -104,6 +104,9 @@ public class GameManager : MonoBehaviour {
             case CreatureType.Humain:
                 PlayerBrain = puppet.gameObject.AddComponent<PlayerHumanBrain>();
                 break;
+            case CreatureType.Wolf:
+                PlayerBrain = puppet.gameObject.AddComponent<PlayerWolfBrain>();
+                break;
             case CreatureType.Max_Creatures:
                 Debug.Log("What it is ?");
                 break;

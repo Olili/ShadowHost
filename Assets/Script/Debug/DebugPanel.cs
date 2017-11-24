@@ -9,8 +9,10 @@ public class DebugPanel : MonoBehaviour {
     PlayerBrain playerBrain;
     HordeCreator hordeCreator;
     [Range(0, 15)]  public float timeScale = 1;
+    [SerializeField] public int nbGrunt = 5;
+    [SerializeField] public int nbSpider = 5;
 
-	void Start () {
+    void Start () {
         playerBrain = FindObjectOfType<PlayerBrain>();
         hordeCreator = FindObjectOfType<HordeCreator>();
     }
@@ -52,7 +54,7 @@ public class DebugPanel : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                hordeCreator.CreateHorde(hit.point, CreatureType.Spider, 1);
+                hordeCreator.CreateHorde(hit.point, CreatureType.Spider, nbSpider);
             }
 
         }   // Grunt horde
@@ -69,7 +71,7 @@ public class DebugPanel : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
-                hordeCreator.CreateHorde(hit.point, CreatureType.Grunt, 3);
+                hordeCreator.CreateHorde(hit.point, CreatureType.Grunt, nbGrunt);
 
             }
         }
@@ -89,6 +91,24 @@ public class DebugPanel : MonoBehaviour {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 hordeCreator.CreateHorde(hit.point, CreatureType.Humain, 1);
+
+            }
+        }
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateDeadPuppet(CreatureType.Wolf, hit.point);
+            }
+        }
+        // Humain corpse
+        else if (Input.GetKey(KeyCode.Alpha1) && Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                hordeCreator.CreateHorde(hit.point, CreatureType.Wolf, 1);
 
             }
         }

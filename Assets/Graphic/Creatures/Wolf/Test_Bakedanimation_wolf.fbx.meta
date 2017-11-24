@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: ade698c7d1daf1c47b71c09a1e5d2ff9
+timeCreated: 1511513761
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: CTRL_globalSRT_Wolf
+    100002: CTRL_spine_spine_Wolf
+    100004: CTRL_spineParent_spine_Wolf
+    100006: CTRL_spineRoot_spine_Wolf
+    100008: CTRL_spineRootParent_spine_Wolf
+    100010: Group_Deformers_Wolf
+    100012: Group_globalSRT_Wolf
+    100014: joint_C0_L_clavicle_Wolf
+    100016: joint_C0_L_ear1_Wolf
+    100018: joint_C0_L_ear_Wolf
+    100020: joint_C0_L_foreLimb_Wolf
+    100022: joint_C0_L_hindLimb_Wolf
+    100024: joint_C0_neck_Wolf
+    100026: joint_C0_R_clavicle_Wolf
+    100028: joint_C0_R_foreLimb_Wolf
+    100030: joint_C0_R_hinbLimb_Wolf
+    100032: joint_C0_spine_Wolf
+    100034: joint_C0_tail_Wolf
+    100036: joint_C1_L_foreLimb_Wolf
+    100038: joint_C1_L_hindLimb_Wolf
+    100040: joint_C1_neck_Wolf
+    100042: joint_C1_R_foreLimb_Wolf
+    100044: joint_C1_R_hinbLimb_Wolf
+    100046: joint_C1_spine_Wolf
+    100048: joint_C1_tail_Wolf
+    100050: joint_C2_L_foreLimb_Wolf
+    100052: joint_C2_L_hindLimb_Wolf
+    100054: joint_C2_neck_Wolf
+    100056: joint_C2_R_foreLimb_Wolf
+    100058: joint_C2_R_hinbLimb_Wolf
+    100060: joint_C2_spine_Wolf
+    100062: joint_C2_tail_Wolf
+    100064: joint_C3_spine_Wolf
+    100066: joint_C3_tail_Wolf
+    100068: joint_C4_tail_Wolf
+    100070: joint_C5_tail_Wolf
+    100072: joint_eff_L_clavicle_Wolf
+    100074: joint_eff_L_ear1_Wolf
+    100076: joint_eff_L_ear_Wolf
+    100078: joint_eff_R_clavicle_Wolf
+    100080: nullOut_C1_spine_Wolf
+    100082: polySurface_Wolf
+    100084: root_spineRIG_spine_Wolf
+    100086: spineParentGroup1_spine_Wolf
+    100088: //RootNode
+    400000: CTRL_globalSRT_Wolf
+    400002: CTRL_spine_spine_Wolf
+    400004: CTRL_spineParent_spine_Wolf
+    400006: CTRL_spineRoot_spine_Wolf
+    400008: CTRL_spineRootParent_spine_Wolf
+    400010: Group_Deformers_Wolf
+    400012: Group_globalSRT_Wolf
+    400014: joint_C0_L_clavicle_Wolf
+    400016: joint_C0_L_ear1_Wolf
+    400018: joint_C0_L_ear_Wolf
+    400020: joint_C0_L_foreLimb_Wolf
+    400022: joint_C0_L_hindLimb_Wolf
+    400024: joint_C0_neck_Wolf
+    400026: joint_C0_R_clavicle_Wolf
+    400028: joint_C0_R_foreLimb_Wolf
+    400030: joint_C0_R_hinbLimb_Wolf
+    400032: joint_C0_spine_Wolf
+    400034: joint_C0_tail_Wolf
+    400036: joint_C1_L_foreLimb_Wolf
+    400038: joint_C1_L_hindLimb_Wolf
+    400040: joint_C1_neck_Wolf
+    400042: joint_C1_R_foreLimb_Wolf
+    400044: joint_C1_R_hinbLimb_Wolf
+    400046: joint_C1_spine_Wolf
+    400048: joint_C1_tail_Wolf
+    400050: joint_C2_L_foreLimb_Wolf
+    400052: joint_C2_L_hindLimb_Wolf
+    400054: joint_C2_neck_Wolf
+    400056: joint_C2_R_foreLimb_Wolf
+    400058: joint_C2_R_hinbLimb_Wolf
+    400060: joint_C2_spine_Wolf
+    400062: joint_C2_tail_Wolf
+    400064: joint_C3_spine_Wolf
+    400066: joint_C3_tail_Wolf
+    400068: joint_C4_tail_Wolf
+    400070: joint_C5_tail_Wolf
+    400072: joint_eff_L_clavicle_Wolf
+    400074: joint_eff_L_ear1_Wolf
+    400076: joint_eff_L_ear_Wolf
+    400078: joint_eff_R_clavicle_Wolf
+    400080: nullOut_C1_spine_Wolf
+    400082: polySurface_Wolf
+    400084: root_spineRIG_spine_Wolf
+    400086: spineParentGroup1_spine_Wolf
+    400088: //RootNode
+    4300000: polySurface_Wolf
+    7400000: Attack
+    7400002: Idle
+    7400004: Walk
+    7400006: BeforeJump
+    7400008: JumpAttack
+    9500000: //RootNode
+    13700000: polySurface_Wolf
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 60
+      lastFrame: 115
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 151
+      lastFrame: 182
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: BeforeJump
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: JumpAttack
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 51
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
