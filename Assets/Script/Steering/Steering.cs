@@ -19,11 +19,12 @@ public class Steering : MonoBehaviour {
     bool updateNeighbours = true;
     Collider[] closeNeighbours;
     Collider[] farawayNeighbours;
+    Collider[] obstacles;
+    public float collisionAvoidanceRay;
     float timer = 0;
     float delay = 0.1f;
 
     // info : 
-    private bool isOnGround = false;
     public bool isSliding;
 
     #region getterSetters
@@ -47,6 +48,7 @@ public class Steering : MonoBehaviour {
 #if UNITY_EDITOR
         giz.separateSphereLenght = puppet.Extents.magnitude * separationRayFactor;
 #endif
+        collisionAvoidanceRay = puppet.Extents.magnitude * 2 + 1;
     }
     /// <summary>
     /// Renvoi la velocité finale calculée par le steering 
@@ -68,6 +70,9 @@ public class Steering : MonoBehaviour {
                 EndFrameReset();
                 return Vector3.zero;
             }
+
+            ObstaclesAvoidance(5);
+
             steering = Vector3.ClampMagnitude(steering, puppet.stats.Get(Stats.StatType.move_speed));
             Vector3 velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
             velocity += (steering * 50 * Time.fixedDeltaTime * puppet.stats.Get(Stats.StatType.maxAcceleration));
@@ -106,6 +111,8 @@ public class Steering : MonoBehaviour {
         {
             updateNeighbours = true;
             timer = 0;
+                // un peu crade mais pour tester vite
+            UpdateObstacles();
         }
     }
 
@@ -247,12 +254,62 @@ public class Steering : MonoBehaviour {
         }
         Seek(averagePosition / closeNeighbours.Length);
     }
+
+    public void ObstaclesAvoidance(float factor = 1)
+    {
+        Collider closestObstacle = null;
+        float closestDistance = 1000;
+        Vector3 closestPoint;
+        // si pas d'obstacle rien a faire
+        if (obstacles == null)
+            return;
+        // On cherche l'obstacle le plus proche du puppet
+        // On vérifie aussi qu'on va vers lui
+        for (int i = 0; i < obstacles.Length;i++)
+        {
+            closestPoint = obstacles[i].ClosestPointOnBounds(transform.position);
+            Vector3 puppetToObstacle = closestPoint - puppet.transform.position;
+            float angle = Vector3.Angle(puppet.transform.forward, puppetToObstacle);
+            if (angle <= 90 && puppetToObstacle.magnitude < closestDistance)
+            {
+                closestDistance = puppetToObstacle.magnitude;
+                closestObstacle = obstacles[i];
+            }
+        }
+        if (closestObstacle !=null)
+        {
+            Vector3 puppetToObstacle = closestObstacle.transform.position - puppet.transform.position;
+            Vector3 avoidanceForce = Vector3.zero;
+            // Soit il faut tourner à gauche/ sens AntiHoraire :
+            if (Vector3.Dot(puppet.transform.right, puppetToObstacle) > 0)
+            {
+                avoidanceForce.x = -puppetToObstacle.z;
+                avoidanceForce.z = puppetToObstacle.x;
+            }
+            else // Soit il faut tourner à droite /sens Horaire: 
+            {
+                avoidanceForce.x = puppetToObstacle.z;
+                avoidanceForce.z = -puppetToObstacle.x;
+            }
+
+            //if (Vector3.Angle(puppet.Rb.velocity, avoidanceForce)<10)
+            //{
+            //    avoidanceForce = Vector3.Cross(avoidanceForce, puppet.transform.up);
+            //}
+#if UNITY_EDITOR
+            giz.avoidance = avoidanceForce;
+#endif
+            float power = ((collisionAvoidanceRay - closestDistance)/ collisionAvoidanceRay * factor);
+            avoidanceForce = avoidanceForce.normalized * puppet.stats.Get(Stats.StatType.move_speed) * power;
+            steering += avoidanceForce;
+        }
+    }
+
     #endregion
 
 
     public Collider[] GetNeighbouringPuppet()
     {
-
         if (updateNeighbours)
         {
             int separationMask = LayerMask.GetMask(new string[] { "Puppet" });
@@ -263,6 +320,12 @@ public class Steering : MonoBehaviour {
             updateNeighbours = false;
         }
         return closeNeighbours;
+    }
+    public Collider[] UpdateObstacles()
+    {
+        int separationMask = LayerMask.GetMask(new string[] { "Obstacle" });
+        obstacles = Physics.OverlapSphere(transform.position, collisionAvoidanceRay, separationMask);
+        return obstacles;
     }
     
     public virtual Vector3 GetDvOnPlan(Vector3 target)
@@ -289,9 +352,11 @@ public class Steering : MonoBehaviour {
         public bool Steering;
         public bool SeparateCheckSphere;
         public bool Separate;
+        public bool collisionAvoidance;
 
         public Vector3 steeringForce;
         public Vector3 separateForce;
+        public Vector3 avoidance;
         public float separateSphereLenght;
     }
     public GizmosForSteering giz;

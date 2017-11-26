@@ -27,12 +27,22 @@ public static class SteeringGizmos  {
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(position, position + steering.giz.separateForce);
         }
+        if (steering.giz.collisionAvoidance)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(position, position + steering.giz.avoidance);
+        }
         if (steering.giz.SeparateCheckSphere)
         {
             Gizmos.color = new Color(0,1,0,0.5f);
             Gizmos.DrawSphere(position, steering.giz.separateSphereLenght);
         }
-        
+        if (steering.giz.collisionAvoidance)
+        {
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            Gizmos.DrawSphere(position, steering.collisionAvoidanceRay);
+        }
+
 
     }
 }
