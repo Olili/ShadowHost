@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33906811611877704}
   - component: {fileID: 23920349845101724}
   - component: {fileID: 135344341211464002}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PREFAB_Cristaux_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709912604659924}
   - component: {fileID: 108248734290965598}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -96,6 +97,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
