@@ -50,6 +50,8 @@ public class Host : MonoBehaviour
             body.Animator.SetTrigger("Revive");
         GameManager.Instance.PlayerBrain.host = this;
 
+        GameManager.Instance.hordeCreator.RemoveDeadPuppet(body);
+
         GameManager.Instance.FeedbackManager.PossessBody(body.transform);
         body.FriendlyFire = true;
     }
