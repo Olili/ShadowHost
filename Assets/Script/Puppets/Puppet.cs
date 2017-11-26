@@ -245,7 +245,7 @@ public class Puppet : MonoBehaviour {
                 IsOnGround = false;
             }
                 // On est proche du sol mais pas assez
-            else if (Vector3.Distance(hit.point, centerDown.position) > 0.2f)
+            else if (Vector3.Distance(hit.point, centerDown.position) > 0.5f)
             {
                 rb.AddForce(Physics.gravity*10, ForceMode.Acceleration);
                 IsOnGround = true;
@@ -302,12 +302,12 @@ public class Puppet : MonoBehaviour {
     {
         if (puppetAction!=null)
             puppetAction.DrawGizmo();
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.green;
-            Vector3 start = centerDown.position + Vector3.up * Extents.y;
-            Gizmos.DrawLine(start, start + -OnPlanNormal * (extents.y + 0.5f));
-        }
+        //if (Application.isPlaying)
+        //{
+        //    Gizmos.color = Color.green;
+        //    Vector3 start = centerDown.position + Vector3.up * Extents.y;
+        //    Gizmos.DrawLine(start, start + -OnPlanNormal * (extents.y + 0.5f));
+        //}
     }
 
     public void OnAnimationEvent(string functionName)
