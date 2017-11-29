@@ -8,6 +8,12 @@ public class Chase_State : IA_State
     protected Puppet myTarget = null;
     protected Vector3 myVel = Vector3.zero;
 
+    protected float timerForCheckingFoes = 0.0f; // Permet d'éviter de faire des sphere-Cast à chaque frame
+    protected float maxTimerForCheckingFoes = 1.0f; // check pour les ennemies toute les 1 sec;
+    protected float radiusForCheckingFoes = 6.00f;
+    protected float radiusForFight = 4.00f;
+
+
     public Chase_State(Puppet _puppet) : base(_puppet)
     {
     }
@@ -15,6 +21,7 @@ public class Chase_State : IA_State
     public override void OnBegin()
     {
         foeLeaderPuppet = puppet.HordeManager.FoeLeaderPuppet;
+        FixedUpdateFct = FixedUpdate_ChaseFoe;
         base.OnBegin();
     }
     public override void OnEnd()
@@ -24,14 +31,73 @@ public class Chase_State : IA_State
 
     public virtual void FixedUpdate_ChaseFoe()
     {
-        if (!FindTheNearestFoe())
+        if (!CheckTarget())
         {
             (puppet.brain as IA_Brain).MyIAState = (puppet.brain as IA_Brain).GetTypeState(Brain.E_State.follow);
+            return;
+        }
+
+        FindTheNearestFoe();
+      
+        if (myTarget!=null)
+        {
+            if (Vector3.Distance(puppet.transform.position, myTarget.transform.position) > radiusForFight)
+            {
+                GoToTarget();
+                Move();
+            }
+            else
+            {
+                Brain brain = puppet.brain;
+                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.fight);
+                ((brain as IA_Brain).MyIAState as Fight_State).myTarget = myTarget;
+            }
         }
     }
-    public virtual void Update_ChaseFoe()
+    public virtual bool CheckTarget()
     {
+        if (myTarget==null|| (myTarget.PuppetAction is DeathAction))
+        {
+            myTarget = puppet.HordeManager.GetTarget();
+        }
+        return myTarget != null;
+    }
 
+    protected virtual bool FindTheNearestFoe()
+    {
+        timerForCheckingFoes += Time.deltaTime;
+        if (timerForCheckingFoes >= maxTimerForCheckingFoes)
+        {
+            LayerMask possibleTarget = 1 << LayerMask.NameToLayer("Puppet");
+            Collider[] allPossibleTarget = Physics.OverlapSphere(puppet.transform.position, radiusForCheckingFoes, possibleTarget, QueryTriggerInteraction.Ignore);
+            float nearestDistance = float.MaxValue;
+
+            for (int i = 0; i < allPossibleTarget.Length; i++)
+            {
+                Puppet spottedPuppet = allPossibleTarget[i].GetComponent<Puppet>();
+                if (spottedPuppet.Type != puppet.Type)
+                {
+                    float tempDist = Vector3.Distance(puppet.transform.position, spottedPuppet.transform.position);
+                    if (tempDist < nearestDistance)
+                    {
+                        nearestDistance = tempDist;
+                        myTarget = spottedPuppet;
+                    }
+                }
+
+            }
+            timerForCheckingFoes = 0.0f;
+        }
+
+            // transition 
+      
+        return true;
+    }
+
+
+    public virtual void GoToTarget()
+    {
+        steering.Seek(myTarget.transform.position);
     }
     protected virtual void Move()
     {
@@ -50,32 +116,5 @@ public class Chase_State : IA_State
             puppet.PuppetAction.SetVelocity(Vector3.zero);
             puppet.PuppetAction.SetRotation(Vector3.zero);
         }
-    }
-
-    protected virtual bool FindTheNearestFoe()
-    {
-        float nearestDistance = float.MaxValue;
-        Puppet myPossibleTarget = null;
-
-        if (foeLeaderPuppet.HordeManager != null)
-        {
-            foreach (Puppet pup in foeLeaderPuppet.HordeManager.HordePuppets)
-            {
-                float tempDist = Vector3.Distance(puppet.transform.position, pup.transform.position);
-                if (tempDist < nearestDistance)
-                {
-                    nearestDistance = tempDist;
-                    myPossibleTarget = pup;
-                }
-            }
-        }
-
-        if (myPossibleTarget != null)
-        {
-            myTarget = myPossibleTarget;
-            return true;
-        }
-        myTarget = null;
-        return false;
     }
 }

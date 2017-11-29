@@ -27,7 +27,6 @@ public class Follow_State : IA_State {
 
     protected virtual void FollowMovingPlayer()
     {
-
         Vector3 leaderPos = puppet.Leader.transform.position;
         Vector3 leaderVel = puppet.Leader.Rb.velocity;
         Vector3 leaderDir = puppet.Leader.transform.forward;

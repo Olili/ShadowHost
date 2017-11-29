@@ -9,7 +9,6 @@ public class WolfJumpAttack : WolfAction
     Vector3 attackOrigin;
     float pushForce;
 
-
     public WolfJumpAttack(Puppet _puppet) : base(_puppet)
     {
     }

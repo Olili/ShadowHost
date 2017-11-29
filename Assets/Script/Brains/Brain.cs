@@ -82,12 +82,6 @@ public class Brain : MonoBehaviour {
             {
                 switch (_type)
                 {
-                    case CreatureType.Spider:
-                        return new ChaseSpider_State(_myPuppet);
-                    case CreatureType.Grunt:
-                        return new ChaseGrunt_State(_myPuppet);
-                    case CreatureType.Humain:
-                        return new ChaseHumain_State(_myPuppet);
                     default:
                         return new Chase_State(_myPuppet);
                 }
@@ -96,15 +90,8 @@ public class Brain : MonoBehaviour {
             {
                 switch (_type)
                 {
-                    case CreatureType.Spider:
-                        return new CircleLeaders_state(_myPuppet);
-                    case CreatureType.Grunt:
-                        return new CircleLeaders_state(_myPuppet);
-                    case CreatureType.Humain:
-                        return new ChaseHumain_State(_myPuppet);
-
                     default:
-                        return new CircleLeaders_state(_myPuppet);
+                        return new Fight_State(_myPuppet);
                 }
             }
         }
@@ -122,12 +109,6 @@ public class Brain : MonoBehaviour {
             {
                 switch (_type)
                 {
-                    case CreatureType.Spider:
-                        return new ChaseSpider_State(_myPuppet);
-                    case CreatureType.Grunt:
-                        return new ChaseGrunt_State(_myPuppet);
-                    case CreatureType.Humain:
-                        return new ChaseHumain_State(_myPuppet);
                     default:
                         return new Chase_State(_myPuppet);
                 }
@@ -136,12 +117,8 @@ public class Brain : MonoBehaviour {
             {
                 switch (_type)
                 {
-                    case CreatureType.Spider:
-                        return new SpiderAlphasFight_State(_myPuppet);
-                    case CreatureType.Grunt:
-                        return new GruntAlphasFight_State(_myPuppet);
                     default:
-                        return new AlphasFight_State(_myPuppet);
+                        return new Fight_State(_myPuppet);
                 }
             }
         }

@@ -141,14 +141,25 @@ public class HordeManager : MonoBehaviour
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.chase);
         }
     }
-    public void StartAlphaFight(Puppet _foePuppet)
+    public void StartAlphaFight(Puppet _foeLeaderPuppet)
     {
-        FoeLeaderPuppet = _foePuppet;
+        FoeLeaderPuppet = _foeLeaderPuppet;
         foreach (Puppet myFollowers in HordePuppets)
         {
             Brain brain = myFollowers.brain;
+                    // Alpha -> fight
             if (brain is IA_Brain)
-                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.fight);
+            {
+                if (myFollowers.Leader == myFollowers)
+                {
+                    (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.fight);
+                    ((brain as IA_Brain).MyIAState as Fight_State).myTarget = FoeLeaderPuppet;
+                }
+                else  // puppet ->circle
+                {
+                    (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.circle);
+                }
+            }
         }
     }
     public void EndAlphaFight()
@@ -160,4 +171,28 @@ public class HordeManager : MonoBehaviour
                 (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.follow);
         }
     }
+
+    public Puppet GetTarget()
+    {
+        LayerMask possibleTarget = 1 << LayerMask.NameToLayer("Puppet");
+        Collider[] tabPuppetsCollider = Physics.OverlapSphere(currentAlpha.transform.position, 20, possibleTarget);
+        float nearest = float.MaxValue;
+        Puppet target = null;
+
+        for (int i = 0; i < tabPuppetsCollider.Length;i++)
+        {
+            Puppet foe = tabPuppetsCollider[i].GetComponent<Puppet>();
+            if (foe.Type != currentAlpha.Type)
+            {
+                float tempDistance = Vector3.Distance(tabPuppetsCollider[i].transform.position, currentAlpha.transform.position);
+                if (tempDistance < nearest)
+                {
+                    tempDistance = nearest;
+                    target = foe;
+                }
+            }
+        }
+        return target;
+    }
+
 }
