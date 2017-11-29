@@ -148,7 +148,7 @@ public class HordeManager : MonoBehaviour
         {
             Brain brain = myFollowers.brain;
             if (brain is IA_Brain)
-                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.alphaFight);
+                (brain as IA_Brain).MyIAState = (brain as IA_Brain).GetTypeState(Brain.E_State.fight);
         }
     }
     public void EndAlphaFight()
