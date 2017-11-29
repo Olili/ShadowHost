@@ -34,8 +34,9 @@ public class Brain : MonoBehaviour {
     {
         free,
         follow,
+        circle,
         chase,
-        alphaFight
+        fight
     }
     public virtual IA_State GetTypeState(E_State _state)
     {
@@ -57,8 +58,24 @@ public class Brain : MonoBehaviour {
 
                     case CreatureType.Grunt:
                         return new GruntFollow_State(_myPuppet);
+                    case CreatureType.Humain:
+
                     default:
                         return new Follow_State(_myPuppet);
+                }
+            }
+            else if (_state == E_State.circle)
+            {
+                switch (_type)
+                {
+                    case CreatureType.Spider:
+                        return new CircleLeaders_state(_myPuppet);
+                    case CreatureType.Grunt:
+                        return new CircleLeaders_state(_myPuppet);
+                    case CreatureType.Humain:
+                        return new CircleLeaders_state(_myPuppet);
+                    default:
+                        return new CircleLeaders_state(_myPuppet);
                 }
             }
             else if (_state == E_State.chase)
@@ -72,10 +89,10 @@ public class Brain : MonoBehaviour {
                     case CreatureType.Humain:
                         return new ChaseHumain_State(_myPuppet);
                     default:
-                        return new Follow_State(_myPuppet);
+                        return new Chase_State(_myPuppet);
                 }
             }
-            else if (_state == E_State.alphaFight)
+            else if (_state == E_State.fight)
             {
                 switch (_type)
                 {
@@ -83,12 +100,15 @@ public class Brain : MonoBehaviour {
                         return new CircleLeaders_state(_myPuppet);
                     case CreatureType.Grunt:
                         return new CircleLeaders_state(_myPuppet);
+                    case CreatureType.Humain:
+                        return new ChaseHumain_State(_myPuppet);
+
                     default:
                         return new CircleLeaders_state(_myPuppet);
                 }
             }
         }
-        else
+        else// si je suis alpha
         {
             if (_state == E_State.follow)
             {
@@ -112,7 +132,7 @@ public class Brain : MonoBehaviour {
                         return new Chase_State(_myPuppet);
                 }
             }
-            else if (_state == E_State.alphaFight)
+            else if (_state == E_State.fight)
             {
                 switch (_type)
                 {

@@ -8,6 +8,7 @@ public class HordeManager : MonoBehaviour
     [SerializeField] private Puppet foeLeaderPuppet;
     [SerializeField] private List<Puppet> hordePuppets = new List<Puppet>();
     [SerializeField] private Puppet currentAlpha;
+    [SerializeField] private Brain.E_State hordeState;
 
     #region GetSet
     public List<Puppet> HordePuppets
@@ -34,7 +35,6 @@ public class HordeManager : MonoBehaviour
             foeLeaderPuppet = value;
         }
     }
-
     public Puppet CurrentAlpha
     {
         get
@@ -47,10 +47,23 @@ public class HordeManager : MonoBehaviour
             currentAlpha = value;
         }
     }
+    public Brain.E_State HordeState
+    {
+        get
+        {
+            return hordeState;
+        }
+
+        set
+        {
+            hordeState = value;
+        }
+    }
     #endregion
-   
+
     public void InitAlpha(Puppet _firstAlpha)
     {
+        hordeState = Brain.E_State.follow;
         if (_firstAlpha != currentAlpha)
         {
             GameManager.Instance.FeedbackManager.NewAlpha(_firstAlpha.transform);
