@@ -23,6 +23,8 @@ public class Puppet : MonoBehaviour {
     [SerializeField] private bool friendlyFire;
     public Brain brain;
 
+    List<Collider> attackedPuppets;
+
     // State machine : 
     private PuppetAction puppetAction;
 
@@ -190,6 +192,7 @@ public class Puppet : MonoBehaviour {
         OnPlanNormal = Vector3.up;
         PhysicMaterial.dynamicFriction = 0;
         centerDown = transform.Find("CenterDown");
+        attackedPuppets = new List<Collider>();
         InitAction();
     }
     public void InitAction()
@@ -344,7 +347,11 @@ public class Puppet : MonoBehaviour {
         {
             if (collTab[i].transform != transform)
             {
-                HitPuppet(collTab[i], pushForce, hitter);
+                if (!attackedPuppets.Contains(collTab[i]))
+                {
+                    attackedPuppets.Add(collTab[i]);
+                    HitPuppet(collTab[i], pushForce, hitter);
+                }
             }
         }
     }
@@ -360,6 +367,10 @@ public class Puppet : MonoBehaviour {
         {
             targetPuppet.PuppetAction.OnHit(stats.Get(Stats.StatType.strengh), forceApply.normalized * pushForce, hitter);
         }
+    }
+    public void ResetAttackedCollidedPuppets()
+    {
+        attackedPuppets.Clear();
     }
 
     public Transform FindChildByName(string _name, Transform _tr)

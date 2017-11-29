@@ -66,6 +66,7 @@ public class GruntQuickAttack : GruntAction
     }
     public void AttackEnd()
     {
+        puppet.ResetAttackedCollidedPuppets();
         puppet.Rb.velocity = Vector3.zero;
         timer += Time.deltaTime;
         if (timer > 0.2f)
