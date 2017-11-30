@@ -87,6 +87,7 @@ public class FeedbackManager : MonoBehaviour {
 		{
 			baseMaterial = smr.material;
 			smr.material = pl.MAT_OnDeadSelectable;
+			smr.material.SetTexture("_MainTex", baseMaterial.GetTexture("_MainTex"));
 			currentlySelectablePuppet = p;
 			selectableFX = Instantiate(pl.FX_OnDeadSelectable, p.transform.position, Quaternion.identity, p.transform);
 		}
