@@ -1,0 +1,221 @@
+fileFormatVersion: 2
+guid: 9d05a9d5d323e1447817227d9511b952
+timeCreated: 1512031716
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: ASSET_Batte
+    100002: ASSET_Troll
+    100004: Group_deformers_Troll
+    100006: Group_RIG_Troll
+    100008: joint_Out_arm_L_C1_Troll
+    100010: joint_Out_arm_L_C2_Troll
+    100012: joint_Out_arm_L_C2_twist_Troll
+    100014: joint_Out_arm_L_root_Troll
+    100016: joint_Out_arm_R_C1_Troll
+    100018: joint_Out_arm_R_C2_Troll
+    100020: joint_Out_arm_R_C2_twist_Troll
+    100022: joint_Out_arm_R_root_Troll
+    100024: joint_Out_clavicle_L_C1_Troll
+    100026: joint_Out_clavicle_L_root_Troll
+    100028: joint_Out_clavicle_R_C1_Troll
+    100030: joint_Out_clavicle_R_root_Troll
+    100032: joint_Out_index_L_C1_Troll
+    100034: joint_Out_index_L_C2_Troll
+    100036: joint_Out_index_L_C3_Troll
+    100038: joint_Out_index_R_C1_Troll
+    100040: joint_Out_index_R_C2_Troll
+    100042: joint_Out_index_R_C3_Troll
+    100044: joint_Out_leg_L_C1_Troll
+    100046: joint_Out_leg_L_C2_Troll
+    100048: joint_Out_leg_L_C3_Troll
+    100050: joint_Out_leg_L_C4_Troll
+    100052: joint_Out_leg_L_root_Troll
+    100054: joint_Out_leg_R_C1_Troll
+    100056: joint_Out_leg_R_C2_Troll
+    100058: joint_Out_leg_R_C3_Troll
+    100060: joint_Out_leg_R_C4_Troll
+    100062: joint_Out_leg_R_root_Troll
+    100064: joint_Out_little_L_C1_Troll
+    100066: joint_Out_little_L_C2_Troll
+    100068: joint_Out_little_L_C3_Troll
+    100070: joint_Out_little_R_C1_Troll
+    100072: joint_Out_little_R_C2_Troll
+    100074: joint_Out_little_R_C3_Troll
+    100076: joint_Out_major_L_C1_Troll
+    100078: joint_Out_major_L_C2_Troll
+    100080: joint_Out_major_L_C3_Troll
+    100082: joint_Out_major_R_C1_Troll
+    100084: joint_Out_major_R_C2_Troll
+    100086: joint_Out_major_R_C3_Troll
+    100088: joint_Out_neck_C1_Troll
+    100090: joint_Out_neck_C2_Troll
+    100092: joint_Out_neck_C3_Troll
+    100094: joint_Out_neck_C4_Troll
+    100096: joint_Out_ring_L_C1_Troll
+    100098: joint_Out_ring_L_C2_Troll
+    100100: joint_Out_ring_L_C3_Troll
+    100102: joint_Out_ring_R_C1_Troll
+    100104: joint_Out_ring_R_C2_Troll
+    100106: joint_Out_ring_R_C3_Troll
+    100108: joint_Out_spine_C1_Troll
+    100110: joint_Out_spine_C2_Troll
+    100112: joint_Out_spine_C3_Troll
+    100114: joint_Out_spine_C4_Troll
+    100116: joint_Out_spine_C5_Troll
+    100118: joint_Out_thumb_L_C1_Troll
+    100120: joint_Out_thumb_L_C2_Troll
+    100122: joint_Out_thumb_L_C3_Troll
+    100124: joint_Out_thumb_R_C1_Troll
+    100126: joint_Out_thumb_R_C2_Troll
+    100128: joint_Out_thumb_R_C3_Troll
+    100130: //RootNode
+    400000: ASSET_Batte
+    400002: ASSET_Troll
+    400004: Group_deformers_Troll
+    400006: Group_RIG_Troll
+    400008: joint_Out_arm_L_C1_Troll
+    400010: joint_Out_arm_L_C2_Troll
+    400012: joint_Out_arm_L_C2_twist_Troll
+    400014: joint_Out_arm_L_root_Troll
+    400016: joint_Out_arm_R_C1_Troll
+    400018: joint_Out_arm_R_C2_Troll
+    400020: joint_Out_arm_R_C2_twist_Troll
+    400022: joint_Out_arm_R_root_Troll
+    400024: joint_Out_clavicle_L_C1_Troll
+    400026: joint_Out_clavicle_L_root_Troll
+    400028: joint_Out_clavicle_R_C1_Troll
+    400030: joint_Out_clavicle_R_root_Troll
+    400032: joint_Out_index_L_C1_Troll
+    400034: joint_Out_index_L_C2_Troll
+    400036: joint_Out_index_L_C3_Troll
+    400038: joint_Out_index_R_C1_Troll
+    400040: joint_Out_index_R_C2_Troll
+    400042: joint_Out_index_R_C3_Troll
+    400044: joint_Out_leg_L_C1_Troll
+    400046: joint_Out_leg_L_C2_Troll
+    400048: joint_Out_leg_L_C3_Troll
+    400050: joint_Out_leg_L_C4_Troll
+    400052: joint_Out_leg_L_root_Troll
+    400054: joint_Out_leg_R_C1_Troll
+    400056: joint_Out_leg_R_C2_Troll
+    400058: joint_Out_leg_R_C3_Troll
+    400060: joint_Out_leg_R_C4_Troll
+    400062: joint_Out_leg_R_root_Troll
+    400064: joint_Out_little_L_C1_Troll
+    400066: joint_Out_little_L_C2_Troll
+    400068: joint_Out_little_L_C3_Troll
+    400070: joint_Out_little_R_C1_Troll
+    400072: joint_Out_little_R_C2_Troll
+    400074: joint_Out_little_R_C3_Troll
+    400076: joint_Out_major_L_C1_Troll
+    400078: joint_Out_major_L_C2_Troll
+    400080: joint_Out_major_L_C3_Troll
+    400082: joint_Out_major_R_C1_Troll
+    400084: joint_Out_major_R_C2_Troll
+    400086: joint_Out_major_R_C3_Troll
+    400088: joint_Out_neck_C1_Troll
+    400090: joint_Out_neck_C2_Troll
+    400092: joint_Out_neck_C3_Troll
+    400094: joint_Out_neck_C4_Troll
+    400096: joint_Out_ring_L_C1_Troll
+    400098: joint_Out_ring_L_C2_Troll
+    400100: joint_Out_ring_L_C3_Troll
+    400102: joint_Out_ring_R_C1_Troll
+    400104: joint_Out_ring_R_C2_Troll
+    400106: joint_Out_ring_R_C3_Troll
+    400108: joint_Out_spine_C1_Troll
+    400110: joint_Out_spine_C2_Troll
+    400112: joint_Out_spine_C3_Troll
+    400114: joint_Out_spine_C4_Troll
+    400116: joint_Out_spine_C5_Troll
+    400118: joint_Out_thumb_L_C1_Troll
+    400120: joint_Out_thumb_L_C2_Troll
+    400122: joint_Out_thumb_L_C3_Troll
+    400124: joint_Out_thumb_R_C1_Troll
+    400126: joint_Out_thumb_R_C2_Troll
+    400128: joint_Out_thumb_R_C3_Troll
+    400130: //RootNode
+    2300000: ASSET_Batte
+    3300000: ASSET_Batte
+    4300000: ASSET_Batte
+    4300002: ASSET_Troll
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: ASSET_Troll
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

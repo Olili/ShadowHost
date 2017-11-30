@@ -52455,11 +52455,14 @@ MonoBehaviour:
       currentStat: 1
   leader: {fileID: 1782597197}
   hordeManager: {fileID: 0}
+  life: 0
   debugAction: 
   isOnGround: 0
   OnPlanNormal: {x: 0, y: 0, z: 0}
   slidingDebug: 0
   centerDown: {fileID: 0}
+  friendlyFire: 0
+  brain: {fileID: 0}
 --- !u!114 &1782597198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52472,14 +52475,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e86d74b861288144be68eb8475b74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionAvoidanceRay: 0
   isSliding: 0
   giz:
     Velocity: 0
     Steering: 0
     SeparateCheckSphere: 0
     Separate: 0
+    collisionAvoidance: 0
     steeringForce: {x: 0, y: 0, z: 0}
     separateForce: {x: 0, y: 0, z: 0}
+    avoidance: {x: 0, y: 0, z: 0}
     separateSphereLenght: 0
 --- !u!54 &1782597199
 Rigidbody:
